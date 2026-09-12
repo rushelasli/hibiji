@@ -1,91 +1,132 @@
 <script setup lang="ts">
-import Card from '@/components/ui/card.vue'
-import CardContent from '@/components/ui/card-content.vue'
-import CardHeader from '@/components/ui/card-header.vue'
-import CardTitle from '@/components/ui/card-title.vue'
-import { Zap } from 'lucide-vue-next'
+import { ArrowUpRight } from 'lucide-vue-next'
 
-const projects = [
+interface ProjectLink {
+  label: string
+  href: string
+}
+
+interface Project {
+  index: string
+  title: string
+  description: string
+  tags: string[]
+  links?: ProjectLink[]
+  points?: string[]
+}
+
+const projects: Project[] = [
   {
-    title: 'Headamp',
+    index: '01',
+    title: 'Headphone Amplifiers',
     description:
-      'Koleksi proyek headphone amplifier yang aku kembangkan, mulai dari desain analog, hybrid, hingga discrete Operational Amplifier. Fokus pada kualitas audio, transparansi, dan eksperimen tabung.',
+      'A series of headphone amplifier builds — from analog and hybrid designs to a fully discrete op-amp. Focused on audio transparency and learning through iteration.',
+    tags: ['Analog', 'Discrete Op-Amp', 'Tube'],
     links: [
-      { label: 'Nyaahibi', href: 'https://nyaahibi.nggonku.web.id', display: 'nyaahibi.nggonku.web.id' },
-      { label: 'NyaahibiV2 amp', href: 'https://amp.nyaahibi.web.id', display: 'amp.nyaahibi.web.id' },
-      { label: 'MicroHibi', href: 'https://microamp.nyaahibi.web.id', display: 'microamp.nyaahibi.web.id' },
-      { label: 'NyaaOP - Discrete OPamp', href: 'https://nyaaop.nyaahibi.web.id', display: 'nyaaop.nyaahibi.web.id' },
+      { label: 'nyaahibi.nggonku.web.id', href: 'https://nyaahibi.nggonku.web.id' },
+      { label: 'amp.nyaahibi.web.id', href: 'https://amp.nyaahibi.web.id' },
+      { label: 'microamp.nyaahibi.web.id', href: 'https://microamp.nyaahibi.web.id' },
+      { label: 'nyaaop.nyaahibi.web.id', href: 'https://nyaaop.nyaahibi.web.id' },
     ],
   },
   {
-    title: 'Build Homeserver & IoT',
+    index: '02',
+    title: 'Homeserver & IoT',
     description:
-      'Membangun ekosistem smart home dan server pribadi. Semua layanan dijalankan secara lokal untuk kontrol penuh, keamanan, dan eksperimen.',
+      'A self-hosted home ecosystem: centralized IoT, local NAS storage, and on-prem services — full control, no cloud dependency.',
+    tags: ['ESP32', 'ESP8266', 'Self-hosted', 'NAS'],
     points: [
-      'Sistem IoT rumah terpusat dengan ESP32 & ESP8266',
-      'NAS storage terpusat untuk backup & media',
-      'Full selfhost server untuk layanan lokal (web, cloud, media)',
+      'Centralized home IoT on ESP32 & ESP8266',
+      'Local NAS for backup and media',
+      'Self-hosted services (web, cloud, media)',
     ],
   },
   {
-    title: 'Keyboard Mechanical',
+    index: '03',
+    title: 'Custom Mechanical Keyboards',
     description:
-      'Proyek ini menggabungkan hobi elektronik & komputer: membangun keyboard dan macropad wireless custom, sekaligus eksperimen firmware dan microcontroller.',
+      'Hand-wired custom keyboards and wireless macropads — combining electronics with firmware experiments.',
+    tags: ['Handwire', 'VIA', 'ESP32 + OLED'],
     points: [
-      'Handwire custom keyboard dengan layout unik',
-      'Support VIA untuk konfigurasi keymap mudah',
-      'Macropad wireless menggunakan ESP32 + OLED',
+      'Hand-wired boards with custom layouts',
+      'VIA support for easy keymap configuration',
+      'Wireless macropad on ESP32 with OLED display',
     ],
   },
 ]
 </script>
 
 <template>
-  <section id="projects" class="bg-[#14142b] px-4 py-16 md:px-6 md:py-20 lg:px-8 lg:py-24">
-    <div class="mx-auto max-w-[1100px]">
-      <h2 class="mb-8 inline-flex w-full items-center justify-center gap-2 text-center font-pixel text-lg leading-relaxed text-[#6c5ce7] md:mb-10 md:text-xl">
-        <Zap class="size-6 shrink-0 text-[#6c5ce7]" /> Projects
+  <section id="projects" class="border-b border-white/10">
+    <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+        Projects
+      </p>
+      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        Selected work
       </h2>
+      <p class="mb-12 max-w-xl text-[16px] leading-relaxed text-zinc-400">
+        Three areas I keep coming back to — audio electronics, home
+        infrastructure, and input devices.
+      </p>
 
-      <div class="flex flex-col gap-6">
-        <Card
-          v-for="(project, idx) in projects"
-          :key="idx"
-          class="border-none bg-[#0d0d1a] shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_12px_25px_rgba(0,0,0,0.5)]"
+      <div class="flex flex-col gap-5">
+        <article
+          v-for="project in projects"
+          :key="project.title"
+          class="rounded-xl border border-white/10 bg-[#101018] p-6 transition-colors hover:border-white/20 md:p-8"
         >
-          <CardHeader class="pb-3">
-            <CardTitle class="text-lg text-[#55efc4] md:text-xl">{{ project.title }}</CardTitle>
-          </CardHeader>
-          <CardContent class="pt-0">
-            <ul
-              v-if="project.links"
-              class="ml-5 list-disc space-y-1 leading-[1.7] text-[#b2bec3] marker:text-[#6c5ce7]"
-            >
-              <li v-for="link in project.links" :key="link.href">
-                <strong class="text-white">{{ link.label }}</strong>
-                <span class="hidden sm:inline"> - </span>
-                <br class="sm:hidden" />
-                <a
-                  :href="link.href"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="break-all text-[#6c5ce7] underline decoration-[#6c5ce7]/50 underline-offset-2 transition hover:text-[#a29bfe] hover:decoration-[#a29bfe]"
-                >{{ link.display }}</a>
-              </li>
-            </ul>
+          <div class="flex items-baseline gap-4">
+            <span class="font-mono text-[13px] text-zinc-500">{{ project.index }}</span>
+            <h3 class="text-xl font-semibold tracking-tight text-white md:text-2xl">
+              {{ project.title }}
+            </h3>
+          </div>
 
-            <ul
-              v-else-if="project.points"
-              class="ml-5 list-disc space-y-1 leading-[1.7] text-[#b2bec3] marker:text-[#6c5ce7]"
-            >
-              <li v-for="point in project.points" :key="point">{{ point }}</li>
-            </ul>
+          <p class="mt-3 max-w-2xl leading-relaxed text-zinc-400">
+            {{ project.description }}
+          </p>
 
-            <p class="mt-3 leading-[1.7] text-[#b2bec3]">
-              {{ project.description }}
-            </p>
-          </CardContent>
-        </Card>
+          <ul
+            v-if="project.points"
+            class="mt-4 flex max-w-2xl flex-col gap-1.5"
+          >
+            <li
+              v-for="point in project.points"
+              :key="point"
+              class="flex gap-2.5 text-[15px] leading-relaxed text-zinc-300"
+            >
+              <span class="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-[#6c5ce7]" />
+              {{ point }}
+            </li>
+          </ul>
+
+          <div v-if="project.links" class="mt-5 flex flex-col gap-2">
+            <a
+              v-for="link in project.links"
+              :key="link.href"
+              :href="link.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-zinc-300 transition-colors hover:text-white"
+            >
+              <ArrowUpRight
+                class="h-3.5 w-3.5 text-[#6c5ce7] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+              {{ link.label }}
+            </a>
+          </div>
+
+          <div class="mt-5 flex flex-wrap gap-2 border-t border-white/10 pt-5">
+            <span
+              v-for="tag in project.tags"
+              :key="tag"
+              class="rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-zinc-400"
+            >
+              {{ tag }}
+            </span>
+          </div>
+        </article>
       </div>
     </div>
   </section>

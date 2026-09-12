@@ -1,84 +1,68 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import Badge from '@/components/ui/badge.vue'
-import biniGif from '@/assets/bini.gif'
-import { Hand, Music, Zap } from 'lucide-vue-next'
+const interests = [
+  'Listening to music',
+  'Watching anime',
+  'Tinkering with electronics and vacuum tubes',
+  'Learning computers & networking',
+]
 
-const visible = ref(false)
-const containerRef = ref<HTMLElement | null>(null)
-
-onMounted(() => {
-  const el = containerRef.value
-  if (!el) return
-
-  // IntersectionObserver for fade-in
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          visible.value = true
-          observer.disconnect()
-          break
-        }
-      }
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -100px 0px' },
-  )
-  observer.observe(el)
-
-  // Fallback: check if already visible on load
-  const rect = el.getBoundingClientRect()
-  if (rect.top < window.innerHeight - 100) {
-    visible.value = true
-    observer.disconnect()
-  }
-})
+const tags = [
+  'Analog Electronics',
+  'Digital Electronics',
+  'Computers',
+  'Networking',
+  'Vacuum Tubes',
+]
 </script>
 
 <template>
-  <section id="about" class="bg-[#111125] px-4 py-16 md:px-6 md:py-20 lg:px-8 lg:py-24">
-    <div
-      ref="containerRef"
-      :class="[
-        'mx-auto flex max-w-[1100px] flex-col items-center gap-8 transition-all duration-1000 ease-out lg:flex-row lg:items-start lg:gap-12',
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
-      ]"
-    >
-      <!-- Left - GIF -->
-      <div class="flex w-full justify-center lg:w-[40%] lg:shrink-0">
-        <img
-          :src="biniGif"
-          alt="GIF Bini"
-          class="w-full max-w-[260px] rounded-[20px] transition duration-300 [filter:drop-shadow(0_0_2px_white)_drop-shadow(0_0_2px_white)] hover:scale-[1.02] sm:max-w-[300px]"
-          loading="lazy"
-        />
-      </div>
+  <section id="about" class="border-b border-white/10">
+    <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+        About
+      </p>
+      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        Hi, I'm Ulil Albab
+      </h2>
+      <p class="mb-10 max-w-2xl text-[16px] leading-relaxed text-zinc-400">
+        A beginner with real enthusiasm for electronics — both
+        <span class="text-zinc-200">analog</span> and
+        <span class="text-zinc-200">digital</span>. I also enjoy learning about
+        <span class="text-zinc-200">computers</span>,
+        <span class="text-zinc-200">networking</span>, and lately I've become
+        a fan of <span class="text-zinc-200">vacuum tubes</span>.
+      </p>
 
-      <!-- Right - Content -->
-      <div class="w-full text-center text-white lg:w-[60%] lg:text-left">
-        <h2 class="mb-5 inline-flex items-center gap-2 font-pixel text-lg leading-relaxed text-[#6c5ce7] md:text-xl"><Hand class="size-6 shrink-0 text-[#6c5ce7]" /> Hai, saya Ulil Albab</h2>
+      <div class="grid gap-5 md:grid-cols-2">
+        <div class="rounded-xl border border-white/10 bg-[#101018] p-6">
+          <h3 class="mb-4 text-base font-semibold text-white">
+            Interests
+          </h3>
+          <ul class="flex flex-col gap-2.5">
+            <li
+              v-for="item in interests"
+              :key="item"
+              class="flex gap-2.5 text-[15px] leading-relaxed text-zinc-300"
+            >
+              <span class="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-[#6c5ce7]" />
+              {{ item }}
+            </li>
+          </ul>
+        </div>
 
-        <p class="mb-5 leading-[1.7] text-white/90">
-          Saya seorang pemula yang bersemangat di dunia elektronik, baik <strong>analog</strong> maupun <strong>digital</strong>.
-          Selain itu saya juga senang belajar <strong>komputer</strong>, <strong>jaringan</strong>, dan sekarang menjadi penikmat
-          <strong>tabung vakum</strong>.
-        </p>
-
-        <h3 class="mb-2.5 mt-6 inline-flex items-center gap-2 text-lg font-semibold text-[#55efc4]"><Music class="size-5 shrink-0" /> Hobi &amp; Minat</h3>
-        <ul class="mb-5 list-disc pl-5 text-left leading-[1.7] marker:text-[#6c5ce7] sm:inline-block lg:block">
-          <li>Mendengarkan musik</li>
-          <li>Menonton anime</li>
-          <li>Mengutak-atik elektronik dan tabung vakum</li>
-          <li>Belajar komputer &amp; jaringan</li>
-        </ul>
-
-        <h3 class="mb-2.5 mt-6 inline-flex items-center gap-2 text-lg font-semibold text-[#55efc4]"><Zap class="size-5 shrink-0" /> Skill</h3>
-        <div class="flex flex-wrap justify-center gap-2.5 lg:justify-start">
-          <Badge variant="purple" class="px-3 py-1 text-xs sm:text-sm">Elektronika Analog</Badge>
-          <Badge variant="purple" class="px-3 py-1 text-xs sm:text-sm">Elektronika Digital</Badge>
-          <Badge variant="pink" class="px-3 py-1 text-xs sm:text-sm">Komputer</Badge>
-          <Badge variant="pink" class="px-3 py-1 text-xs sm:text-sm">Jaringan</Badge>
-          <Badge variant="purple" class="px-3 py-1 text-xs sm:text-sm">Tabung Vakum</Badge>
+        <div class="rounded-xl border border-white/10 bg-[#101018] p-6">
+          <h3 class="mb-4 text-base font-semibold text-white">
+            Focus areas
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="tag in tags"
+              :key="tag"
+              class="rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-zinc-400"
+            >
+              {{ tag }}
+            </span>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
+const MAX_STARS = 60
+const SPAWN_INTERVAL_MS = 200
+
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 let animationId: number | null = null
 let stars: Star[] = []
@@ -27,7 +30,7 @@ class Star {
     this.size = random(1, 3)
     this.speedY = random(1, 4)
     this.speedX = -this.speedY * random(0.3, 1)
-    this.trailLength = Math.floor(10 + ((this.speedY - 1) / 3) * 70)
+    this.trailLength = Math.floor(5 + ((this.speedY - 1) / 3) * 25)
     this.history = []
   }
 
@@ -65,8 +68,10 @@ function resizeCanvas() {
 }
 
 function spawnStar() {
+  if (document.hidden) return
   const canvas = canvasRef.value
   if (!canvas) return
+  if (stars.length >= MAX_STARS) stars.shift()
   stars.push(new Star(canvas))
 }
 
@@ -81,20 +86,48 @@ function animate() {
   animationId = requestAnimationFrame(animate)
 }
 
+function start() {
+  stop()
+  if (!document.hidden) {
+    spawnInterval = window.setInterval(spawnStar, SPAWN_INTERVAL_MS)
+    animate()
+  }
+}
+
+function stop() {
+  if (animationId) {
+    cancelAnimationFrame(animationId)
+    animationId = null
+  }
+  if (spawnInterval) {
+    clearInterval(spawnInterval)
+    spawnInterval = null
+  }
+}
+
+function handleVisibilityChange() {
+  if (document.hidden) {
+    stop()
+  } else {
+    if (stars.length > MAX_STARS) stars = stars.slice(-Math.floor(MAX_STARS / 2))
+    start()
+  }
+}
+
 onMounted(() => {
   resizeCanvas()
   window.addEventListener('resize', resizeCanvas)
-  spawnInterval = window.setInterval(spawnStar, 120)
-  animate()
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+  start()
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', resizeCanvas)
-  if (animationId) cancelAnimationFrame(animationId)
-  if (spawnInterval) clearInterval(spawnInterval)
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
+  stop()
 })
 </script>
 
 <template>
-  <canvas ref="canvasRef" class="absolute inset-0 h-full w-full pointer-events-none" />
+  <canvas ref="canvasRef" class="pointer-events-none absolute inset-0 h-full w-full" />
 </template>

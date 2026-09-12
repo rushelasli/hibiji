@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { MailPlus } from 'lucide-vue-next'
-
 const socials = [
   {
     href: 'https://www.facebook.com/share/1AiX1D61gs/',
@@ -36,13 +34,20 @@ const socials = [
 </script>
 
 <template>
-  <section id="contact" class="bg-[#2b2b88] px-4 py-16 text-center text-white md:px-6 md:py-20 lg:px-8">
-    <div class="mx-auto max-w-[800px]">
-      <h2 class="mb-8 inline-flex items-center justify-center gap-2 font-pixel text-base leading-relaxed text-[#6c5ce7] md:mb-10 md:text-lg">
-        <MailPlus class="size-6 shrink-0 text-[#6c5ce7]" /> Contact Me
+  <section id="contact">
+    <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+        Contact
+      </p>
+      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        Get in touch
       </h2>
+      <p class="mb-10 max-w-xl text-[16px] leading-relaxed text-zinc-400">
+        Open to project discussions, collaboration, or just talking shop
+        about amps and electronics.
+      </p>
 
-      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      <div class="flex flex-wrap items-center gap-3">
         <a
           v-for="s in socials"
           :key="s.label"
@@ -51,20 +56,16 @@ const socials = [
           rel="noopener noreferrer"
           :title="s.label"
           :aria-label="s.label"
-          class="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 p-3 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:bg-[#6c5ce7] hover:shadow-[0_8px_20px_rgba(108,92,231,0.4)] sm:h-14 sm:w-14"
+          class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 p-2.5 transition-colors hover:border-white/30 hover:bg-white/5"
         >
           <img
             :src="s.icon"
             :alt="s.label"
-            class="h-6 w-6 brightness-0 invert sm:h-7 sm:w-7"
+            class="h-5 w-5 brightness-0 invert"
             loading="lazy"
           />
         </a>
       </div>
-
-      <p class="mt-8 text-sm leading-relaxed text-white/90 md:mt-10 md:text-base">
-        -terbuka untuk diskusi proyek, kolaborasi, atau sekadar ngobrol hal seru 😄-
-      </p>
     </div>
   </section>
 </template>

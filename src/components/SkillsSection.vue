@@ -4,72 +4,64 @@ import { Code, Wrench, Monitor, Globe, Plug, Moon, Smartphone } from 'lucide-vue
 const skills = [
   {
     icon: Code,
-    label: 'Ngoding',
-    desc: 'Membuat script, web, dan proyek Python/Arduino minta ngoding sama cgpt.',
-    gradient: 'from-[#6c5ce7] to-[#a29bfe]',
+    label: 'Coding',
+    desc: 'Scripts, web, and Python/Arduino projects.',
   },
   {
     icon: Wrench,
-    label: 'Elektronika',
-    desc: 'Analog & digital, PCB, tabung vakum, sirkuit menantang.',
-    gradient: 'from-[#ff7675] to-[#fd79a8]',
+    label: 'Electronics',
+    desc: 'Analog & digital, PCBs, vacuum tubes, challenging circuits.',
   },
   {
     icon: Monitor,
-    label: 'PC & Komputer',
-    desc: 'Setting OS, optimasi, eksperimen software.',
-    gradient: 'from-[#55efc4] to-[#00b894]',
+    label: 'PC & Computers',
+    desc: 'OS setup, optimization, software experiments.',
   },
   {
     icon: Globe,
-    label: 'Jaringan',
-    desc: 'Kabel & switch, santai aja, jangan mikrotik XD',
-    gradient: 'from-[#fdcb6e] to-[#e17055]',
+    label: 'Networking',
+    desc: 'Cabling & switching — the fun parts, no MikroTik trauma.',
   },
   {
     icon: Plug,
-    label: 'Servis Elektronika',
-    desc: 'Perbaikan barang elektronika.',
-    gradient: 'from-[#00cec9] to-[#0984e3]',
+    label: 'Electronics Repair',
+    desc: 'Fixing TVs, radios, monitors, PCs, and laptops.',
   },
   {
     icon: Moon,
-    label: 'Tidur & Malas',
-    desc: 'Hobi paling gwe suka.',
-    gradient: 'from-[#d63031] to-[#e84393]',
+    label: 'Rest & Recharge',
+    desc: 'Essential hobby. Sleep is a feature.',
   },
   {
     icon: Smartphone,
-    label: 'Scroll Fesnuk',
-    desc: 'Scroll fesnuk tiada henti',
-    gradient: 'from-[#6c5ce7] to-[#a29bfe]',
+    label: 'Scrolling',
+    desc: 'Endless social media scrolling. We all do it.',
   },
 ]
 </script>
 
 <template>
-  <section id="skills" class="bg-[#1a1a3d] px-4 py-16 md:px-6 md:py-20 lg:px-8 lg:py-24">
-    <div class="mx-auto max-w-[1100px] text-center">
-      <h2 class="mb-6 inline-flex items-center justify-center gap-2 font-pixel text-lg leading-relaxed text-[#6c5ce7] md:text-xl">
-        <Code class="size-6 shrink-0 text-[#6c5ce7]" /> Skills & Hobi
+  <section id="skills" class="border-b border-white/10">
+    <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+        Skills
+      </p>
+      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        What I do
       </h2>
-
-      <p class="mx-auto mb-10 max-w-[700px] leading-[1.8] text-[#b2bec3]">
-        Scroll fensuk tiada henti, nganggur, dan tidur adalah hobi paling ku suka :D
+      <p class="mb-12 max-w-xl text-[16px] leading-relaxed text-zinc-400">
+        A mix of hands-on electronics, computers, and honest hobbies.
       </p>
 
-      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div
-          v-for="(skill, idx) in skills"
-          :key="idx"
-          :class="[
-            'rounded-[15px] bg-gradient-to-br p-5 text-white shadow-[0_8px_20px_rgba(0,0,0,0.5)] transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_12px_25px_rgba(0,0,0,0.6)] text-left sm:text-left flex flex-col min-h-[140px]',
-            skill.gradient,
-          ]"
+          v-for="skill in skills"
+          :key="skill.label"
+          class="rounded-xl border border-white/10 bg-[#101018] p-6 transition-colors hover:border-white/20"
         >
-          <component :is="skill.icon" class="mb-3 size-7 shrink-0 text-white" />
-          <h3 class="mb-2 text-base font-bold md:text-lg">{{ skill.label }}</h3>
-          <p class="text-sm leading-relaxed text-white/90">{{ skill.desc }}</p>
+          <component :is="skill.icon" class="mb-4 h-6 w-6 text-[#6c5ce7]" />
+          <h3 class="mb-1.5 text-base font-semibold text-white">{{ skill.label }}</h3>
+          <p class="text-sm leading-relaxed text-zinc-400">{{ skill.desc }}</p>
         </div>
       </div>
     </div>

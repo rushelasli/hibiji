@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 240 30% 4%;
-    --foreground: 0 0% 98%;
-    --card: 240 30% 7%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 30% 7%;
-    --popover-foreground: 0 0% 98%;
+    --background: 240 20% 4%;
+    --foreground: 0 0% 96%;
+    --card: 240 18% 8%;
+    --card-foreground: 0 0% 96%;
+    --popover: 240 18% 8%;
+    --popover-foreground: 0 0% 96%;
     --primary: 252 82% 64%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 10% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 10% 18%;
-    --muted-foreground: 199 8% 72%;
-    --accent: 160 84% 64%;
-    --accent-foreground: 240 30% 7%;
-    --destructive: 346 84% 58%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 15% 18%;
-    --input: 240 15% 18%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 12% 14%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 240 12% 14%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 240 12% 14%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 12% 14%;
+    --input: 240 12% 14%;
     --ring: 252 82% 64%;
-    --radius: 0.75rem;
+    --radius: 0.625rem;
   }
 }
 
@@ -33,20 +33,13 @@
   }
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem;
+    scroll-padding-top: 4rem;
   }
   body {
-    @apply bg-bg-dark text-white font-outfit antialiased overflow-x-hidden;
-    font-family: 'Outfit', sans-serif;
+    @apply bg-[#09090f] font-sans text-zinc-100 antialiased;
   }
-}
-
-@layer utilities {
-  .bg-bg-dark { background-color: #050512; }
-  .bg-card-bg { background-color: #0d0d1a; }
-  .text-purple { color: #6c5ce7; }
-  .bg-purple { background-color: #6c5ce7; }
-  .bg-pink { background-color: #e84393; }
-  .text-accent-green { color: #55efc4; }
-  .text-text-gray { color: #b2bec3; }
+  ::selection {
+    background-color: #6c5ce7;
+    color: #fff;
+  }
 }

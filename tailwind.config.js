@@ -41,13 +41,7 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        // original theme
-        'bg-dark': '#050512',
-        'card-bg': '#0d0d1a',
         purple: '#6c5ce7',
-        pink: '#e84393',
-        'text-gray': '#b2bec3',
-        'accent-green': '#55efc4',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -55,8 +49,8 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        outfit: ['Outfit', 'sans-serif'],
-        pixel: ['"Press Start 2P"', 'cursive'],
+        sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       keyframes: {
         'accordion-down': {
