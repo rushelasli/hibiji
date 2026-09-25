@@ -2,7 +2,7 @@
 import { ArrowDown, Mail } from '@lucide/vue'
 import { useI18n } from 'vue-i18n'
 import StarfieldCanvas from '@/components/StarfieldCanvas.vue'
-import profilImg from '@/assets/profil.png'
+import profilImg from '@/assets/profil.jpg'
 
 const { t } = useI18n()
 
