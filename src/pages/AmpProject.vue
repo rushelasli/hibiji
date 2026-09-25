@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import AmpHero from '@/components/amp/AmpHero.vue'
-import AmpAbout from '@/components/amp/AmpAbout.vue'
-import BlockDiagramSection from '@/components/amp/BlockDiagramSection.vue'
-import Amp3DSection from '@/components/amp/Amp3DSection.vue'
-import AmpMeasurementSection from '@/components/amp/AmpMeasurementSection.vue'
-import AmpReferences from '@/components/amp/AmpReferences.vue'
+import ProjectHero from '@/components/project/ProjectHero.vue'
+import ProjectAbout from '@/components/project/ProjectAbout.vue'
+import BlockDiagramSection from '@/components/project/BlockDiagramSection.vue'
+import Project3DSection from '@/components/project/Project3DSection.vue'
+import ProjectMeasurementSection from '@/components/project/ProjectMeasurementSection.vue'
+import ProjectReferences from '@/components/project/ProjectReferences.vue'
 
 interface BlockItem {
   title: string
@@ -21,8 +21,8 @@ const psuBlocks = computed(() => tm('amp.psuBlocks') as unknown as BlockItem[])
 
 <template>
   <main>
-    <AmpHero />
-    <AmpAbout />
+    <ProjectHero />
+    <ProjectAbout />
 
     <BlockDiagramSection
       eyebrow-key="amp.topologyEyebrow"
@@ -40,8 +40,8 @@ const psuBlocks = computed(() => tm('amp.psuBlocks') as unknown as BlockItem[])
       :blocks="psuBlocks"
     />
 
-    <Amp3DSection />
-    <AmpMeasurementSection />
-    <AmpReferences />
+    <Project3DSection />
+    <ProjectMeasurementSection />
+    <ProjectReferences />
   </main>
 </template>

@@ -1,7 +1,9 @@
 {
   "meta": {
     "home": "Ulil Albab — Elektronik & Proyek",
-    "amp": "NyaaHibiV2 Hybrid SE — Penguat Headphone DIY"
+    "amp": "NyaaHibiV2 Hybrid SE — Penguat Headphone DIY",
+    "microamp": "MicroHibi AMP — Single-Ended Micro Discrete Amplifier",
+    "furuhibi": "FuruHibi — Modern Design, Analog Heritage."
   },
   "nav": {
     "home": "Beranda",
@@ -76,6 +78,18 @@
           "Papan dengan wiring manual dan layout kustom",
           "Dukungan VIA untuk konfigurasi keymap yang mudah",
           "Macropad nirkabel berbasis ESP32 dengan layar OLED"
+        ]
+      },
+      {
+        "id": "furuhibi",
+        "index": "04",
+        "title": "FuruHibi R2R DAC",
+        "description": "DAC R2R berbasis ESP32-S3 beserta software pendukungnya — companion app Windows & Android, DSP berbasis browser, dan cloud presets dalam satu ekosistem audio.",
+        "tags": ["ESP32-S3", "R2R DAC", "DSP", "Windows / Android"],
+        "points": [
+          "Resistor-ladder DAC dengan input Bluetooth dan USB UAC",
+          "DSP PEQ, loudness, dan surround yang dikontrol dari browser",
+          "Companion app Windows & Android dengan sinkronisasi preset ke cloud"
         ]
       }
     ]
@@ -316,5 +330,292 @@
         ]
       }
     ]
+  },
+  "microamp": {
+    "back": "Kembali ke proyek",
+    "headerEyebrow": "Proyek / 01 — MicroHibi AMP",
+    "headerTitle": "MicroHibi AMP",
+    "headerSubtitle": "Single-Ended Micro Discrete Amplifier",
+    "aboutEyebrow": "Tentang",
+    "aboutTitle": "Tentang MicroHibi AMP",
+    "aboutP1": "<strong>MicroHibi</strong> lahir dari ide sederhana: membuat headphone amplifier yang tetap enak didengar tetapi memiliki ukuran yang benar-benar kecil. Proyek ini berfokus pada menciptakan amplifier yang praktis untuk digunakan sehari-hari tanpa harus membawa perangkat besar. Hasilnya adalah MicroHibi, amplifier portabel berukuran sekitar <strong>5 cm × 2,5 cm</strong> yang mudah dibawa ke mana saja.",
+    "aboutP2": "Nama <strong>MicroHibi</strong> sendiri diambil dari proyek sebelumnya, yaitu <strong>NyaaHibi</strong>. Jika NyaaHibi merupakan versi yang lebih besar, maka MicroHibi dapat dianggap sebagai versi mungilnya dengan filosofi yang sama: <em>sederhana dan ringkas</em>, tetapi tetap mempertahankan pendekatan desain yang serius terhadap rangkaian, termasuk topologi power supply yang tidak dipangkas dari versi sebelumnya.",
+    "mascotAlt": "Maskot MicroHibi — foto oleh Flassy",
+    "mascotOverlay": "Foto oleh Flassy",
+    "infoEyebrow": "Detail",
+    "infoTitle": "Informasi Tambahan",
+    "infoP1": "Karena ukurannya yang sangat kecil dan menggunakan baterai mini, output power memang tidak sebesar amplifier desktop. MicroHibi menggunakan supply <strong>5V simetris</strong> yang sangat hemat daya dan cocok untuk baterai sekitar <strong>500 mAh</strong>. Untuk menjaga keamanan headphone, rangkaian ini juga dilengkapi <strong>DC Servo</strong> yang menjaga DC offset tetap rendah tanpa mempengaruhi karakter suara amplifier.",
+    "infoP2": "Desain rangkaian <strong>MicroHibi</strong> pada dasarnya mengambil inspirasi dari topologi amplifier <strong>OCL (Output Capacitor-Less)</strong> standar yang cukup umum digunakan pada amplifier audio. Namun agar dapat dimuat pada PCB yang jauh lebih kecil, beberapa bagian rangkaian disederhanakan dan disesuaikan tanpa mengubah prinsip kerja utamanya.",
+    "infoP3": "Salah satu perubahan yang dilakukan adalah pada bagian <strong>bias network</strong>. Pada desain OCL klasik biasanya digunakan dioda sebagai pengatur bias untuk tahap output, namun pada MicroHibi bagian ini diganti menggunakan transistor. Selain membantu menjaga kestabilan bias, pendekatan ini juga memungkinkan ukuran rangkaian menjadi lebih ringkas sehingga lebih mudah diimplementasikan pada desain PCB berukuran kecil.",
+    "infoP4": "Dengan pendekatan ini, MicroHibi tetap mempertahankan karakter dasar dari topologi amplifier klasik, namun dengan beberapa penyesuaian agar lebih cocok untuk perangkat portabel. Tujuannya adalah menghadirkan rangkaian yang tetap sederhana, efisien dalam penggunaan ruang, dan tetap mampu memberikan performa audio yang baik dalam ukuran yang sangat compact.",
+    "topologyEyebrow": "Topologi",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram penguat",
+    "ampBlocks": [
+      {
+        "title": "SE Buffer PNP",
+        "desc": "Berfungsi sebagai tahap buffer awal yang mengisolasi sumber sinyal dari rangkaian penguat utama sehingga impedansi input tetap tinggi. Selain itu tahap ini juga memiliki input negatif (local feedback) yang membantu mengoreksi distorsi sejak tahap awal serta menjaga kestabilan loop sebelum sinyal masuk ke tahap penguatan berikutnya."
+      },
+      {
+        "title": "VAS (Voltage Amplifier Stage)",
+        "desc": "Merupakan tahap penguatan tegangan utama dalam amplifier. Pada bagian ini sinyal diperkuat secara signifikan sebelum diteruskan ke tahap driver, sehingga VAS menjadi penentu utama gain keseluruhan dari sistem."
+      },
+      {
+        "title": "Driver",
+        "desc": "Bertugas menyediakan arus yang cukup untuk menggerakkan tahap output atau final stage. Driver berfungsi sebagai penguat arus sekaligus penghubung antara VAS dan transistor output agar tahap akhir dapat bekerja secara stabil."
+      },
+      {
+        "title": "Final Stage",
+        "desc": "Tahap akhir yang memberikan arus dan daya ke beban (headphone). Sinyal yang sudah diperkuat oleh tahap sebelumnya dikonversi menjadi kemampuan drive yang cukup untuk menggerakkan beban impedansi rendah."
+      },
+      {
+        "title": "Bias Adjust (Transistor Bias Network)",
+        "desc": "Digunakan untuk mengatur arus bias pada tahap output agar transistor bekerja pada kondisi yang optimal. Pada desain ini dioda bias konvensional digantikan dengan transistor sehingga pengaturan bias menjadi lebih stabil terhadap perubahan temperatur sekaligus membantu mengurangi ukuran rangkaian."
+      },
+      {
+        "title": "DC Servo",
+        "desc": "Rangkaian ini memonitor tegangan DC pada output dan secara perlahan memberikan koreksi pada tahap input amplifier sehingga DC offset tetap rendah tanpa mempengaruhi sinyal audio pada frekuensi kerja."
+      }
+    ],
+    "psuEyebrow": "Catu Daya",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram catu daya",
+    "psuBlocks": [
+      {
+        "title": "Modul Charger",
+        "desc": "Menggunakan modul TP4056 yang dipasang onboard untuk menghemat ruang PCB."
+      },
+      {
+        "title": "Step-Up Converter",
+        "desc": "Menaikkan tegangan baterai dengan pilihan mode tegangan tinggi dan rendah. Mode rendah memberikan waktu pakai lebih lama, sedangkan mode tinggi memberikan performa maksimum."
+      },
+      {
+        "title": "Charge Pump",
+        "desc": "Menghasilkan rail tegangan negatif sehingga catu daya menjadi simetris (+ dan −)."
+      },
+      {
+        "title": "Filter Stage 1",
+        "desc": "Terdiri dari kapasitor, ferrite bead, resistor, dan kapasitor untuk meredam ripple dan noise awal."
+      },
+      {
+        "title": "Capacitance Multiplier",
+        "desc": "Digunakan agar kapasitansi kecil pada SMD terasa seperti kapasitansi besar, sehingga suplai lebih bersih."
+      },
+      {
+        "title": "Filter Stage 2",
+        "desc": "Filter lokal yang ditempatkan dekat masing-masing IC untuk mengurangi noise akibat jalur suplai yang panjang."
+      }
+    ],
+    "threeDEyebrow": "Pratinjau 3D",
+    "threeDTitle": "Tampilan 3D",
+    "threeDIntro": "Pratinjau 3D interaktif — seret untuk memutar, gulir untuk memperbesar. Model dimuat sesuai kebutuhan.",
+    "models": ["Amplifier + box", "NyaaHibiV2", "Nilai Komponen"],
+    "osciEyebrow": "Pengukuran",
+    "osciTitle": "Test Power Output Menggunakan Oscilloscope",
+    "disclaimer": "⚠️ Disclaimer: Load 10Ω ini tidak di rekomendasikan untuk penggunaan normal karena dapat membebani amplifier secara berlebihan, namun ini hanya untuk tujuan pengujian maksimal output saja!.",
+    "osciRows": [
+      {
+        "image": "/projects/amp/maxmode.jpg",
+        "caption": "5V/Div HI Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32ohm:",
+            "entries": [
+              { "label": "V/Div:", "value": "5V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "3Div x 5V/Div = 15Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 7.5V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 32 ≈ 1.76W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 15 / 2.828 ≈ 5.30V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 32 ≈ 0.878W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10ohm!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 10 ≈ 5.63W!" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 10 ≈ 2.81W!" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      },
+      {
+        "image": "/projects/amp/lowmode.jpg",
+        "caption": "2V/Div LO Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32Ω:",
+            "entries": [
+              { "label": "V/Div:", "value": "2V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "4.2Div x 2V/Div = 8.4Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 4.2V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 32 ≈ 0.551W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 8.4 / 2.828 ≈ 2.97V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 32 ≈ 0.276W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10Ω!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 10 ≈ 1.76W" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 10 ≈ 0.882W" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      }
+    ],
+    "notesEyebrow": "Catatan",
+    "notesTitle": "Catatan dan Referensi",
+    "refs": [
+      {
+        "title": "Base OCL 150W standard",
+        "links": [
+          {
+            "label": "OCL 150W",
+            "href": "https://www.edukasielektronika.com/2015/03/power-amplifier-ocl-150-watt.html"
+          }
+        ]
+      },
+      {
+        "title": "Step-Up Simetris",
+        "links": [
+          {
+            "label": "LT3471 OLED Driver Symetric boost Converter",
+            "href": "https://www.alldatasheet.com/html-pdf/101718/LINER/LT3471/1079/7/LT3471.html"
+          },
+          {
+            "label": "Charge Pump",
+            "href": "https://electronics.stackexchange.com/questions/143507/inverting-charge-pump-with-boost-converter-loading-characteristics"
+          }
+        ]
+      }
+    ]
+  },
+  "furuhibi": {
+    "back": "Kembali ke proyek",
+    "headerEyebrow": "Proyek / 04 — FuruHibi R2R DAC",
+    "heroMark": "Audio Engineering — Jawa Ireng, ID",
+    "heroTitle": "Where vintage character meets<br><em>modern audio engineering yang dongo dan tidak berpendidikan.</em>",
+    "heroSub": "FuruHibi merancang DAC R2R dan software pendukungnya — dari firmware, DSP, hingga cloud presets — sebagai satu ecosystem yang jujur terhadap karakter suara analog.",
+    "ctaPrimary": "Explore FuruHibi",
+    "ctaSecondary": "Explore DSP",
+    "mascotAlt": "Maskot FuruHibi — foto oleh Flassy",
+    "mascotCaption": "Maskot FuruHibi — Photos by Flassy",
+    "productsEyebrow": "Hardware",
+    "productsTitle": "FuruHibi R2R DAC",
+    "productLabel": "FuruHibi R2R — ESP32-S3",
+    "productTitle": "Resistor-ladder DAC, dikendalikan penuh secara digital.",
+    "productDesc": "Dibangun di atas ESP32-S3, FuruHibi R2R menggabungkan jalur DAC R2R dengan penerimaan Bluetooth, USB Audio Class, dan tampilan OLED — dikendalikan lewat companion app Windows dan Android.",
+    "specs": [
+      { "label": "Platform", "value": "ESP32-S3" },
+      { "label": "Input", "value": "Bluetooth · USB UAC" },
+      { "label": "Kontrol", "value": "OLED GUI + Companion App" },
+      { "label": "DSP", "value": "PEQ · Loudness · Surround" }
+    ],
+    "productCta": "Get the Companion App",
+    "productAlt": "Diagram arsitektur pipeline audio FuruHibi R2R",
+    "ecoEyebrow": "Software Ecosystem",
+    "ecoTitle": "Satu ecosystem, dari hardware hingga preset.",
+    "ecoIntro": "Setiap perangkat FuruHibi ditenagai oleh software yang saling terhubung — companion app untuk kontrol perangkat, DSP untuk membentuk karakter suara, dan cloud presets untuk menyimpan hasilnya.",
+    "ecoItems": [
+      {
+        "num": "01",
+        "title": "Companion App",
+        "desc": "Aplikasi Windows & Android untuk menghubungkan dan mengontrol perangkat FuruHibi."
+      },
+      {
+        "num": "02",
+        "title": "DSP",
+        "desc": "Parametric EQ, loudness, surround dan pengolahan sinyal lain, diatur langsung dari browser."
+      },
+      {
+        "num": "03",
+        "title": "Cloud Presets",
+        "desc": "Simpan, temukan, dan bagikan preset suara — tersinkron ke perangkat kapan saja."
+      }
+    ],
+    "dspEyebrow": "FuruHibi DSP",
+    "dspTitle": "Fine-tune the way you hear your music.",
+    "dspDesc": "Parametric EQ, loudness compensation, stereo widening, hingga soft clipper — semua dapat diatur langsung dari panel DSP berbasis browser, real-time ke perangkat.",
+    "dspCta": "Open DSP",
+    "presetsEyebrow": "Cloud Presets",
+    "presetsTitle": "Discover, save and manage your sound presets.",
+    "presetsDesc": "Simpan konfigurasi DSP favorit Anda ke cloud, jelajahi preset dari pengguna lain, dan terapkan ke perangkat FuruHibi kapan saja.",
+    "presetsCta": "Explore Cloud Presets",
+    "downloadsEyebrow": "Download Center",
+    "downloadsTitle": "Companion app untuk Windows dan Android.",
+    "downloads": [
+      {
+        "platform": "Windows",
+        "tag": "Desktop App",
+        "latestLabel": "Latest version",
+        "version": "v1.1",
+        "downloadLabel": "Download",
+        "historyLabel": "Release History",
+        "href": "https://furuhibi.nyaahibi.web.id/windows_app/FuruHibiR2R%20DAC%20%20v1.1.rar",
+        "history": [
+          {
+            "version": "v1.0",
+            "label": "Download .rar",
+            "href": "https://furuhibi.nyaahibi.web.id/windows_app/FuruHibiR2R%20DAC%20%20v1.0.rar"
+          }
+        ]
+      },
+      {
+        "platform": "Android",
+        "tag": "Mobile App",
+        "latestLabel": "Latest version",
+        "version": "v1.1",
+        "downloadLabel": "Download APK",
+        "historyLabel": "Release History",
+        "href": "https://furuhibi.nyaahibi.web.id/android_app/furuhibi%20r2r%201.1.apk",
+        "history": [
+          {
+            "version": "v1.0",
+            "label": "Download .apk",
+            "href": "https://furuhibi.nyaahibi.web.id/android_app/furuhibi%20r2r%201.0.apk"
+          }
+        ]
+      }
+    ],
+    "philEyebrow": "Technology & Philosophy",
+    "philTitle": "Analog heritage. Modern engineering.",
+    "philIntro": "FuruHibi tidak mengejar teknologi hanya demi angka spesifikasi. Kami menggabungkan musicality, warmth, dan kesederhanaan dengan digital signal processing serta konektivitas modern.",
+    "philItems": [
+      {
+        "kanji": "古",
+        "word": "Furu",
+        "desc": "Vintage. Heritage. Memory — karakter suara dari masa lalu yang tetap dijaga.",
+        "tags": ["Vintage", "Heritage", "Memory"]
+      },
+      {
+        "kanji": "日々",
+        "word": "Hibi",
+        "desc": "Everyday. Music. Life — hadir dalam keseharian mendengarkan musik.",
+        "tags": ["Everyday", "Music", "Life"]
+      }
+    ],
+    "philLine": "Modern Design, Analog Heritage.",
+    "archEyebrow": "Architecture",
+    "archTitle": "FuruHibi R2R Audio Architecture",
+    "archDesc": "Diagram arsitektur pipeline audio FuruHibi R2R, dari USB/Bluetooth input hingga DSP dan output PCM ke DAC R2R — didukung oleh ESP32-S3.",
+    "archAlt": "FuruHibi R2R System Block Diagram",
+    "updatesEyebrow": "Latest Updates",
+    "updatesTitle": "Firmware, driver & app updates.",
+    "updates": [
+      { "tag": "App", "desc": "Companion app Windows dan Android diperbarui ke versi 1.1.", "version": "v1.1" },
+      {
+        "tag": "App",
+        "desc": "Rilis awal companion app FuruHibi R2R untuk Windows dan Android.",
+        "version": "v1.0"
+      }
+    ],
+    "aboutEyebrow": "Tentang",
+    "aboutTitle": "Tentang FuruHibi",
+    "aboutP1": "<strong>FuruHibi</strong> berasal dari bahasa Jepang: <strong>furu</strong> (古) yang berarti \"lama, kuno, vintage\", dan <strong>hibi</strong> (日々) yang berarti \"hari-hari\". Secara filosofis, nama ini bermakna \"hari-hari yang telah berlalu\" — kenangan dari masa lampau.",
+    "aboutP2": "Bagi kami, audio bukan sekadar spesifikasi dan angka pengukuran. Audio adalah tentang bagaimana musik menghadirkan emosi, membangkitkan kenangan, dan menemani keseharian."
   }
 }

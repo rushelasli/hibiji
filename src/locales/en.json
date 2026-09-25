@@ -1,7 +1,9 @@
 {
   "meta": {
     "home": "Ulil Albab — Electronics & Projects",
-    "amp": "NyaaHibiV2 Hybrid SE — DIY Headphone Amplifier"
+    "amp": "NyaaHibiV2 Hybrid SE — DIY Headphone Amplifier",
+    "microamp": "MicroHibi AMP — Single-Ended Micro Discrete Amplifier",
+    "furuhibi": "FuruHibi — Modern Design, Analog Heritage."
   },
   "nav": {
     "home": "Home",
@@ -76,6 +78,18 @@
           "Hand-wired boards with custom layouts",
           "VIA support for easy keymap configuration",
           "Wireless macropad on ESP32 with OLED display"
+        ]
+      },
+      {
+        "id": "furuhibi",
+        "index": "04",
+        "title": "FuruHibi R2R DAC",
+        "description": "An ESP32-S3 R2R DAC with its supporting software — a Windows & Android companion app, browser-based DSP, and cloud presets in one audio ecosystem.",
+        "tags": ["ESP32-S3", "R2R DAC", "DSP", "Windows / Android"],
+        "points": [
+          "Resistor-ladder DAC with Bluetooth and USB UAC inputs",
+          "PEQ, loudness, and surround DSP controlled from the browser",
+          "Windows & Android companion app with cloud preset sync"
         ]
       }
     ]
@@ -316,5 +330,289 @@
         ]
       }
     ]
+  },
+  "microamp": {
+    "back": "Back to projects",
+    "headerEyebrow": "Projects / 01 — MicroHibi AMP",
+    "headerTitle": "MicroHibi AMP",
+    "headerSubtitle": "Single-Ended Micro Discrete Amplifier",
+    "aboutEyebrow": "About",
+    "aboutTitle": "About MicroHibi AMP",
+    "aboutP1": "<strong>MicroHibi</strong> was born from a simple idea: a headphone amplifier that still sounds good but is truly tiny. The project focuses on an amplifier that is practical for everyday use without carrying large equipment. The result is MicroHibi — a portable amplifier about <strong>5 cm × 2,5 cm</strong> that is easy to take anywhere.",
+    "aboutP2": "The name <strong>MicroHibi</strong> itself comes from the previous project, <strong>NyaaHibi</strong>. If NyaaHibi is the larger version, then MicroHibi can be seen as its tiny counterpart with the same philosophy: <em>simple and compact</em>, while still keeping a serious design approach to the circuit — including a power supply topology that is not cut down from the previous version.",
+    "mascotAlt": "MicroHibi mascot — photo by Flassy",
+    "mascotOverlay": "Photos by Flassy",
+    "infoEyebrow": "Details",
+    "infoTitle": "Additional Information",
+    "infoP1": "Because it is extremely small and uses a mini battery, output power is naturally not as large as a desktop amplifier. MicroHibi uses a <strong>symmetric 5V</strong> supply that is very power-efficient and suits batteries around <strong>500 mAh</strong>. To keep headphones safe, the circuit is also equipped with a <strong>DC Servo</strong> that keeps DC offset low without affecting the amplifier's sound character.",
+    "infoP2": "The <strong>MicroHibi</strong> circuit is essentially inspired by the standard <strong>OCL (Output Capacitor-Less)</strong> amplifier topology commonly used in audio amplifiers. However, so it could fit on a much smaller PCB, several parts of the circuit were simplified and adjusted without changing its core operating principles.",
+    "infoP3": "One of the changes is in the <strong>bias network</strong>. Classic OCL designs usually use a diode as the bias regulator for the output stage, but in MicroHibi this part is replaced with a transistor. Besides helping keep bias stable, this approach also allows a more compact circuit that is easier to implement on a small PCB.",
+    "infoP4": "With this approach, MicroHibi keeps the core character of the classic amplifier topology, with a few adjustments to make it more suitable for portable devices. The goal is a circuit that stays simple, efficient with space, and still delivers good audio performance in a very compact size.",
+    "topologyEyebrow": "Topology",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram of the amplifier",
+    "ampBlocks": [
+      {
+        "title": "SE Buffer PNP",
+        "desc": "Acts as the initial buffer stage, isolating the signal source from the main amplifier stage so input impedance stays high. This stage also has local negative feedback, which helps correct distortion early on and keeps the loop stable before the signal enters the next gain stage."
+      },
+      {
+        "title": "VAS (Voltage Amplifier Stage)",
+        "desc": "The main voltage gain stage of the amplifier. Here the signal is significantly amplified before being passed to the driver stage, making the VAS the primary determinant of the system's overall gain."
+      },
+      {
+        "title": "Driver",
+        "desc": "Supplies enough current to drive the output (final) stage. The driver acts as a current amplifier and the link between the VAS and the output transistors, so the final stage can work stably."
+      },
+      {
+        "title": "Final Stage",
+        "desc": "The final stage that delivers current and power to the load (headphone). The signal amplified by the previous stages is converted into enough drive capability to run a low-impedance load."
+      },
+      {
+        "title": "Bias Adjust (Transistor Bias Network)",
+        "desc": "Sets the bias current of the output stage so the transistors operate under optimal conditions. In this design the conventional bias diode is replaced with a transistor, making bias more stable across temperature changes while also reducing the circuit size."
+      },
+      {
+        "title": "DC Servo",
+        "desc": "Monitors the DC voltage at the output and slowly corrects the amplifier's input stage, keeping DC offset low without affecting the audio signal at working frequencies."
+      }
+    ],
+    "psuEyebrow": "Power Supply",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram of the power supply",
+    "psuBlocks": [
+      { "title": "Charger Module", "desc": "Uses a TP4056 module mounted onboard to save PCB space." },
+      {
+        "title": "Step-Up Converter",
+        "desc": "Boosts the battery voltage with high- and low-voltage mode options. Low mode gives longer runtime, while high mode delivers maximum performance."
+      },
+      {
+        "title": "Charge Pump",
+        "desc": "Produces a negative voltage rail so the power supply becomes symmetric (+ and −)."
+      },
+      {
+        "title": "Filter Stage 1",
+        "desc": "Consists of capacitors, a ferrite bead, resistors, and more capacitors to suppress ripple and early noise."
+      },
+      {
+        "title": "Capacitance Multiplier",
+        "desc": "Makes a small SMD capacitance behave like a large one, resulting in a cleaner supply."
+      },
+      {
+        "title": "Filter Stage 2",
+        "desc": "Local filters placed near each IC to reduce noise caused by long supply paths."
+      }
+    ],
+    "threeDEyebrow": "3D Preview",
+    "threeDTitle": "3D View",
+    "threeDIntro": "Interactive 3D previews — drag to rotate, scroll to zoom. Models are loaded on demand.",
+    "models": ["Amplifier + box", "NyaaHibiV2", "Component Values"],
+    "osciEyebrow": "Measurement",
+    "osciTitle": "Power Output Test Using an Oscilloscope",
+    "disclaimer": "⚠️ Disclaimer: This 10Ω load is not recommended for normal use, as it may overburden the amplifier — it is only used to test maximum power output!.",
+    "osciRows": [
+      {
+        "image": "/projects/amp/maxmode.jpg",
+        "caption": "5V/Div HI Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32ohm:",
+            "entries": [
+              { "label": "V/Div:", "value": "5V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "3Div x 5V/Div = 15Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 7.5V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 32 ≈ 1.76W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 15 / 2.828 ≈ 5.30V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 32 ≈ 0.878W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10ohm!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 10 ≈ 5.63W!" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 10 ≈ 2.81W!" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      },
+      {
+        "image": "/projects/amp/lowmode.jpg",
+        "caption": "2V/Div LO Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32Ω:",
+            "entries": [
+              { "label": "V/Div:", "value": "2V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "4.2Div x 2V/Div = 8.4Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 4.2V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 32 ≈ 0.551W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 8.4 / 2.828 ≈ 2.97V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 32 ≈ 0.276W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10Ω!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 10 ≈ 1.76W" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 10 ≈ 0.882W" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      }
+    ],
+    "notesEyebrow": "Notes",
+    "notesTitle": "Notes and References",
+    "refs": [
+      {
+        "title": "Base OCL 150W standard",
+        "links": [
+          {
+            "label": "OCL 150W",
+            "href": "https://www.edukasielektronika.com/2015/03/power-amplifier-ocl-150-watt.html"
+          }
+        ]
+      },
+      {
+        "title": "Symmetric Step-Up",
+        "links": [
+          {
+            "label": "LT3471 OLED Driver Symetric boost Converter",
+            "href": "https://www.alldatasheet.com/html-pdf/101718/LINER/LT3471/1079/7/LT3471.html"
+          },
+          {
+            "label": "Charge Pump",
+            "href": "https://electronics.stackexchange.com/questions/143507/inverting-charge-pump-with-boost-converter-loading-characteristics"
+          }
+        ]
+      }
+    ]
+  },
+  "furuhibi": {
+    "back": "Back to projects",
+    "headerEyebrow": "Projects / 04 — FuruHibi R2R DAC",
+    "heroMark": "Audio Engineering — Jawa Ireng, ID",
+    "heroTitle": "Where vintage character meets<br><em>modern audio engineering by a clueless, uneducated tinkerer.</em>",
+    "heroSub": "FuruHibi designs R2R DACs and their supporting software — from firmware, DSP, to cloud presets — as one ecosystem that stays honest to the analog character of sound.",
+    "ctaPrimary": "Explore FuruHibi",
+    "ctaSecondary": "Explore DSP",
+    "mascotAlt": "FuruHibi mascot — photo by Flassy",
+    "mascotCaption": "FuruHibi mascot — Photos by Flassy",
+    "productsEyebrow": "Hardware",
+    "productsTitle": "FuruHibi R2R DAC",
+    "productLabel": "FuruHibi R2R — ESP32-S3",
+    "productTitle": "A resistor-ladder DAC, fully digitally controlled.",
+    "productDesc": "Built on the ESP32-S3, FuruHibi R2R combines an R2R DAC path with Bluetooth reception, USB Audio Class, and an OLED display — controlled through a Windows and Android companion app.",
+    "specs": [
+      { "label": "Platform", "value": "ESP32-S3" },
+      { "label": "Input", "value": "Bluetooth · USB UAC" },
+      { "label": "Control", "value": "OLED GUI + Companion App" },
+      { "label": "DSP", "value": "PEQ · Loudness · Surround" }
+    ],
+    "productCta": "Get the Companion App",
+    "productAlt": "Architecture diagram of the FuruHibi R2R audio pipeline",
+    "ecoEyebrow": "Software Ecosystem",
+    "ecoTitle": "One ecosystem, from hardware to presets.",
+    "ecoIntro": "Every FuruHibi device is powered by interconnected software — a companion app for device control, DSP to shape the sound, and cloud presets to save the results.",
+    "ecoItems": [
+      {
+        "num": "01",
+        "title": "Companion App",
+        "desc": "Windows & Android apps to connect and control FuruHibi devices."
+      },
+      {
+        "num": "02",
+        "title": "DSP",
+        "desc": "Parametric EQ, loudness, surround and other signal processing, adjusted straight from the browser."
+      },
+      {
+        "num": "03",
+        "title": "Cloud Presets",
+        "desc": "Save, discover, and share sound presets — synced to your devices anytime."
+      }
+    ],
+    "dspEyebrow": "FuruHibi DSP",
+    "dspTitle": "Fine-tune the way you hear your music.",
+    "dspDesc": "Parametric EQ, loudness compensation, stereo widening, down to soft clipper — all adjustable straight from the browser-based DSP panel, in real time to the device.",
+    "dspCta": "Open DSP",
+    "presetsEyebrow": "Cloud Presets",
+    "presetsTitle": "Discover, save and manage your sound presets.",
+    "presetsDesc": "Save your favorite DSP configurations to the cloud, explore presets from other users, and apply them to your FuruHibi device anytime.",
+    "presetsCta": "Explore Cloud Presets",
+    "downloadsEyebrow": "Download Center",
+    "downloadsTitle": "Companion app for Windows and Android.",
+    "downloads": [
+      {
+        "platform": "Windows",
+        "tag": "Desktop App",
+        "latestLabel": "Latest version",
+        "version": "v1.1",
+        "downloadLabel": "Download",
+        "historyLabel": "Release History",
+        "href": "https://furuhibi.nyaahibi.web.id/windows_app/FuruHibiR2R%20DAC%20%20v1.1.rar",
+        "history": [
+          {
+            "version": "v1.0",
+            "label": "Download .rar",
+            "href": "https://furuhibi.nyaahibi.web.id/windows_app/FuruHibiR2R%20DAC%20%20v1.0.rar"
+          }
+        ]
+      },
+      {
+        "platform": "Android",
+        "tag": "Mobile App",
+        "latestLabel": "Latest version",
+        "version": "v1.1",
+        "downloadLabel": "Download APK",
+        "historyLabel": "Release History",
+        "href": "https://furuhibi.nyaahibi.web.id/android_app/furuhibi%20r2r%201.1.apk",
+        "history": [
+          {
+            "version": "v1.0",
+            "label": "Download .apk",
+            "href": "https://furuhibi.nyaahibi.web.id/android_app/furuhibi%20r2r%201.0.apk"
+          }
+        ]
+      }
+    ],
+    "philEyebrow": "Technology & Philosophy",
+    "philTitle": "Analog heritage. Modern engineering.",
+    "philIntro": "FuruHibi does not chase technology just for specification numbers. We combine musicality, warmth, and simplicity with digital signal processing and modern connectivity.",
+    "philItems": [
+      {
+        "kanji": "古",
+        "word": "Furu",
+        "desc": "Vintage. Heritage. Memory — the sound character of the past, still preserved.",
+        "tags": ["Vintage", "Heritage", "Memory"]
+      },
+      {
+        "kanji": "日々",
+        "word": "Hibi",
+        "desc": "Everyday. Music. Life — present in the everyday act of listening to music.",
+        "tags": ["Everyday", "Music", "Life"]
+      }
+    ],
+    "philLine": "Modern Design, Analog Heritage.",
+    "archEyebrow": "Architecture",
+    "archTitle": "FuruHibi R2R Audio Architecture",
+    "archDesc": "Architecture diagram of the FuruHibi R2R audio pipeline — from USB/Bluetooth input through DSP and PCM output to the R2R DAC, powered by the ESP32-S3.",
+    "archAlt": "FuruHibi R2R System Block Diagram",
+    "updatesEyebrow": "Latest Updates",
+    "updatesTitle": "Firmware, driver & app updates.",
+    "updates": [
+      { "tag": "App", "desc": "Windows and Android companion app updated to version 1.1.", "version": "v1.1" },
+      {
+        "tag": "App",
+        "desc": "Initial release of the FuruHibi R2R companion app for Windows and Android.",
+        "version": "v1.0"
+      }
+    ],
+    "aboutEyebrow": "About",
+    "aboutTitle": "About FuruHibi",
+    "aboutP1": "<strong>FuruHibi</strong> comes from Japanese: <strong>furu</strong> (古), meaning \"old, ancient, vintage\", and <strong>hibi</strong> (日々), meaning \"days\". Philosophically, the name conveys \"days that have passed\" — memories of yesteryear.",
+    "aboutP2": "For us, audio is not just specifications and measurement figures. Audio is about how music brings out emotion, awakens memories, and accompanies everyday life."
   }
 }

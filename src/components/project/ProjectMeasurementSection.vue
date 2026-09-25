@@ -20,19 +20,27 @@ interface OsciRow {
   tests: OsciTest[]
 }
 
+const props = withDefaults(
+  defineProps<{
+    /** i18n namespace for this project's copy (e.g. "amp", "microamp") */
+    ns?: string
+  }>(),
+  { ns: 'amp' },
+)
+
 const { t, tm } = useI18n()
 
-const osciRows = computed(() => tm('amp.osciRows') as unknown as OsciRow[])
+const osciRows = computed(() => tm(props.ns + '.osciRows') as unknown as OsciRow[])
 </script>
 
 <template>
   <section class="border-b border-white/10">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-20">
       <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
-        {{ t('amp.osciEyebrow') }}
+        {{ t(props.ns + '.osciEyebrow') }}
       </p>
       <h2 class="mb-8 text-2xl font-semibold tracking-tight text-white md:text-3xl">
-        {{ t('amp.osciTitle') }}
+        {{ t(props.ns + '.osciTitle') }}
       </h2>
 
       <div class="flex flex-col gap-10">
@@ -72,7 +80,7 @@ const osciRows = computed(() => tm('amp.osciRows') as unknown as OsciRow[])
                 <span v-if="entry.value" class="value">{{ entry.value }}</span>
               </p>
               <p v-if="test.showDisclaimer" class="disclaimer mt-3">
-                {{ t('amp.disclaimer') }}
+                {{ t(props.ns + '.disclaimer') }}
               </p>
             </div>
           </div>

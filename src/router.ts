@@ -14,6 +14,16 @@ const router = createRouter({
       component: () => import('@/pages/AmpProject.vue'),
     },
     {
+      path: '/projects/microamp',
+      name: 'microamp',
+      component: () => import('@/pages/MicroampProject.vue'),
+    },
+    {
+      path: '/projects/furuhibi',
+      name: 'furuhibi',
+      component: () => import('@/pages/FuruhibiProject.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       redirect: '/',
     },

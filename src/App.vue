@@ -8,9 +8,12 @@ import FooterSection from '@/components/FooterSection.vue'
 const route = useRoute()
 const { t, locale } = useI18n()
 
+const PROJECT_ROUTES = new Set(['amp', 'microamp', 'furuhibi'])
+
 function syncDocumentMeta() {
   document.documentElement.lang = locale.value
-  document.title = route.name === 'amp' ? t('meta.amp') : t('meta.home')
+  const name = String(route.name)
+  document.title = t(PROJECT_ROUTES.has(name) ? `meta.${name}` : 'meta.home')
 }
 
 onMounted(syncDocumentMeta)

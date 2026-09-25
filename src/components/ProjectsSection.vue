@@ -27,8 +27,12 @@ const projectLinks: Record<string, ProjectLink[]> = {
   amps: [
     { label: 'nyaahibi.nggonku.web.id', href: 'https://nyaahibi.nggonku.web.id' },
     { label: 'amp.nyaahibi.web.id', href: '/projects/amp', internal: true },
-    { label: 'microamp.nyaahibi.web.id', href: 'https://microamp.nyaahibi.web.id' },
+    { label: 'microamp.nyaahibi.web.id', href: '/projects/microamp', internal: true },
     { label: 'nyaaop.nyaahibi.web.id', href: 'https://nyaaop.nyaahibi.web.id' },
+  ],
+  furuhibi: [
+    { label: 'furuhibi.nyaahibi.web.id', href: '/projects/furuhibi', internal: true },
+    { label: 'Live site — furuhibi.nyaahibi.web.id', href: 'https://furuhibi.nyaahibi.web.id' },
   ],
 }
 
