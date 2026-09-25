@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type Component } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Code, Wrench, Monitor, Globe, Plug, Moon, Smartphone } from 'lucide-vue-next'
+import { Code, Wrench, Monitor, Globe, Plug, Moon, Smartphone } from '@lucide/vue'
 
 interface SkillMsg {
   id: string

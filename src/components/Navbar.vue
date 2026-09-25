@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import Button from '@/components/ui/button.vue'
 import Sheet from '@/components/ui/sheet.vue'
-import { Menu } from 'lucide-vue-next'
+import { Menu } from '@lucide/vue'
 import type { Locale } from '@/i18n'
 
 const sectionIds = ['home', 'about', 'projects', 'skills', 'experience', 'contact']

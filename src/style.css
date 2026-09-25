@@ -1,6 +1,51 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn-vue/tailwind.css";
+
+/* Tailwind classes also live inside the i18n HTML messages */
+@source "./locales/*.json";
+
+/* Don't scan skill docs / lock data — they contain example classes */
+@source not "../.agents";
+@source not "../skills-lock.json";
+
+/* Class-based dark variant (the site is dark-only; `.dark` is never toggled) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* Typography — Outfit + JetBrains Mono, loaded via index.html */
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Brand accent (previously tailwind.config.js → colors.purple) */
+  --color-purple: #6c5ce7;
+
+  /* shadcn semantic colors → HSL triplets declared in :root below */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Border radii — same formulas as the old tailwind.config.js */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
 
 @layer base {
   :root {
@@ -25,18 +70,20 @@
     --ring: 252 82% 64%;
     --radius: 0.625rem;
   }
-}
 
-@layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 4rem;
   }
   body {
-    @apply bg-[#09090f] font-sans text-zinc-100 antialiased;
+    background-color: #09090f;
+    color: #f4f4f5;
+    font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   ::selection {
     background-color: #6c5ce7;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowDown, Mail } from 'lucide-vue-next'
+import { ArrowDown, Mail } from '@lucide/vue'
 import { useI18n } from 'vue-i18n'
 import StarfieldCanvas from '@/components/StarfieldCanvas.vue'
 import profilImg from '@/assets/profil.png'
@@ -53,14 +53,18 @@ function scrollToContact() {
         </div>
       </div>
 
-      <!-- Photo -->
+      <!-- Photo — circular avatar with gradient ring, from the original site's profile -->
       <div class="shrink-0">
-        <img
-          :src="profilImg"
-          alt="Ulil Albab"
-          class="h-36 w-36 rounded-2xl border border-white/10 object-cover md:h-52 md:w-52"
-          loading="eager"
-        />
+        <div
+          class="rounded-full bg-linear-to-br from-[#6c5ce7] to-[#a29bfe] p-2.5 shadow-[0_0_40px_rgba(108,92,231,0.4)] md:p-3"
+        >
+          <img
+            :src="profilImg"
+            alt="Ulil Albab"
+            class="h-44 w-44 rounded-full object-cover md:h-72 md:w-72"
+            loading="eager"
+          />
+        </div>
       </div>
     </div>
   </section>

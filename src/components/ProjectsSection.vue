@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ArrowRight, ArrowUpRight } from 'lucide-vue-next'
+import { ArrowRight, ArrowUpRight } from '@lucide/vue'
 
 interface ProjectLink {
   label: string
