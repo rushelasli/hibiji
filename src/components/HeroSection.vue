@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ArrowDown, Mail } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
 import StarfieldCanvas from '@/components/StarfieldCanvas.vue'
 import profilImg from '@/assets/profil.png'
+
+const { t } = useI18n()
 
 function scrollToProjects() {
   document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
@@ -22,17 +25,15 @@ function scrollToContact() {
       <!-- Text -->
       <div class="max-w-xl">
         <p class="mb-4 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
-          Ulil Albab — Electronics Hobbyist
+          {{ t('hero.eyebrow') }}
         </p>
         <h1
           class="mb-5 text-4xl font-semibold leading-[1.1] tracking-tight text-white md:text-5xl"
         >
-          I build headphone amps, homeservers, and custom keyboards.
+          {{ t('hero.title') }}
         </h1>
         <p class="mb-8 max-w-lg text-[17px] leading-relaxed text-zinc-400">
-          Learning electronics by building — from analog and discrete
-          headphone amplifiers to ESP32-based IoT and self-hosted home
-          infrastructure.
+          {{ t('hero.body') }}
         </p>
         <div class="flex flex-wrap items-center gap-3">
           <button
@@ -40,14 +41,14 @@ function scrollToContact() {
             @click="scrollToProjects"
           >
             <ArrowDown class="h-4 w-4" />
-            View projects
+            {{ t('hero.ctaPrimary') }}
           </button>
           <button
             class="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-medium text-zinc-200 transition-colors hover:border-white/30 hover:text-white"
             @click="scrollToContact"
           >
             <Mail class="h-4 w-4" />
-            Get in touch
+            {{ t('hero.ctaSecondary') }}
           </button>
         </div>
       </div>

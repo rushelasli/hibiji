@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const socials = [
   {
     href: 'https://www.facebook.com/share/1AiX1D61gs/',
@@ -37,14 +41,13 @@ const socials = [
   <section id="contact">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
       <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
-        Contact
+        {{ t('contact.eyebrow') }}
       </p>
       <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-        Get in touch
+        {{ t('contact.title') }}
       </h2>
       <p class="mb-10 max-w-xl text-[16px] leading-relaxed text-zinc-400">
-        Open to project discussions, collaboration, or just talking shop
-        about amps and electronics.
+        {{ t('contact.intro') }}
       </p>
 
       <div class="flex flex-wrap items-center gap-3">

@@ -1,25 +1,26 @@
 <script setup lang="ts">
+import { onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import Navbar from '@/components/Navbar.vue'
-import HeroSection from '@/components/HeroSection.vue'
-import AboutSection from '@/components/AboutSection.vue'
-import ProjectsSection from '@/components/ProjectsSection.vue'
-import SkillsSection from '@/components/SkillsSection.vue'
-import ExperienceSection from '@/components/ExperienceSection.vue'
-import ContactSection from '@/components/ContactSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
+
+const route = useRoute()
+const { t, locale } = useI18n()
+
+function syncDocumentMeta() {
+  document.documentElement.lang = locale.value
+  document.title = route.name === 'amp' ? t('meta.amp') : t('meta.home')
+}
+
+onMounted(syncDocumentMeta)
+watch([locale, () => route.name], syncDocumentMeta)
 </script>
 
 <template>
   <div class="min-h-screen bg-[#09090f] font-sans text-zinc-100 antialiased">
     <Navbar />
-    <main>
-      <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <ContactSection />
-    </main>
+    <RouterView />
     <FooterSection />
   </div>
 </template>

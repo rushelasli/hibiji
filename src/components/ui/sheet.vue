@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { cn } from '@/lib/utils'
 import { X } from 'lucide-vue-next'
+
+const { t } = useI18n()
 
 interface Props {
   open?: boolean
@@ -54,7 +57,7 @@ const sideClasses: Record<string, string> = {
           @click="close"
         >
           <X class="h-4 w-4" />
-          <span class="sr-only">Close</span>
+          <span class="sr-only">{{ t('common.close') }}</span>
         </button>
         <slot :close="close" />
       </div>

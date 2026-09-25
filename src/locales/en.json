@@ -1,0 +1,320 @@
+{
+  "meta": {
+    "home": "Ulil Albab — Electronics & Projects",
+    "amp": "NyaaHibiV2 Hybrid SE — DIY Headphone Amplifier"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "experience": "Experience",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "common": {
+    "close": "Close"
+  },
+  "hero": {
+    "eyebrow": "Ulil Albab — Electronics Hobbyist",
+    "title": "I build headphone amps, homeservers, and custom keyboards.",
+    "body": "Learning electronics by building — from analog and discrete headphone amplifiers to ESP32-based IoT and self-hosted home infrastructure.",
+    "ctaPrimary": "View projects",
+    "ctaSecondary": "Get in touch"
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Hi, I'm Ulil Albab",
+    "intro": "A beginner with real enthusiasm for electronics — both <span class=\"text-zinc-200\">analog</span> and <span class=\"text-zinc-200\">digital</span>. I also enjoy learning about <span class=\"text-zinc-200\">computers</span>, <span class=\"text-zinc-200\">networking</span>, and lately I've become a fan of <span class=\"text-zinc-200\">vacuum tubes</span>.",
+    "interestsTitle": "Interests",
+    "interests": [
+      "Listening to music",
+      "Watching anime",
+      "Tinkering with electronics and vacuum tubes",
+      "Learning computers & networking"
+    ],
+    "focusTitle": "Focus areas",
+    "tags": [
+      "Analog Electronics",
+      "Digital Electronics",
+      "Computers",
+      "Networking",
+      "Vacuum Tubes"
+    ]
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "Selected work",
+    "intro": "Three areas I keep coming back to — audio electronics, home infrastructure, and input devices.",
+    "items": [
+      {
+        "id": "amps",
+        "index": "01",
+        "title": "Headphone Amplifiers",
+        "description": "A series of headphone amplifier builds — from analog and hybrid designs to a fully discrete op-amp. Focused on audio transparency and learning through iteration.",
+        "tags": ["Analog", "Discrete Op-Amp", "Tube"]
+      },
+      {
+        "id": "servers",
+        "index": "02",
+        "title": "Homeserver & IoT",
+        "description": "A self-hosted home ecosystem: centralized IoT, local NAS storage, and on-prem services — full control, no cloud dependency.",
+        "tags": ["ESP32", "ESP8266", "Self-hosted", "NAS"],
+        "points": [
+          "Centralized home IoT on ESP32 & ESP8266",
+          "Local NAS for backup and media",
+          "Self-hosted services (web, cloud, media)"
+        ]
+      },
+      {
+        "id": "keyboards",
+        "index": "03",
+        "title": "Custom Mechanical Keyboards",
+        "description": "Hand-wired custom keyboards and wireless macropads — combining electronics with firmware experiments.",
+        "tags": ["Handwire", "VIA", "ESP32 + OLED"],
+        "points": [
+          "Hand-wired boards with custom layouts",
+          "VIA support for easy keymap configuration",
+          "Wireless macropad on ESP32 with OLED display"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "Skills",
+    "title": "What I do",
+    "intro": "A mix of hands-on electronics, computers, and honest hobbies.",
+    "items": [
+      {
+        "id": "coding",
+        "label": "Coding",
+        "desc": "Scripts, web, and Python/Arduino projects."
+      },
+      {
+        "id": "electronics",
+        "label": "Electronics",
+        "desc": "Analog & digital, PCBs, vacuum tubes, challenging circuits."
+      },
+      {
+        "id": "pc",
+        "label": "PC & Computers",
+        "desc": "OS setup, optimization, software experiments."
+      },
+      {
+        "id": "networking",
+        "label": "Networking",
+        "desc": "Cabling & switching — the fun parts, no MikroTik trauma."
+      },
+      {
+        "id": "repair",
+        "label": "Electronics Repair",
+        "desc": "Fixing TVs, radios, monitors, PCs, and laptops."
+      },
+      {
+        "id": "rest",
+        "label": "Rest & Recharge",
+        "desc": "Essential hobby. Sleep is a feature."
+      },
+      {
+        "id": "scrolling",
+        "label": "Scrolling",
+        "desc": "Endless social media scrolling. We all do it."
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Where I've been",
+    "items": [
+      {
+        "period": "2017 — Present",
+        "title": "Electronics Repair",
+        "desc": "Freelance repair of TVs, radios, monitors, PCs, laptops, and more."
+      },
+      {
+        "period": "2023 — Present",
+        "title": "Self-Directed Learning",
+        "desc": "Deep-diving into headphone amplifiers, homeservers, and custom keyboards."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Get in touch",
+    "intro": "Open to project discussions, collaboration, or just talking shop about amps and electronics."
+  },
+  "footer": {
+    "tagline": "Built with Vue"
+  },
+  "amp": {
+    "back": "Back to projects",
+    "headerEyebrow": "Projects / 01 — NyaaHibiV2 AMP",
+    "headerTitle": "NyaaHibiV2 Hybrid SE",
+    "headerSubtitle": "A single-ended, high-performance headphone amplifier — fully SMD on a 4-layer PCB, with a hybrid JFET + TPA6120 topology and a symmetrical battery power supply.",
+    "aboutEyebrow": "About",
+    "aboutTitle": "About NyaaHibiV2",
+    "aboutP1": "NyaaHibiV2 builds on the topology of the first-generation amplifier, <a href=\"https://nyaahibi.nggonku.web.id\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-white underline decoration-[#6c5ce7] underline-offset-4 transition-colors hover:text-[#6c5ce7]\">-NyaaHibi-</a>. The name NyaaHibi itself comes from Japanese: Nyaa (にゃあ), meaning a cat's meow, and Hibi (日々), meaning every day. Combined, NyaaHibi can be read as \"meowing every day\" — a simple philosophy of bringing enjoyable sound that can be savored every day ^_^.",
+    "aboutP2": "In version V2, the design is fully SMD with several improvements — most notably, the final stage now uses the TPA6120A2 IC. The PCB is also upgraded to 4 layers for cleaner routing and lower noise. The circuit topology has been refined as well, improving sound quality while keeping the amplifier stable.",
+    "mascotAlt": "NyaaHibiV2 mascot — photo by Flassy",
+    "mascotOverlay": "Photos by Flassy",
+    "topologyEyebrow": "Topology",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram of the NyaaHibiV2 amplifier",
+    "ampBlocks": [
+      {
+        "title": "Discrete JFET Input",
+        "desc": "Used to reduce the shortcomings of SMD input capacitors — the design is fully SMD, so large film capacitors like Wima aren't an option. JFETs also give a more \"tube-ish\" character, as their transfer curve resembles a vacuum tube."
+      },
+      {
+        "title": "BJT Current Booster",
+        "desc": "Because a JFET's current capability is limited, BJT transistors are added as a current boost so the following stage can operate optimally."
+      },
+      {
+        "title": "Outer Loop Preamp Gain",
+        "desc": "The main voltage gain stage of the system — it largely determines the amplifier's character or tonal color."
+      },
+      {
+        "title": "Inner Loop Nested Feedback",
+        "desc": "Keeps the circuit stable despite the high gain of the preamp gain stage, minimizing phase shift."
+      },
+      {
+        "title": "Buffer Frontend",
+        "desc": "Isolates the preamp gain block from the final stage so they don't affect each other."
+      },
+      {
+        "title": "Front End Final Stage",
+        "desc": "Uses a composite amplifier concept to help correct the signal before it reaches the final output stage."
+      },
+      {
+        "title": "Final Stage (TPA6120)",
+        "desc": "Uses the TPA6120 IC, known for its high slew rate, wide bandwidth, and excellent performance in headphone amplifier applications."
+      },
+      {
+        "title": "DC Servo",
+        "desc": "Used because the design omits a DC blocking capacitor in the signal path. The DC servo keeps the output DC offset low without affecting the sound character."
+      }
+    ],
+    "psuEyebrow": "Power Supply",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram of the NyaaHibiV2 power supply",
+    "psuBlocks": [
+      {
+        "title": "Charger Module",
+        "desc": "Uses a TP4056 module mounted onboard to save PCB space."
+      },
+      {
+        "title": "Active Bypass Charging",
+        "desc": "While the battery charges, the amplifier draws power directly from the charger. This keeps the charging module from being overloaded when the amplifier is on. Switching uses a MOSFET to reduce power loss compared with conventional diodes."
+      },
+      {
+        "title": "Step-Up Converter",
+        "desc": "Raises the battery voltage, with high- and low-voltage modes. Low mode gives longer runtime, while high mode delivers maximum performance."
+      },
+      {
+        "title": "Charge Pump",
+        "desc": "Generates a negative voltage rail so the power supply becomes symmetrical (+ and −)."
+      },
+      {
+        "title": "Filter Stage 1",
+        "desc": "A combination of capacitor, ferrite bead, resistor, and capacitor that dampens initial ripple and noise."
+      },
+      {
+        "title": "Capacitance Multiplier",
+        "desc": "Makes a small SMD capacitance behave like a large one, keeping the supply cleaner."
+      },
+      {
+        "title": "Filter Stage 2",
+        "desc": "A local filter placed near each IC to reduce noise picked up from long supply traces."
+      }
+    ],
+    "threeDEyebrow": "3D Preview",
+    "threeDTitle": "3D View",
+    "threeDIntro": "Interactive 3D previews — drag to rotate, scroll to zoom. Models are loaded on demand.",
+    "models": ["Amplifier + box", "NyaaHibiV2", "Component Values"],
+    "osciEyebrow": "Measurement",
+    "osciTitle": "Power Output Test Using an Oscilloscope",
+    "disclaimer": "⚠️ Disclaimer: This 10Ω load is not recommended for normal use, as it may overburden the amplifier — it is intended solely for testing maximum output!",
+    "osciRows": [
+      {
+        "image": "/projects/amp/maxmode.jpg",
+        "caption": "5V/Div HI Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32ohm:",
+            "entries": [
+              { "label": "V/Div:", "value": "5V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "3Div x 5V/Div = 15Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 7.5V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 32 ≈ 1.76W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 15 / 2.828 ≈ 5.30V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 32 ≈ 0.878W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10ohm!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 10 ≈ 5.63W!" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 10 ≈ 2.81W!" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      },
+      {
+        "image": "/projects/amp/lowmode.jpg",
+        "caption": "2V/Div LO Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32Ω:",
+            "entries": [
+              { "label": "V/Div:", "value": "2V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "4.2Div x 2V/Div = 8.4Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 4.2V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 32 ≈ 0.551W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 8.4 / 2.828 ≈ 2.97V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 32 ≈ 0.276W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10Ω!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 10 ≈ 1.76W" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 10 ≈ 0.882W" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      }
+    ],
+    "notesEyebrow": "Notes",
+    "notesTitle": "Notes and References",
+    "refs": [
+      {
+        "title": "JFET",
+        "links": [
+          { "label": "JFET Pre-Amplifiers", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET + BJT Buffer", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET Source Follower", "href": "https://next.gr/circuits/amplifier/simple-jfet-preamp-c21712" },
+          { "label": "Universal JFET Buffer", "href": "https://hifisonix.com/wp-content/uploads/2015/01/UBx.pdf" }
+        ]
+      },
+      {
+        "title": "Nested Composite",
+        "links": [
+          { "label": "Composite Amp", "href": "https://www.analog.com/en/resources/analog-dialogue/articles/composite-amplifiers-high-output-drive-capability-with-precision.html" },
+          { "label": "Nested Feedback", "href": "https://www.allaboutcircuits.com/technical-articles/composite-amplifiers-improving-phase-accuracy/" },
+          { "label": "Nested Distortion Reducer", "href": "https://www.tubecad.com/2017/04/blog0376.htm" }
+        ]
+      },
+      {
+        "title": "Symmetrical Step-Up",
+        "links": [
+          { "label": "LT3471 Symmetric Boost Converter", "href": "https://www.alldatasheet.com/html-pdf/101718/LINER/LT3471/1079/7/LT3471.html" },
+          { "label": "Charge Pump", "href": "https://electronics.stackexchange.com/questions/143507/inverting-charge-pump-with-boost-converter-loading-characteristics" }
+        ]
+      }
+    ]
+  }
+}

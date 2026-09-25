@@ -14,6 +14,9 @@ dist-ssr
 .env
 .env.*
 
+# Raw project page source material (reference only)
+/project_raw/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

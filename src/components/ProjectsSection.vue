@@ -1,79 +1,59 @@
 <script setup lang="ts">
-import { ArrowUpRight } from 'lucide-vue-next'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { ArrowRight, ArrowUpRight } from 'lucide-vue-next'
 
 interface ProjectLink {
   label: string
   href: string
+  internal?: boolean
 }
 
-interface Project {
+interface ProjectMsg {
+  id: string
   index: string
   title: string
   description: string
   tags: string[]
-  links?: ProjectLink[]
   points?: string[]
 }
 
-const projects: Project[] = [
-  {
-    index: '01',
-    title: 'Headphone Amplifiers',
-    description:
-      'A series of headphone amplifier builds — from analog and hybrid designs to a fully discrete op-amp. Focused on audio transparency and learning through iteration.',
-    tags: ['Analog', 'Discrete Op-Amp', 'Tube'],
-    links: [
-      { label: 'nyaahibi.nggonku.web.id', href: 'https://nyaahibi.nggonku.web.id' },
-      { label: 'amp.nyaahibi.web.id', href: 'https://amp.nyaahibi.web.id' },
-      { label: 'microamp.nyaahibi.web.id', href: 'https://microamp.nyaahibi.web.id' },
-      { label: 'nyaaop.nyaahibi.web.id', href: 'https://nyaaop.nyaahibi.web.id' },
-    ],
-  },
-  {
-    index: '02',
-    title: 'Homeserver & IoT',
-    description:
-      'A self-hosted home ecosystem: centralized IoT, local NAS storage, and on-prem services — full control, no cloud dependency.',
-    tags: ['ESP32', 'ESP8266', 'Self-hosted', 'NAS'],
-    points: [
-      'Centralized home IoT on ESP32 & ESP8266',
-      'Local NAS for backup and media',
-      'Self-hosted services (web, cloud, media)',
-    ],
-  },
-  {
-    index: '03',
-    title: 'Custom Mechanical Keyboards',
-    description:
-      'Hand-wired custom keyboards and wireless macropads — combining electronics with firmware experiments.',
-    tags: ['Handwire', 'VIA', 'ESP32 + OLED'],
-    points: [
-      'Hand-wired boards with custom layouts',
-      'VIA support for easy keymap configuration',
-      'Wireless macropad on ESP32 with OLED display',
-    ],
-  },
-]
+const { t, tm } = useI18n()
+
+const projects = computed(() => tm('projects.items') as unknown as ProjectMsg[])
+
+// Links aren't language-dependent — keyed by project id from the locale files.
+const projectLinks: Record<string, ProjectLink[]> = {
+  amps: [
+    { label: 'nyaahibi.nggonku.web.id', href: 'https://nyaahibi.nggonku.web.id' },
+    { label: 'amp.nyaahibi.web.id', href: '/projects/amp', internal: true },
+    { label: 'microamp.nyaahibi.web.id', href: 'https://microamp.nyaahibi.web.id' },
+    { label: 'nyaaop.nyaahibi.web.id', href: 'https://nyaaop.nyaahibi.web.id' },
+  ],
+}
+
+function linksFor(id: string): ProjectLink[] {
+  return projectLinks[id] ?? []
+}
 </script>
 
 <template>
   <section id="projects" class="border-b border-white/10">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
       <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
-        Projects
+        {{ t('projects.eyebrow') }}
       </p>
       <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-        Selected work
+        {{ t('projects.title') }}
       </h2>
       <p class="mb-12 max-w-xl text-[16px] leading-relaxed text-zinc-400">
-        Three areas I keep coming back to — audio electronics, home
-        infrastructure, and input devices.
+        {{ t('projects.intro') }}
       </p>
 
       <div class="flex flex-col gap-5">
         <article
           v-for="project in projects"
-          :key="project.title"
+          :key="project.id"
           class="rounded-xl border border-white/10 bg-[#101018] p-6 transition-colors hover:border-white/20 md:p-8"
         >
           <div class="flex items-baseline gap-4">
@@ -101,9 +81,20 @@ const projects: Project[] = [
             </li>
           </ul>
 
-          <div v-if="project.links" class="mt-5 flex flex-col gap-2">
+          <div v-if="linksFor(project.id).length" class="mt-5 flex flex-col gap-2">
+            <RouterLink
+              v-for="link in linksFor(project.id).filter((l) => l.internal)"
+              :key="link.href"
+              :to="link.href"
+              class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-zinc-300 transition-colors hover:text-white"
+            >
+              <ArrowRight
+                class="h-3.5 w-3.5 text-[#6c5ce7] transition-transform group-hover:translate-x-0.5"
+              />
+              {{ link.label }}
+            </RouterLink>
             <a
-              v-for="link in project.links"
+              v-for="link in linksFor(project.id).filter((l) => !l.internal)"
               :key="link.href"
               :href="link.href"
               target="_blank"

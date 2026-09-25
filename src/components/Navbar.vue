@@ -1,31 +1,48 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import Button from '@/components/ui/button.vue'
 import Sheet from '@/components/ui/sheet.vue'
 import { Menu } from 'lucide-vue-next'
+import type { Locale } from '@/i18n'
 
 const sectionIds = ['home', 'about', 'projects', 'skills', 'experience', 'contact']
-const { activeId, scrollTo } = useScrollSpy(sectionIds, 100)
+const route = useRoute()
+const router = useRouter()
+const scrollSpy = useScrollSpy(sectionIds, 100)
+const { t, locale } = useI18n()
 
 const sheetOpen = ref(false)
 
 const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'home' },
+  { id: 'about' },
+  { id: 'projects' },
+  { id: 'skills' },
+  { id: 'experience' },
+  { id: 'contact' },
 ]
 
+const locales: Locale[] = ['id', 'en']
+
+function setLocale(l: Locale) {
+  locale.value = l
+  localStorage.setItem('locale', l)
+}
+
 function handleNavClick(id: string) {
-  scrollTo(id)
+  if (route.path !== '/') {
+    router.push({ path: '/', hash: `#${id}` })
+  } else {
+    scrollSpy.scrollTo(id)
+  }
   sheetOpen.value = false
 }
 
 function isActive(id: string) {
-  return activeId.value === id
+  return route.path === '/' && scrollSpy.activeId.value === id
 }
 </script>
 
@@ -55,8 +72,25 @@ function isActive(id: string) {
           ]"
           @click.prevent="handleNavClick(item.id)"
         >
-          {{ item.label }}
+          {{ t(`nav.${item.id}`) }}
         </a>
+
+        <div class="ml-2 flex items-center gap-0.5 border-l border-white/10 pl-3">
+          <button
+            v-for="opt in locales"
+            :key="opt"
+            :class="[
+              'rounded px-2 py-1.5 font-mono text-xs tracking-wider transition-colors',
+              locale === opt
+                ? 'bg-white/10 text-white'
+                : 'text-zinc-500 hover:text-zinc-300',
+            ]"
+            :aria-label="`Switch language to ${opt.toUpperCase()}`"
+            @click="setLocale(opt)"
+          >
+            {{ opt.toUpperCase() }}
+          </button>
+        </div>
       </div>
 
       <!-- Mobile hamburger -->
@@ -97,9 +131,29 @@ function isActive(id: string) {
             ]"
             @click.prevent="() => { handleNavClick(item.id); close() }"
           >
-            {{ item.label }}
+            {{ t(`nav.${item.id}`) }}
           </a>
         </nav>
+
+        <div class="flex items-center gap-1 border-t border-white/10 pt-6">
+          <span class="mr-2 font-mono text-xs uppercase tracking-widest text-zinc-500">
+            {{ t('nav.language') }}
+          </span>
+          <button
+            v-for="opt in locales"
+            :key="opt"
+            :class="[
+              'rounded px-3 py-1.5 font-mono text-xs tracking-wider transition-colors',
+              locale === opt
+                ? 'bg-white/10 text-white'
+                : 'text-zinc-500 hover:text-zinc-300',
+            ]"
+            :aria-label="`Switch language to ${opt.toUpperCase()}`"
+            @click="setLocale(opt)"
+          >
+            {{ opt.toUpperCase() }}
+          </button>
+        </div>
       </div>
     </template>
   </Sheet>

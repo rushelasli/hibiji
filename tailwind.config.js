@@ -4,6 +4,8 @@ export default {
   content: [
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
+    // locale files contain HTML messages with Tailwind classes
+    './src/**/*.json',
   ],
   theme: {
     extend: {

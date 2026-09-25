@@ -1,0 +1,320 @@
+{
+  "meta": {
+    "home": "Ulil Albab — Elektronik & Proyek",
+    "amp": "NyaaHibiV2 Hybrid SE — Penguat Headphone DIY"
+  },
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "projects": "Proyek",
+    "skills": "Keahlian",
+    "experience": "Pengalaman",
+    "contact": "Kontak",
+    "language": "Bahasa"
+  },
+  "common": {
+    "close": "Tutup"
+  },
+  "hero": {
+    "eyebrow": "Ulil Albab — Hobi Elektronik",
+    "title": "Saya membuat penguat headphone, homeserver, dan keyboard kustom.",
+    "body": "Belajar elektronik lewat praktik langsung — dari penguat headphone analog dan discrete hingga IoT berbasis ESP32 serta infrastruktur rumah yang di-hosting sendiri.",
+    "ctaPrimary": "Lihat proyek",
+    "ctaSecondary": "Hubungi saya"
+  },
+  "about": {
+    "eyebrow": "Tentang",
+    "title": "Hai, saya Ulil Albab",
+    "intro": "Pemula dengan antusiasme sungguhan pada elektronik, baik <span class=\"text-zinc-200\">analog</span> maupun <span class=\"text-zinc-200\">digital</span>. Saya juga senang mempelajari <span class=\"text-zinc-200\">komputer</span>, <span class=\"text-zinc-200\">jaringan</span>, dan belakangan ini jadi penggemar <span class=\"text-zinc-200\">tabung vakum</span>.",
+    "interestsTitle": "Minat",
+    "interests": [
+      "Mendengarkan musik",
+      "Menonton anime",
+      "Mengutak-atik elektronik dan tabung vakum",
+      "Belajar komputer & jaringan"
+    ],
+    "focusTitle": "Bidang fokus",
+    "tags": [
+      "Elektronik Analog",
+      "Elektronik Digital",
+      "Komputer",
+      "Jaringan",
+      "Tabung Vakum"
+    ]
+  },
+  "projects": {
+    "eyebrow": "Proyek",
+    "title": "Karya pilihan",
+    "intro": "Tiga bidang yang selalu membuat saya kembali — elektronik audio, infrastruktur rumah, dan perangkat masukan.",
+    "items": [
+      {
+        "id": "amps",
+        "index": "01",
+        "title": "Penguat Headphone",
+        "description": "Serangkaian build penguat headphone — dari desain analog dan hybrid hingga op-amp discrete sepenuhnya. Fokus pada transparansi audio dan belajar lewat iterasi.",
+        "tags": ["Analog", "Op-Amp Discrete", "Tabung"]
+      },
+      {
+        "id": "servers",
+        "index": "02",
+        "title": "Homeserver & IoT",
+        "description": "Ekosistem rumah yang di-hosting sendiri: IoT terpusat, penyimpanan NAS lokal, dan layanan on-prem — kendali penuh, tanpa ketergantungan cloud.",
+        "tags": ["ESP32", "ESP8266", "Self-hosted", "NAS"],
+        "points": [
+          "IoT rumah terpusat di ESP32 & ESP8266",
+          "NAS lokal untuk backup dan media",
+          "Layanan self-hosted (web, cloud, media)"
+        ]
+      },
+      {
+        "id": "keyboards",
+        "index": "03",
+        "title": "Keyboard Mekanik Kustom",
+        "description": "Keyboard kustom dengan wiring manual dan macropad nirkabel — memadukan elektronik dengan eksperimen firmware.",
+        "tags": ["Handwire", "VIA", "ESP32 + OLED"],
+        "points": [
+          "Papan dengan wiring manual dan layout kustom",
+          "Dukungan VIA untuk konfigurasi keymap yang mudah",
+          "Macropad nirkabel berbasis ESP32 dengan layar OLED"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "Keahlian",
+    "title": "Apa yang saya kerjakan",
+    "intro": "Perpaduan elektronik praktik langsung, komputer, dan hobi yang apa adanya.",
+    "items": [
+      {
+        "id": "coding",
+        "label": "Koding",
+        "desc": "Skrip, web, dan proyek Python/Arduino."
+      },
+      {
+        "id": "electronics",
+        "label": "Elektronik",
+        "desc": "Analog & digital, PCB, tabung vakum, dan rangkaian yang menantang."
+      },
+      {
+        "id": "pc",
+        "label": "PC & Komputer",
+        "desc": "Pengaturan OS, optimasi, dan eksperimen perangkat lunak."
+      },
+      {
+        "id": "networking",
+        "label": "Jaringan",
+        "desc": "Pengkabelan & switching — bagian serunya saja, tanpa trauma MikroTik."
+      },
+      {
+        "id": "repair",
+        "label": "Servis Elektronik",
+        "desc": "Memperbaiki TV, radio, monitor, PC, dan laptop."
+      },
+      {
+        "id": "rest",
+        "label": "Istirahat & Mengisi Ulang",
+        "desc": "Hobi wajib. Tidur itu fitur."
+      },
+      {
+        "id": "scrolling",
+        "label": "Scrolling",
+        "desc": "Scrolling media sosial tanpa henti — kita semua melakukannya."
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "Pengalaman",
+    "title": "Rekam jejak saya",
+    "items": [
+      {
+        "period": "2017 — Sekarang",
+        "title": "Servis Elektronik",
+        "desc": "Perbaikan TV, radio, monitor, PC, laptop, dan lainnya secara freelance."
+      },
+      {
+        "period": "2023 — Sekarang",
+        "title": "Belajar Mandiri",
+        "desc": "Mendalami penguat headphone, homeserver, dan keyboard kustom."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Kontak",
+    "title": "Mari terhubung",
+    "intro": "Terbuka untuk diskusi proyek, kolaborasi, atau sekadar ngobrol soal penguat dan elektronik."
+  },
+  "footer": {
+    "tagline": "Dibuat dengan Vue"
+  },
+  "amp": {
+    "back": "Kembali ke proyek",
+    "headerEyebrow": "Proyek / 01 — NyaaHibiV2 AMP",
+    "headerTitle": "NyaaHibiV2 Hybrid SE",
+    "headerSubtitle": "Penguat headphone single-ended berperforma tinggi — desain full-SMD di atas PCB 4 lapis dengan topologi hybrid JFET + TPA6120 dan catu daya baterai simetris.",
+    "aboutEyebrow": "Tentang",
+    "aboutTitle": "Tentang NyaaHibiV2",
+    "aboutP1": "NyaaHibiV2 merupakan pengembangan dari topologi amplifier versi pertama, yaitu <a href=\"https://nyaahibi.nggonku.web.id\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-white underline decoration-[#6c5ce7] underline-offset-4 transition-colors hover:text-[#6c5ce7]\">-NyaaHibi-</a>. Nama <span class=\"text-zinc-200\">NyaaHibi</span> sendiri berasal dari bahasa Jepang: Nyaa (にゃあ), yang berarti suara kucing, dan Hibi (日々), yang berarti setiap hari. Jika digabungkan, NyaaHibi bisa diartikan sebagai \"mengeong setiap hari\" — filosofi sederhana untuk menghadirkan suara yang menyenangkan dan bisa dinikmati setiap hari ^_^.",
+    "aboutP2": "Di versi V2 ini, desain dibuat full-SMD dengan beberapa peningkatan — salah satunya pada final stage yang kini menggunakan IC TPA6120A2. PCB juga di-upgrade ke 4 lapis agar tata letak lebih rapi dan noise lebih rendah. Selain itu, topologi rangkaian disempurnakan untuk meningkatkan kualitas suara sekaligus menjaga stabilitas amplifier.",
+    "mascotAlt": "Maskot NyaaHibiV2 — foto oleh Flassy",
+    "mascotOverlay": "Foto oleh Flassy",
+    "topologyEyebrow": "Topologi",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram penguat NyaaHibiV2",
+    "ampBlocks": [
+      {
+        "title": "Discrete JFET Input",
+        "desc": "Digunakan untuk mengurangi karakter buruk dari kapasitor input SMD, karena desain ini fully SMD sehingga tidak memungkinkan penggunaan kapasitor film besar seperti Wima. Selain itu, JFET juga memberikan karakter suara yang cenderung \"tube-ish\" karena kurva transfernya menyerupai tabung vakum."
+      },
+      {
+        "title": "BJT Current Booster",
+        "desc": "Karena JFET memiliki kemampuan arus yang terbatas, ditambahkan transistor BJT sebagai penguat arus agar tahap berikutnya dapat bekerja dengan optimal."
+      },
+      {
+        "title": "Outer Loop Preamp Gain",
+        "desc": "Merupakan tahap utama penguatan tegangan pada sistem dan menjadi penentu utama karakter atau warna suara amplifier."
+      },
+      {
+        "title": "Inner Loop Nested Feedback",
+        "desc": "Digunakan untuk menjaga stabilitas rangkaian akibat penguatan tinggi pada preamp gain, sehingga pergeseran fasa dapat diminimalkan."
+      },
+      {
+        "title": "Buffer Frontend",
+        "desc": "Berfungsi sebagai isolator antara blok preamp gain dan blok final stage agar keduanya tidak saling mempengaruhi."
+      },
+      {
+        "title": "Front End Final Stage",
+        "desc": "Menggunakan konsep composite amplifier untuk membantu mengoreksi sinyal sebelum masuk ke tahap output akhir."
+      },
+      {
+        "title": "Final Stage (TPA6120)",
+        "desc": "Menggunakan IC TPA6120 yang dikenal memiliki slew rate tinggi, bandwidth lebar, dan performa sangat baik untuk aplikasi headphone amplifier."
+      },
+      {
+        "title": "DC Servo",
+        "desc": "Digunakan karena desain tidak memakai kapasitor DC blocker pada jalur sinyal. DC servo menjaga agar DC offset di output tetap rendah tanpa memengaruhi karakter suara."
+      }
+    ],
+    "psuEyebrow": "Catu Daya",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram catu daya NyaaHibiV2",
+    "psuBlocks": [
+      {
+        "title": "Modul Charger",
+        "desc": "Menggunakan modul TP4056 yang dipasang onboard untuk menghemat ruang PCB."
+      },
+      {
+        "title": "Active Bypass Charging",
+        "desc": "Saat baterai diisi, amplifier mengambil daya langsung dari charger, sehingga modul charging tidak terbebani saat amplifier menyala. Peralihan daya menggunakan MOSFET sehingga rugi daya lebih kecil dibanding dioda konvensional."
+      },
+      {
+        "title": "Step-Up Converter",
+        "desc": "Menaikkan tegangan baterai dengan pilihan mode tegangan tinggi dan rendah. Mode rendah memberikan waktu pakai lebih lama, sedangkan mode tinggi memberikan performa maksimum."
+      },
+      {
+        "title": "Charge Pump",
+        "desc": "Menghasilkan rail tegangan negatif sehingga catu daya menjadi simetris (+ dan −)."
+      },
+      {
+        "title": "Filter Stage 1",
+        "desc": "Terdiri dari kapasitor, ferrite bead, resistor, dan kapasitor untuk meredam ripple serta noise awal."
+      },
+      {
+        "title": "Capacitance Multiplier",
+        "desc": "Digunakan agar kapasitansi kecil pada SMD terasa seperti kapasitansi besar, sehingga suplai lebih bersih."
+      },
+      {
+        "title": "Filter Stage 2",
+        "desc": "Filter lokal yang ditempatkan dekat masing-masing IC untuk mengurangi noise akibat jalur suplai yang panjang."
+      }
+    ],
+    "threeDEyebrow": "Pratinjau 3D",
+    "threeDTitle": "Tampilan 3D",
+    "threeDIntro": "Pratinjau 3D interaktif — seret untuk memutar, gulir untuk memperbesar. Model dimuat sesuai kebutuhan.",
+    "models": ["Amplifier + box", "NyaaHibiV2", "Nilai Komponen"],
+    "osciEyebrow": "Pengukuran",
+    "osciTitle": "Uji Daya Keluar Menggunakan Oscilloscope",
+    "disclaimer": "⚠️ Disclaimer: Beban 10Ω ini tidak direkomendasikan untuk penggunaan normal karena dapat membebani amplifier secara berlebihan; beban ini hanya digunakan untuk menguji daya keluar maksimum!",
+    "osciRows": [
+      {
+        "image": "/projects/amp/maxmode.jpg",
+        "caption": "5V/Div HI Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32ohm:",
+            "entries": [
+              { "label": "V/Div:", "value": "5V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "3Div x 5V/Div = 15Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 7.5V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 32 ≈ 1.76W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 15 / 2.828 ≈ 5.30V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 32 ≈ 0.878W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10ohm!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 10 ≈ 5.63W!" },
+              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 10 ≈ 2.81W!" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      },
+      {
+        "image": "/projects/amp/lowmode.jpg",
+        "caption": "2V/Div LO Mode",
+        "tests": [
+          {
+            "title": "Stress Test 32Ω:",
+            "entries": [
+              { "label": "V/Div:", "value": "2V/Div" },
+              { "label": "Vpp:", "equation": "Div vert x V/Div" },
+              { "label": "Vpp:", "equation": "4.2Div x 2V/Div = 8.4Vpp" },
+              { "label": "Vpeak:", "equation": "Vpp / 2 = 4.2V" },
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 32 ≈ 0.551W" },
+              { "label": "Vrms:", "equation": "Vpp / (2√2) = 8.4 / 2.828 ≈ 2.97V" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 32 ≈ 0.276W" }
+            ]
+          },
+          {
+            "title": "Stress Test 10Ω!:",
+            "entries": [
+              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 10 ≈ 1.76W" },
+              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 10 ≈ 0.882W" }
+            ],
+            "showDisclaimer": true
+          }
+        ]
+      }
+    ],
+    "notesEyebrow": "Catatan",
+    "notesTitle": "Catatan dan Referensi",
+    "refs": [
+      {
+        "title": "JFET",
+        "links": [
+          { "label": "JFET Pre-Amplifiers", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET + BJT Buffer", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET Source Follower", "href": "https://next.gr/circuits/amplifier/simple-jfet-preamp-c21712" },
+          { "label": "Universal JFET Buffer", "href": "https://hifisonix.com/wp-content/uploads/2015/01/UBx.pdf" }
+        ]
+      },
+      {
+        "title": "Nested Composite",
+        "links": [
+          { "label": "Composite Amp", "href": "https://www.analog.com/en/resources/analog-dialogue/articles/composite-amplifiers-high-output-drive-capability-with-precision.html" },
+          { "label": "Nested Feedback", "href": "https://www.allaboutcircuits.com/technical-articles/composite-amplifiers-improving-phase-accuracy/" },
+          { "label": "Nested Distortion Reducer", "href": "https://www.tubecad.com/2017/04/blog0376.htm" }
+        ]
+      },
+      {
+        "title": "Step-Up Simetris",
+        "links": [
+          { "label": "LT3471 Symmetric Boost Converter", "href": "https://www.alldatasheet.com/html-pdf/101718/LINER/LT3471/1079/7/LT3471.html" },
+          { "label": "Charge Pump", "href": "https://electronics.stackexchange.com/questions/143507/inverting-charge-pump-with-boost-converter-loading-characteristics" }
+        ]
+      }
+    ]
+  }
+}
