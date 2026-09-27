@@ -60,21 +60,24 @@ export interface HubSite {
   detail?: string
   /** Extra link shown on the card (e.g. FuruHibi's WebUSB DSP panel). */
   extra?: { label: string; href: string }
+  /** Language-neutral chip labels, same style as the portfolio cards. */
+  tags: string[]
 }
 
 /** All sites shown on `project.nyaahibi.web.id` — order = curated order. */
 export const hubSites: HubSite[] = [
-  { slug: 'nyaahibiamp', status: 'live' },
-  { slug: 'nyaahibiv2', status: 'live', detail: '/projects/amp' },
-  { slug: 'amahibi', status: 'soon' },
-  { slug: 'microhibiamp', status: 'live', detail: '/projects/microamp' },
-  { slug: 'nyaaop', status: 'soon' },
-  { slug: 'tubeseamp', status: 'live' },
-  { slug: 'nyaatubefda', status: 'soon' },
+  { slug: 'nyaahibiamp', status: 'live', tags: ['Headphone Amp', 'Gen 1', 'Analog'] },
+  { slug: 'nyaahibiv2', status: 'live', detail: '/projects/amp', tags: ['Headphone Amp', 'Gen 2', 'Hybrid', 'SMD'] },
+  { slug: 'amahibi', status: 'soon', tags: ['Headphone Amp', 'Balanced', 'TPA6120'] },
+  { slug: 'microhibiamp', status: 'live', detail: '/projects/microamp', tags: ['Headphone Amp', 'Micro', 'Discrete'] },
+  { slug: 'nyaaop', status: 'soon', tags: ['Op-Amp', 'Discrete'] },
+  { slug: 'tubeseamp', status: 'live', tags: ['Tube', 'Headphone Amp', 'SE'] },
+  { slug: 'nyaatubefda', status: 'soon', tags: ['Tube', 'Fully Differential'] },
   {
     slug: 'furuhibi',
     status: 'live',
     detail: '/projects/furuhibi',
     extra: { label: 'WebUSB DSP', href: '/furuhibi/dsp.html' },
+    tags: ['R2R DAC', 'PCM56', 'ESP32-S3'],
   },
 ]

@@ -70,8 +70,8 @@ C:\srv\sites\project         served hub:
   locale files (`hub.*` keys), `ThemeToggle`, `LocaleToggle`, and logo.
 - Cards are driven by `hubSites` in `src/data/projects.ts`
   (`slug`, `status: live|soon`, optional `detail` route, optional `extra`
-  link). Adding a site = one registry entry + two `hub.sites.<slug>` locale
-  keys per language.
+  link, language-neutral `tags` chips). Adding a site = one registry
+  entry + two `hub.sites.<slug>` locale keys per language.
 - Mascots (`maskotkiri.png` / `maskotkanan.png`) and `logo.png` live in
   `public/` and ship with both builds.
 

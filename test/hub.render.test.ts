@@ -7,7 +7,10 @@ const { createSSRApp } = await import('vue')
 const { renderToString } = await import('@vue/server-renderer')
 const { default: i18n } = await import('@/i18n')
 const { default: HubApp } = await import('@/hub/HubApp.vue')
-const { hubSites, PORTFOLIO_BASE } = await import('@/data/projects')
+const { hubSites, PORTFOLIO_BASE, PROJECTS_BASE } = await import('@/data/projects')
+
+// Host-only form of the hub origin, as rendered in card address labels
+const siteHost = PROJECTS_BASE.replace(/^https:\/\//, '')
 
 // Unresolved vue-i18n keys leak into the HTML as e.g. ">hub.title"
 const KEY_LEAK = />(nav|hub|footer|common)\.[a-zA-Z]/
@@ -67,9 +70,13 @@ for (const locale of ['id', 'en'] as const) {
     const flag = locale === 'id' ? '/flags/id.svg' : '/flags/gb.svg'
     if (!html.includes(flag)) failures.push(`${locale}: flag ${flag} missing`)
 
-    // Hero
+    // Hero + projects section
     if (!rendered(html, i18n.global.t('hub.eyebrow'))) failures.push(`${locale}: hub tagline missing`)
     if (!rendered(html, i18n.global.t('hub.title'))) failures.push(`${locale}: hub title missing`)
+    if (!rendered(html, i18n.global.t('hub.cta'))) failures.push(`${locale}: hero CTA missing`)
+    if (!rendered(html, i18n.global.t('hub.projectsTitle'))) {
+      failures.push(`${locale}: projects section title missing`)
+    }
 
     // Every registry site renders as a card
     let liveCards = 0
@@ -80,11 +87,16 @@ for (const locale of ['id', 'en'] as const) {
       if (!rendered(html, i18n.global.t(`hub.sites.${site.slug}.desc`))) {
         failures.push(`${locale}: card description missing for ${site.slug}`)
       }
+      if (!rendered(html, site.tags[0])) failures.push(`${locale}: tags missing for ${site.slug}`)
 
       if (site.status === 'live') {
         liveCards++
         if (!html.includes(`href="/${site.slug}"`)) {
           failures.push(`${locale}: visit link missing for ${site.slug}`)
+        }
+        // Address-style label, portfolio convention
+        if (!html.includes(`${siteHost}/${site.slug}`)) {
+          failures.push(`${locale}: address label missing for ${site.slug}`)
         }
       } else {
         soonCards++
@@ -94,8 +106,13 @@ for (const locale of ['id', 'en'] as const) {
         }
       }
 
-      if (site.detail && !html.includes(`${PORTFOLIO_BASE}${site.detail}`)) {
-        failures.push(`${locale}: portfolio detail link missing for ${site.slug}`)
+      if (site.detail) {
+        if (!html.includes(`${PORTFOLIO_BASE}${site.detail}`)) {
+          failures.push(`${locale}: portfolio detail link missing for ${site.slug}`)
+        }
+        if (!rendered(html, i18n.global.t('hub.details'))) {
+          failures.push(`${locale}: details label missing`)
+        }
       }
       if (site.extra && !html.includes(site.extra.href)) {
         failures.push(`${locale}: extra link missing for ${site.slug}`)
