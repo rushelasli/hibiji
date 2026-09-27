@@ -19,12 +19,17 @@ nyaahibi.web.id:8080 {
 	header Cache-Control "no-cache"
 }
 
-# Projects hub: one subdomain + path routing (/furuhibi, /amp, ...),
-# each entry a folder under C:/srv/sites/projects.
-projects.nyaahibi.web.id:8080 {
+# Projects hub: one subdomain + path routing (/furuhibi, /nyaahibiv2, ...).
+# Landing page (dist-hub) sits at the root; each site is a folder under
+# C:/srv/sites/projects.
+project.nyaahibi.web.id:8080 {
 	bind 127.0.0.1
 	root * C:/srv/sites/projects
 	encode gzip
 	try_files {path} /index.html
 	file_server
+
+	@assets path /assets/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+	header Cache-Control "no-cache"
 }

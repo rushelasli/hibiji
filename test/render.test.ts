@@ -138,6 +138,10 @@ if (!homeEn.includes('/flags/gb.svg')) failures.push('home (en): language flag t
 if (homeEn.includes('Switch language to')) failures.push('home: old ID/EN two-button switcher still present')
 if (!homeEn.includes('Switch language')) failures.push('home: nav.languageToggle key not resolving')
 
+// Brand: logo.png in the navbar (favicon/OG live in index.html, checked in preview)
+if (!homeEn.includes('/logo.png')) failures.push('home: navbar brand logo missing')
+if (!homeId.includes('/logo.png')) failures.push('home (id): navbar brand logo missing')
+
 // Get in Touch icons: black in light mode, inverted only under .dark
 if (!homeEn.includes('dark:brightness-0')) failures.push('home: contact icons missing dark-mode inversion classes')
 

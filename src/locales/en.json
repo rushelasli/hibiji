@@ -162,6 +162,50 @@
   "footer": {
     "tagline": "Built with Vue"
   },
+  "hub": {
+    "metaTitle": "NyaaHibi Projects — Everyday Listening",
+    "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",
+    "title": "One home for every NyaaHibi audio project.",
+    "intro": "Amplifiers, DACs, and more — pick a card to open its site.",
+    "visit": "Open site",
+    "details": "Project details",
+    "comingSoon": "Coming soon",
+    "backToMain": "Back to the main portfolio",
+    "sites": {
+      "nyaahibiamp": {
+        "title": "NyaaHibi AMP",
+        "desc": "The first-generation NyaaHibi headphone amplifier."
+      },
+      "nyaahibiv2": {
+        "title": "NyaaHibiV2 AMP",
+        "desc": "Second-generation NyaaHibi — an upgrade over the first-gen amplifier."
+      },
+      "amahibi": {
+        "title": "AmaHibi",
+        "desc": "Balanced amplifier built around the TPA6120."
+      },
+      "microhibiamp": {
+        "title": "MicroHibi",
+        "desc": "Micro discrete amp — single-ended buffer."
+      },
+      "nyaaop": {
+        "title": "Nyaa-OP",
+        "desc": "Micro discrete op-amp based on Rod Elliot's symmetrical buffer."
+      },
+      "tubeseamp": {
+        "title": "NyaaTube SE",
+        "desc": "Tube headphone amplifier, single-ended with a symmetrical HV supply."
+      },
+      "nyaatubefda": {
+        "title": "NyaaTube FDA",
+        "desc": "End-game tube headphone amp — fully differential + single-ended."
+      },
+      "furuhibi": {
+        "title": "FuruHibi",
+        "desc": "R2R DAC built around the PCM56 IC."
+      }
+    }
+  },
   "amp": {
     "back": "Back to projects",
     "headerEyebrow": "Projects / 01 — NyaaHibiV2 AMP",

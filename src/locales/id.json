@@ -162,6 +162,50 @@
   "footer": {
     "tagline": "Dibuat dengan Vue"
   },
+  "hub": {
+    "metaTitle": "NyaaHibi Projects — Everyday Listening",
+    "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",
+    "title": "Satu tempat untuk semua proyek audio NyaaHibi.",
+    "intro": "Amplifier, DAC, dan lainnya — pilih kartu untuk membuka situsnya.",
+    "visit": "Buka situs",
+    "details": "Detail proyek",
+    "comingSoon": "Segera hadir",
+    "backToMain": "Kembali ke portofolio utama",
+    "sites": {
+      "nyaahibiamp": {
+        "title": "NyaaHibi AMP",
+        "desc": "Amplifier headphone NyaaHibi generasi pertama."
+      },
+      "nyaahibiv2": {
+        "title": "NyaaHibiV2 AMP",
+        "desc": "NyaaHibi generasi kedua — upgrade dari amplifier generasi pertama."
+      },
+      "amahibi": {
+        "title": "AmaHibi",
+        "desc": "Amplifier balanced berbasis TPA6120."
+      },
+      "microhibiamp": {
+        "title": "MicroHibi",
+        "desc": "Micro discrete AMP single-ended buffer."
+      },
+      "nyaaop": {
+        "title": "Nyaa-OP",
+        "desc": "Micro discrete op-amp berbasis buffer simetris Rod Elliot."
+      },
+      "tubeseamp": {
+        "title": "NyaaTube SE",
+        "desc": "Headphone amplifier tube single-ended dengan supply HV simetris."
+      },
+      "nyaatubefda": {
+        "title": "NyaaTube FDA",
+        "desc": "Headphone amplifier tube end-game — fully differential + single-ended."
+      },
+      "furuhibi": {
+        "title": "FuruHibi",
+        "desc": "DAC R2R dengan IC PCM56."
+      }
+    }
+  },
   "amp": {
     "back": "Kembali ke proyek",
     "headerEyebrow": "Proyek / 01 — NyaaHibiV2 AMP",

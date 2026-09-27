@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import Button from '@/components/ui/button.vue'
 import Sheet from '@/components/ui/sheet.vue'
 import ThemeToggle from '@/components/ThemeToggle.vue'
+import LocaleToggle from '@/components/LocaleToggle.vue'
 import { Menu } from '@lucide/vue'
-import type { Locale } from '@/i18n'
 
 const sectionIds = ['home', 'about', 'projects', 'skills', 'experience', 'contact']
 const route = useRoute()
 const router = useRouter()
 const scrollSpy = useScrollSpy(sectionIds, 100)
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
 const sheetOpen = ref(false)
 
@@ -25,18 +25,6 @@ const navItems = [
   { id: 'experience' },
   { id: 'contact' },
 ]
-
-function setLocale(l: Locale) {
-  locale.value = l
-  localStorage.setItem('locale', l)
-}
-
-// Single flag toggle: shows the current locale's flag (circle-flags, MIT)
-const flagSrc = computed(() => (locale.value === 'id' ? '/flags/id.svg' : '/flags/gb.svg'))
-
-function toggleLocale() {
-  setLocale(locale.value === 'id' ? 'en' : 'id')
-}
 
 function handleNavClick(id: string) {
   if (route.path !== '/') {
@@ -58,9 +46,10 @@ function isActive(id: string) {
   >
     <nav class="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 md:px-8">
       <button
-        class="font-mono text-lg font-bold tracking-wider text-foreground"
+        class="flex items-center gap-2 font-mono text-lg font-bold tracking-wider text-foreground"
         @click="handleNavClick('home')"
       >
+        <img src="/logo.png" alt="" class="h-7 w-7 object-contain" aria-hidden="true" />
         ULIL ALBAB<span class="text-primary">.</span>
       </button>
 
@@ -83,14 +72,7 @@ function isActive(id: string) {
 
         <div class="ml-2 flex items-center gap-0.5 border-l border-foreground/10 pl-3">
           <ThemeToggle />
-          <button
-            class="cursor-pointer rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
-            :aria-label="t('nav.languageToggle')"
-            :title="t('nav.languageToggle')"
-            @click="toggleLocale"
-          >
-            <img :src="flagSrc" alt="" class="h-5 w-5" aria-hidden="true" />
-          </button>
+          <LocaleToggle />
         </div>
       </div>
 
@@ -116,7 +98,8 @@ function isActive(id: string) {
   >
     <template #default="{ close }">
       <div class="flex flex-col gap-6 pt-10">
-        <div class="font-mono text-lg font-bold tracking-wider text-foreground">
+        <div class="flex items-center gap-2 font-mono text-lg font-bold tracking-wider text-foreground">
+          <img src="/logo.png" alt="" class="h-7 w-7 object-contain" aria-hidden="true" />
           ULIL ALBAB<span class="text-primary">.</span>
         </div>
         <nav class="flex flex-col gap-1">
@@ -141,14 +124,7 @@ function isActive(id: string) {
           <span class="ml-auto mr-2 font-mono text-xs uppercase tracking-widest text-subtle-foreground">
             {{ t('nav.language') }}
           </span>
-          <button
-            class="cursor-pointer rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
-            :aria-label="t('nav.languageToggle')"
-            :title="t('nav.languageToggle')"
-            @click="toggleLocale"
-          >
-            <img :src="flagSrc" alt="" class="h-5 w-5" aria-hidden="true" />
-          </button>
+          <LocaleToggle />
         </div>
       </div>
     </template>
