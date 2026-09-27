@@ -123,6 +123,16 @@ if (!homeEn.includes('projects/furuhibi')) failures.push('home: internal furuhib
 if (homeEn.includes('https://microamp.nyaahibi.web.id')) failures.push('home: microamp still linked to external subdomain')
 if (!homeEn.includes('https://furuhibi.nyaahibi.web.id')) failures.push('home: furuhibi external live link missing')
 
+// language switcher is a single flag toggle showing the current locale's flag
+const homeId = outputs['id:/'] ?? ''
+if (!homeId.includes('/flags/id.svg')) failures.push('home (id): language flag toggle missing')
+if (!homeEn.includes('/flags/gb.svg')) failures.push('home (en): language flag toggle missing')
+if (homeEn.includes('Switch language to')) failures.push('home: old ID/EN two-button switcher still present')
+if (!homeEn.includes('Switch language')) failures.push('home: nav.languageToggle key not resolving')
+
+// Get in Touch icons: black in light mode, inverted only under .dark
+if (!homeEn.includes('dark:brightness-0')) failures.push('home: contact icons missing dark-mode inversion classes')
+
 console.log('rendered combos:', Object.keys(outputs).length)
 for (const k of Object.keys(outputs)) console.log(`  ${k}: ${outputs[k].length} chars`)
 console.log(failures.length ? '\nFAILURES:\n' + failures.join('\n') : '\nALL SSR RENDER CHECKS PASSED')

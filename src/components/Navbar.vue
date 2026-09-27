@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useScrollSpy } from '@/composables/useScrollSpy'
@@ -26,11 +26,16 @@ const navItems = [
   { id: 'contact' },
 ]
 
-const locales: Locale[] = ['id', 'en']
-
 function setLocale(l: Locale) {
   locale.value = l
   localStorage.setItem('locale', l)
+}
+
+// Single flag toggle: shows the current locale's flag (circle-flags, MIT)
+const flagSrc = computed(() => (locale.value === 'id' ? '/flags/id.svg' : '/flags/gb.svg'))
+
+function toggleLocale() {
+  setLocale(locale.value === 'id' ? 'en' : 'id')
 }
 
 function handleNavClick(id: string) {
@@ -78,18 +83,12 @@ function isActive(id: string) {
 
         <div class="ml-2 flex items-center gap-0.5 border-l border-foreground/10 pl-3">
           <button
-            v-for="opt in locales"
-            :key="opt"
-            :class="[
-              'rounded px-2 py-1.5 font-mono text-xs tracking-wider transition-colors',
-              locale === opt
-                ? 'bg-foreground/10 text-foreground'
-                : 'text-subtle-foreground hover:text-foreground/80',
-            ]"
-            :aria-label="`Switch language to ${opt.toUpperCase()}`"
-            @click="setLocale(opt)"
+            class="rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
+            :aria-label="t('nav.languageToggle')"
+            :title="t('nav.languageToggle')"
+            @click="toggleLocale"
           >
-            {{ opt.toUpperCase() }}
+            <img :src="flagSrc" alt="" class="h-5 w-5" aria-hidden="true" />
           </button>
           <ThemeToggle />
         </div>
@@ -142,18 +141,12 @@ function isActive(id: string) {
             {{ t('nav.language') }}
           </span>
           <button
-            v-for="opt in locales"
-            :key="opt"
-            :class="[
-              'rounded px-3 py-1.5 font-mono text-xs tracking-wider transition-colors',
-              locale === opt
-                ? 'bg-foreground/10 text-foreground'
-                : 'text-subtle-foreground hover:text-foreground/80',
-            ]"
-            :aria-label="`Switch language to ${opt.toUpperCase()}`"
-            @click="setLocale(opt)"
+            class="rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
+            :aria-label="t('nav.languageToggle')"
+            :title="t('nav.languageToggle')"
+            @click="toggleLocale"
           >
-            {{ opt.toUpperCase() }}
+            <img :src="flagSrc" alt="" class="h-5 w-5" aria-hidden="true" />
           </button>
           <ThemeToggle class="ml-auto" />
         </div>

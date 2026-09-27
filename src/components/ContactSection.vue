@@ -64,7 +64,7 @@ const socials = [
           <img
             :src="s.icon"
             :alt="s.label"
-            class="h-5 w-5 brightness-0 invert"
+            class="h-5 w-5 dark:brightness-0 dark:invert"
             loading="lazy"
           />
         </a>
