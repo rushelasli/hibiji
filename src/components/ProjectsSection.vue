@@ -2,12 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ArrowRight, ArrowUpRight } from '@lucide/vue'
-
-interface ProjectLink {
-  label: string
-  href: string
-  internal?: boolean
-}
+import { linksFor } from '@/data/projects'
 
 interface ProjectMsg {
   id: string
@@ -21,22 +16,6 @@ interface ProjectMsg {
 const { t, tm } = useI18n()
 
 const projects = computed(() => tm('projects.items') as unknown as ProjectMsg[])
-
-// Links aren't language-dependent — keyed by project id from the locale files.
-const projectLinks: Record<string, ProjectLink[]> = {
-  amps: [
-    { label: 'amp.nyaahibi.web.id', href: '/projects/amp', internal: true },
-    { label: 'microamp.nyaahibi.web.id', href: '/projects/microamp', internal: true },
-  ],
-  furuhibi: [
-    { label: 'furuhibi.nyaahibi.web.id', href: '/projects/furuhibi', internal: true },
-    { label: 'Live site — furuhibi.nyaahibi.web.id', href: 'https://furuhibi.nyaahibi.web.id' },
-  ],
-}
-
-function linksFor(id: string): ProjectLink[] {
-  return projectLinks[id] ?? []
-}
 </script>
 
 <template>

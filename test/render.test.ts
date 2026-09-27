@@ -7,6 +7,7 @@ const { renderToString } = await import('@vue/server-renderer')
 const { default: i18n } = await import('@/i18n')
 const { default: router } = await import('@/router')
 const { default: App } = await import('@/App.vue')
+const { projectLinks } = await import('@/data/projects')
 
 type Combo = { locale: 'id' | 'en'; path: string }
 
@@ -117,11 +118,18 @@ for (const key of ['id:/projects/amp', 'en:/projects/amp', 'id:/projects/microam
 }
 
 const homeEn = outputs['en:/'] ?? ''
-if (!homeEn.includes('projects/amp')) failures.push('home: internal amp route link missing')
-if (!homeEn.includes('projects/microamp')) failures.push('home: internal microamp route link missing')
-if (!homeEn.includes('projects/furuhibi')) failures.push('home: internal furuhibi route link missing')
-if (homeEn.includes('https://microamp.nyaahibi.web.id')) failures.push('home: microamp still linked to external subdomain')
-if (!homeEn.includes('https://furuhibi.nyaahibi.web.id')) failures.push('home: furuhibi external live link missing')
+
+// Every link in the project registry must render on the home card
+for (const [slug, links] of Object.entries(projectLinks)) {
+  for (const link of links) {
+    if (!homeEn.includes(link.href)) failures.push(`home: "${slug}" link missing: ${link.href}`)
+  }
+}
+
+// Retired hosts must never reappear (nyaaop card link, microamp external)
+for (const dead of ['nyaaop.nyaahibi.web.id', 'https://microamp.nyaahibi.web.id']) {
+  if (homeEn.includes(dead)) failures.push(`home: retired host present: ${dead}`)
+}
 
 // language switcher is a single flag toggle showing the current locale's flag
 const homeId = outputs['id:/'] ?? ''
