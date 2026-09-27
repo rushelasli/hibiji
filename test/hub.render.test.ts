@@ -7,7 +7,7 @@ const { createSSRApp } = await import('vue')
 const { renderToString } = await import('@vue/server-renderer')
 const { default: i18n } = await import('@/i18n')
 const { default: HubApp } = await import('@/hub/HubApp.vue')
-const { hubSites, PROJECTS_BASE, PORTFOLIO_BASE } = await import('@/data/projects')
+const { hubSites, PORTFOLIO_BASE } = await import('@/data/projects')
 
 // Unresolved vue-i18n keys leak into the HTML as e.g. ">hub.title"
 const KEY_LEAK = />(nav|hub|footer|common)\.[a-zA-Z]/
@@ -19,8 +19,6 @@ const failures: string[] = []
 
 const liveSites = hubSites.filter((s) => s.status === 'live')
 const soonSites = hubSites.filter((s) => s.status === 'soon')
-// Card links are labeled with the real hub URL: project.nyaahibi.web.id/<slug>
-const hubHost = PROJECTS_BASE.replace(/^https?:\/\//, '')
 
 function count(haystack: string, needle: string): number {
   return haystack.split(needle).length - 1
@@ -75,10 +73,11 @@ for (const locale of ['id', 'en'] as const) {
     if (!html.includes(flag)) failures.push(`${locale}: flag ${flag} missing`)
 
     // Hero section: tagline, title, stats line (interpolated from the
-    // registry), and both CTAs
+    // registry), and the browse CTA — flat, no starfield
     for (const id of ['hero', 'live', 'soon']) {
       if (!html.includes(`id="${id}"`)) failures.push(`${locale}: section #${id} missing`)
     }
+    if (html.includes('<canvas')) failures.push(`${locale}: star-rain canvas still present`)
     if (!rendered(html, i18n.global.t('hub.eyebrow'))) failures.push(`${locale}: hub tagline missing`)
     if (!rendered(html, i18n.global.t('hub.title'))) failures.push(`${locale}: hub title missing`)
     const stats = i18n.global.t('hub.stats', { live: liveSites.length, soon: soonSites.length })
@@ -87,15 +86,23 @@ for (const locale of ['id', 'en'] as const) {
       failures.push(`${locale}: stats interpolation leaked`)
     }
     if (!rendered(html, i18n.global.t('hub.ctaBrowse'))) failures.push(`${locale}: browse CTA missing`)
-    if (!rendered(html, i18n.global.t('hub.ctaPortfolio'))) {
-      failures.push(`${locale}: portfolio CTA missing`)
+    if (!html.includes(`href="${PORTFOLIO_BASE}"`)) {
+      failures.push(`${locale}: portfolio link (navbar/footer) missing`)
     }
-    if (!html.includes(`href="${PORTFOLIO_BASE}"`)) failures.push(`${locale}: portfolio CTA href missing`)
 
-    // Live section header + 2-column grid of cards with URL-labeled links
+    // Live section header + 2-column grid of cards
     if (!rendered(html, i18n.global.t('hub.liveEyebrow'))) failures.push(`${locale}: live eyebrow missing`)
     if (!rendered(html, i18n.global.t('hub.liveTitle'))) failures.push(`${locale}: live title missing`)
     if (!html.includes('md:grid-cols-2')) failures.push(`${locale}: 2-column live grid missing`)
+
+    // Every live card ends in a "See detail" button, pinned to the card
+    // bottom by the flex-end footer (mt-auto)
+    const seeDetail = i18n.global.t('hub.seeDetail')
+    const detailCount = count(html, seeDetail)
+    if (detailCount !== liveSites.length) {
+      failures.push(`${locale}: expected ${liveSites.length} "See detail" buttons, found ${detailCount}`)
+    }
+    if (!html.includes('mt-auto')) failures.push(`${locale}: card button footer not flex-end`)
 
     for (const site of liveSites) {
       if (!rendered(html, i18n.global.t(`hub.sites.${site.slug}.title`))) {
@@ -107,16 +114,17 @@ for (const locale of ['id', 'en'] as const) {
       if (!html.includes(`href="/${site.slug}"`)) {
         failures.push(`${locale}: visit link missing for ${site.slug}`)
       }
-      // The link label is the real URL, portfolio-card style
-      if (!html.includes(`${hubHost}/${site.slug}`)) {
-        failures.push(`${locale}: URL label missing for ${site.slug}`)
-      }
       const tags = i18n.global.tm(`hub.sites.${site.slug}.tags`) as unknown as string[]
       for (const tag of tags ?? []) {
         if (!rendered(html, tag)) failures.push(`${locale}: tag chip missing for ${site.slug}: ${tag}`)
       }
-      if (site.extra && !html.includes(`${hubHost}${site.extra.href}`)) {
-        failures.push(`${locale}: extra URL label missing for ${site.slug}`)
+      // Extra link is a button labeled from the registry, not a raw URL
+      if (site.extra && !rendered(html, site.extra.label)) {
+        failures.push(`${locale}: extra button label missing for ${site.slug}`)
+      }
+      // No raw hub URLs may be displayed anywhere on the cards
+      if (html.includes(`project.nyaahibi.web.id/${site.slug}`)) {
+        failures.push(`${locale}: raw URL label still displayed for ${site.slug}`)
       }
     }
 

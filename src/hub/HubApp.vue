@@ -2,10 +2,9 @@
 import { computed, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ArrowDown, ArrowUpRight, ExternalLink } from '@lucide/vue'
-import StarfieldCanvas from '@/components/StarfieldCanvas.vue'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import LocaleToggle from '@/components/LocaleToggle.vue'
-import { hubSites, PROJECTS_BASE, PORTFOLIO_BASE, type HubSite } from '@/data/projects'
+import { hubSites, PORTFOLIO_BASE, type HubSite } from '@/data/projects'
 
 const { t, tm, locale } = useI18n()
 
@@ -24,18 +23,6 @@ function siteDesc(site: HubSite) {
 
 function siteTags(site: HubSite): string[] {
   return tm(`hub.sites.${site.slug}.tags`) as unknown as string[]
-}
-
-// Card links are labeled with their real URL, portfolio-card style
-// (its cards read e.g. "amp.nyaahibi.web.id").
-const hubHost = PROJECTS_BASE.replace(/^https?:\/\//, '')
-
-function projectUrl(site: HubSite) {
-  return `${hubHost}/${site.slug}`
-}
-
-function extraUrl(site: HubSite) {
-  return site.extra ? `${hubHost}${site.extra.href}` : ''
 }
 
 function scrollToLive() {
@@ -84,56 +71,30 @@ watch(locale, syncDocumentMeta)
         </nav>
       </header>
 
-      <!-- Hero — same structure and CTA style as the portfolio home -->
-      <section id="hero" class="relative overflow-hidden border-b border-foreground/10">
-        <StarfieldCanvas />
-        <div
-          class="relative z-10 mx-auto flex max-w-5xl flex-col-reverse items-start gap-10 px-5 py-16 md:flex-row md:items-center md:justify-between md:px-8 md:py-24"
-        >
-          <div class="max-w-xl">
-            <p class="mb-4 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
-              {{ t('hub.eyebrow') }}
-            </p>
-            <h1
-              class="mb-5 text-4xl font-semibold leading-[1.1] tracking-tight text-foreground md:text-5xl"
-            >
-              {{ t('hub.title') }}
-            </h1>
-            <p class="mb-4 max-w-lg text-[17px] leading-relaxed text-muted-foreground">
-              {{ t('hub.intro') }}
-            </p>
-            <p class="mb-8 font-mono text-[13px] text-subtle-foreground">
-              {{ t('hub.stats', { live: liveSites.length, soon: soonSites.length }) }}
-            </p>
-            <div class="flex flex-wrap items-center gap-3">
-              <button
-                class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-[#5a4bd1]"
-                @click="scrollToLive"
-              >
-                <ArrowDown class="h-4 w-4" />
-                {{ t('hub.ctaBrowse') }}
-              </button>
-              <a
-                :href="PORTFOLIO_BASE"
-                class="inline-flex h-11 items-center gap-2 rounded-lg border border-foreground/15 px-5 text-sm font-medium text-foreground/90 transition-colors hover:border-foreground/30 hover:text-foreground"
-              >
-                <ExternalLink class="h-4 w-4" />
-                {{ t('hub.ctaPortfolio') }}
-              </a>
-            </div>
-          </div>
-
-          <div class="shrink-0">
-            <div
-              class="rounded-2xl bg-linear-to-br from-[#6c5ce7] to-[#a29bfe] p-2.5 shadow-[0_0_40px_rgba(108,92,231,0.4)]"
-            >
-              <img
-                src="/logo.png"
-                alt="NyaaHibi"
-                class="h-44 w-44 rounded-xl object-contain md:h-56 md:w-56"
-              />
-            </div>
-          </div>
+      <!-- Hero — flat, single-column: tagline → title → intro → stats → CTA -->
+      <section id="hero" class="border-b border-foreground/10">
+        <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
+          <p class="mb-4 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
+            {{ t('hub.eyebrow') }}
+          </p>
+          <h1
+            class="mb-5 text-4xl font-semibold leading-[1.1] tracking-tight text-foreground md:text-5xl"
+          >
+            {{ t('hub.title') }}
+          </h1>
+          <p class="mb-4 max-w-lg text-[17px] leading-relaxed text-muted-foreground">
+            {{ t('hub.intro') }}
+          </p>
+          <p class="mb-8 font-mono text-[13px] text-subtle-foreground">
+            {{ t('hub.stats', { live: liveSites.length, soon: soonSites.length }) }}
+          </p>
+          <button
+            class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-[#5a4bd1]"
+            @click="scrollToLive"
+          >
+            <ArrowDown class="h-4 w-4" />
+            {{ t('hub.ctaBrowse') }}
+          </button>
         </div>
       </section>
 
@@ -166,31 +127,7 @@ watch(locale, syncDocumentMeta)
                 {{ siteDesc(site) }}
               </p>
 
-              <div class="mb-5 mt-5 flex flex-col gap-2">
-                <a
-                  :href="`/${site.slug}`"
-                  class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-foreground/80 transition-colors hover:text-foreground"
-                >
-                  <ArrowUpRight
-                    class="h-3.5 w-3.5 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                  {{ projectUrl(site) }}
-                </a>
-                <a
-                  v-if="site.extra"
-                  :href="site.extra.href"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-foreground/80 transition-colors hover:text-foreground"
-                >
-                  <ArrowUpRight
-                    class="h-3.5 w-3.5 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                  {{ extraUrl(site) }}
-                </a>
-              </div>
-
-              <div class="mt-auto flex flex-wrap gap-2 border-t border-foreground/10 pt-5">
+              <div class="mt-5 flex flex-wrap gap-2">
                 <span
                   v-for="tag in siteTags(site)"
                   :key="tag"
@@ -198,6 +135,27 @@ watch(locale, syncDocumentMeta)
                 >
                   {{ tag }}
                 </span>
+              </div>
+
+              <!-- Buttons sit on the same bottom line across every card -->
+              <div class="mt-auto flex flex-wrap gap-2 border-t border-foreground/10 pt-5">
+                <a
+                  :href="`/${site.slug}`"
+                  class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-[#5a4bd1]"
+                >
+                  {{ t('hub.seeDetail') }}
+                  <ArrowUpRight class="h-4 w-4" />
+                </a>
+                <a
+                  v-if="site.extra"
+                  :href="site.extra.href"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex h-11 items-center gap-2 rounded-lg border border-foreground/15 px-5 text-sm font-medium text-foreground/90 transition-colors hover:border-foreground/30 hover:text-foreground"
+                >
+                  {{ site.extra.label }}
+                  <ExternalLink class="h-4 w-4" />
+                </a>
               </div>
             </article>
           </div>

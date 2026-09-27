@@ -165,11 +165,11 @@
   "hub": {
     "metaTitle": "NyaaHibi Projects — Everyday Listening",
     "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",
-    "title": "Satu tempat untuk semua proyek audio NyaaHibi.",
+    "title": "Proyek NyaaHibi",
     "intro": "Amplifier, DAC, dan lainnya — pilih kartu untuk membuka situsnya.",
     "stats": "{live} aktif · {soon} segera hadir",
     "ctaBrowse": "Lihat proyek",
-    "ctaPortfolio": "Portofolio utama",
+    "seeDetail": "Lihat detail",
     "liveEyebrow": "Situs aktif",
     "liveTitle": "Sudah online — langsung buka saja.",
     "soonEyebrow": "Segera hadir",
