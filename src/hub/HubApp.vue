@@ -142,7 +142,7 @@ watch(locale, syncDocumentMeta)
               <div class="mt-auto flex flex-wrap gap-2 border-t border-foreground/10 pt-5">
                 <a
                   :href="`/${site.slug}`"
-                  class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-foreground/80 transition-colors hover:text-foreground"
+                  class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-primary underline underline-offset-4 transition-colors hover:text-foreground"
                 >
                   <ArrowUpRight
                     class="h-3.5 w-3.5 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
