@@ -31,8 +31,8 @@ const expected: Record<string, string[]> = {
   'en:/': ['Selected work', 'Listening to music', 'Home', 'Built with Vue', 'What I do'],
   'id:/projects/amp': ['Catatan dan Referensi', 'Kembali ke proyek', 'Uji Daya Keluar Menggunakan Oscilloscope', 'Block Diagram Amplifier'],
   'en:/projects/amp': ['Notes and References', 'Back to projects', 'Power Output Test Using an Oscilloscope', 'Block Diagram Amplifier'],
-  'id:/projects/microamp': ['Kembali ke proyek', 'Informasi Tambahan', 'Block Diagram Amplifier', 'Catatan dan Referensi', 'Test Power Output Menggunakan Oscilloscope'],
-  'en:/projects/microamp': ['Back to projects', 'Additional Information', 'Block Diagram Amplifier', 'Notes and References', 'Power Output Test Using an Oscilloscope'],
+  'id:/projects/microamp': ['Kembali ke proyek', 'Informasi Tambahan', 'Block Diagram Amplifier', 'Catatan dan Referensi', 'SE Buffer PNP'],
+  'en:/projects/microamp': ['Back to projects', 'Additional Information', 'Block Diagram Amplifier', 'Notes and References', 'SE Buffer PNP'],
   'id:/projects/furuhibi': ['Kembali ke proyek', 'Download Center', 'Satu ecosystem, dari hardware hingga preset.', 'Tentang FuruHibi', 'Modern Design, Analog Heritage.'],
   'en:/projects/furuhibi': ['Back to projects', 'Download Center', 'One ecosystem, from hardware to presets.', 'About FuruHibi', 'Modern Design, Analog Heritage.'],
 }
@@ -95,12 +95,13 @@ if (!ampEn.includes('Tentang Saya')) {
 }
 if (!ampEn.includes('bg-white')) failures.push('amp: white diagram wrapper missing')
 
-// microamp reuses the amp project's local assets; profile block must stay removed
+// microamp matches the live site: diagram images, 3D, and oscilloscope are all
+// commented out on the origin page, so they must be absent here too
 const microEn = outputs['en:/projects/microamp'] ?? ''
-if (!microEn.includes('TopologiAmp.png')) failures.push('microamp: topology diagram img missing')
-if (!microEn.includes('BlockSupply.png')) failures.push('microamp: psu diagram img missing')
-if (!microEn.includes('model-viewer')) failures.push('microamp: model-viewer elements missing')
-if (!microEn.includes('maxmode.jpg')) failures.push('microamp: oscilloscope photo missing')
+if (microEn.includes('TopologiAmp.png')) failures.push('microamp: topology diagram img should be absent (commented out on live site)')
+if (microEn.includes('BlockSupply.png')) failures.push('microamp: psu diagram img should be absent (commented out on live site)')
+if (microEn.includes('model-viewer')) failures.push('microamp: 3D model-viewer should be absent (live site has no 3D section)')
+if (microEn.includes('maxmode.jpg')) failures.push('microamp: oscilloscope photo should be absent (commented out on live site)')
 
 // furuhibi: light pipeline diagram on a white panel, apps stay on live origin
 const fhEn = outputs['en:/projects/furuhibi'] ?? ''

@@ -16,7 +16,7 @@ function scrollToContact() {
 </script>
 
 <template>
-  <section id="home" class="relative overflow-hidden border-b border-white/10">
+  <section id="home" class="relative overflow-hidden border-b border-foreground/10">
     <StarfieldCanvas />
 
     <div
@@ -24,27 +24,27 @@ function scrollToContact() {
     >
       <!-- Text -->
       <div class="max-w-xl">
-        <p class="mb-4 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+        <p class="mb-4 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
           {{ t('hero.eyebrow') }}
         </p>
         <h1
-          class="mb-5 text-4xl font-semibold leading-[1.1] tracking-tight text-white md:text-5xl"
+          class="mb-5 text-4xl font-semibold leading-[1.1] tracking-tight text-foreground md:text-5xl"
         >
           {{ t('hero.title') }}
         </h1>
-        <p class="mb-8 max-w-lg text-[17px] leading-relaxed text-zinc-400">
+        <p class="mb-8 max-w-lg text-[17px] leading-relaxed text-muted-foreground">
           {{ t('hero.body') }}
         </p>
         <div class="flex flex-wrap items-center gap-3">
           <button
-            class="inline-flex h-11 items-center gap-2 rounded-lg bg-[#6c5ce7] px-5 text-sm font-medium text-white transition-colors hover:bg-[#5a4bd1]"
+            class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-[#5a4bd1]"
             @click="scrollToProjects"
           >
             <ArrowDown class="h-4 w-4" />
             {{ t('hero.ctaPrimary') }}
           </button>
           <button
-            class="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-medium text-zinc-200 transition-colors hover:border-white/30 hover:text-white"
+            class="inline-flex h-11 items-center gap-2 rounded-lg border border-foreground/15 px-5 text-sm font-medium text-foreground/90 transition-colors hover:border-foreground/30 hover:text-foreground"
             @click="scrollToContact"
           >
             <Mail class="h-4 w-4" />

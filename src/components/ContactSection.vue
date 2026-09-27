@@ -40,13 +40,13 @@ const socials = [
 <template>
   <section id="contact">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
-      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
         {{ t('contact.eyebrow') }}
       </p>
-      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
         {{ t('contact.title') }}
       </h2>
-      <p class="mb-10 max-w-xl text-[16px] leading-relaxed text-zinc-400">
+      <p class="mb-10 max-w-xl text-[16px] leading-relaxed text-muted-foreground">
         {{ t('contact.intro') }}
       </p>
 
@@ -59,7 +59,7 @@ const socials = [
           rel="noopener noreferrer"
           :title="s.label"
           :aria-label="s.label"
-          class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 p-2.5 transition-colors hover:border-white/30 hover:bg-white/5"
+          class="flex h-11 w-11 items-center justify-center rounded-lg border border-foreground/10 p-2.5 transition-colors hover:border-foreground/30 hover:bg-foreground/5"
         >
           <img
             :src="s.icon"

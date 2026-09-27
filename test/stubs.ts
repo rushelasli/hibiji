@@ -30,6 +30,7 @@ const win = {
   requestAnimationFrame: (cb: (t: number) => void) => setTimeout(() => cb(0), 0),
   cancelAnimationFrame: (id: number) => clearTimeout(id),
   matchMedia: () => ({ matches: false, addEventListener() {}, removeEventListener() {} }),
+  document: doc,
   history: {
     state: null as Record<string, unknown> | null,
     pushState(s: Record<string, unknown> | null) {

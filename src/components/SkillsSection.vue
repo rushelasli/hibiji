@@ -26,15 +26,15 @@ const skills = computed(() => tm('skills.items') as unknown as SkillMsg[])
 </script>
 
 <template>
-  <section id="skills" class="border-b border-white/10">
+  <section id="skills" class="border-b border-foreground/10">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
-      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
         {{ t('skills.eyebrow') }}
       </p>
-      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+      <h2 class="mb-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
         {{ t('skills.title') }}
       </h2>
-      <p class="mb-12 max-w-xl text-[16px] leading-relaxed text-zinc-400">
+      <p class="mb-12 max-w-xl text-[16px] leading-relaxed text-muted-foreground">
         {{ t('skills.intro') }}
       </p>
 
@@ -42,11 +42,11 @@ const skills = computed(() => tm('skills.items') as unknown as SkillMsg[])
         <div
           v-for="skill in skills"
           :key="skill.id"
-          class="rounded-xl border border-white/10 bg-[#101018] p-6 transition-colors hover:border-white/20"
+          class="rounded-xl border border-foreground/10 bg-card p-6 transition-colors hover:border-foreground/20"
         >
-          <component :is="skillIcons[skill.id]" class="mb-4 h-6 w-6 text-[#6c5ce7]" />
-          <h3 class="mb-1.5 text-base font-semibold text-white">{{ skill.label }}</h3>
-          <p class="text-sm leading-relaxed text-zinc-400">{{ skill.desc }}</p>
+          <component :is="skillIcons[skill.id]" class="mb-4 h-6 w-6 text-primary" />
+          <h3 class="mb-1.5 text-base font-semibold text-foreground">{{ skill.label }}</h3>
+          <p class="text-sm leading-relaxed text-muted-foreground">{{ skill.desc }}</p>
         </div>
       </div>
     </div>

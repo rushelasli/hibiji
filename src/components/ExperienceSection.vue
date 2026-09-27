@@ -14,12 +14,12 @@ const experiences = computed(() => tm('experience.items') as unknown as Experien
 </script>
 
 <template>
-  <section id="experience" class="border-b border-white/10">
+  <section id="experience" class="border-b border-foreground/10">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
-      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
         {{ t('experience.eyebrow') }}
       </p>
-      <h2 class="mb-12 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+      <h2 class="mb-12 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
         {{ t('experience.title') }}
       </h2>
 
@@ -27,11 +27,11 @@ const experiences = computed(() => tm('experience.items') as unknown as Experien
         <article
           v-for="(exp, i) in experiences"
           :key="i"
-          class="rounded-xl border border-white/10 bg-[#101018] p-6 transition-colors hover:border-white/20 md:p-7"
+          class="rounded-xl border border-foreground/10 bg-card p-6 transition-colors hover:border-foreground/20 md:p-7"
         >
-          <p class="mb-2 font-mono text-[13px] text-zinc-500">{{ exp.period }}</p>
-          <h3 class="mb-1.5 text-lg font-semibold text-white">{{ exp.title }}</h3>
-          <p class="leading-relaxed text-zinc-400">{{ exp.desc }}</p>
+          <p class="mb-2 font-mono text-[13px] text-subtle-foreground">{{ exp.period }}</p>
+          <h3 class="mb-1.5 text-lg font-semibold text-foreground">{{ exp.title }}</h3>
+          <p class="leading-relaxed text-muted-foreground">{{ exp.desc }}</p>
         </article>
       </div>
     </div>

@@ -21,7 +21,7 @@ watch([locale, () => route.name], syncDocumentMeta)
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#09090f] font-sans text-zinc-100 antialiased">
+  <div class="min-h-screen bg-background font-sans text-foreground/95 antialiased">
     <Navbar />
     <RouterView />
     <FooterSection />

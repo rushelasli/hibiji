@@ -9,7 +9,7 @@
 @source not "../.agents";
 @source not "../skills-lock.json";
 
-/* Class-based dark variant (the site is dark-only; `.dark` is never toggled) */
+/* Class-based dark variant — toggled by ThemeToggle, default dark */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
@@ -17,10 +17,7 @@
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* Brand accent (previously tailwind.config.js → colors.purple) */
-  --color-purple: #6c5ce7;
-
-  /* shadcn semantic colors → HSL triplets declared in :root below */
+  /* shadcn semantic colors → HSL triplets declared in :root (light) / .dark below */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -33,6 +30,8 @@
   --color-secondary-foreground: hsl(var(--secondary-foreground));
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
+  /* Custom tier: one step dimmer than muted-foreground (small mono labels) */
+  --color-subtle-foreground: hsl(var(--subtle-foreground));
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-destructive: hsl(var(--destructive));
@@ -49,25 +48,52 @@
 
 @layer base {
   :root {
-    --background: 240 20% 4%;
-    --foreground: 0 0% 96%;
-    --card: 240 18% 8%;
-    --card-foreground: 0 0% 96%;
-    --popover: 240 18% 8%;
-    --popover-foreground: 0 0% 96%;
-    --primary: 252 82% 64%;
+    /* Light theme — applies when the `.dark` class is absent */
+    --background: 0 0% 100%;
+    --foreground: 240 5.9% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 5.9% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 5.9% 10%;
+    --primary: 246.9 74.3% 63.3%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 5.2% 33.9%;
+    --subtle-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 246.9 74.3% 63.3%;
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    /* Dark theme — reproduces the site's original hardcoded palette exactly */
+    --background: 240 25% 4.7%; /* #09090f */
+    --foreground: 0 0% 100%; /* #ffffff */
+    --card: 240 20% 7.8%; /* #101018 */
+    --card-foreground: 0 0% 100%;
+    --popover: 240 20% 7.8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 246.9 74.3% 63.3%; /* #6c5ce7 */
     --primary-foreground: 0 0% 100%;
     --secondary: 240 12% 14%;
     --secondary-foreground: 0 0% 96%;
     --muted: 240 12% 14%;
-    --muted-foreground: 240 5% 65%;
+    --muted-foreground: 240 5% 65%; /* zinc-400 #a1a1aa */
+    --subtle-foreground: 240 3.8% 46.1%; /* zinc-500 #71717a */
     --accent: 240 12% 14%;
     --accent-foreground: 0 0% 96%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 12% 14%;
-    --input: 240 12% 14%;
-    --ring: 252 82% 64%;
+    --border: 0 0% 100% / 0.1; /* white/10 — identical to the old border-white/10 */
+    --input: 0 0% 100% / 0.1;
+    --ring: 246.9 74.3% 63.3%;
     --radius: 0.625rem;
   }
 
@@ -79,8 +105,8 @@
     scroll-padding-top: 4rem;
   }
   body {
-    background-color: #09090f;
-    color: #f4f4f5;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

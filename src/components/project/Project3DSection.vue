@@ -29,15 +29,15 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="border-b border-white/10">
+  <section class="border-b border-foreground/10">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-20">
-      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
         {{ t(props.ns + '.threeDEyebrow') }}
       </p>
-      <h2 class="mb-3 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+      <h2 class="mb-3 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
         {{ t(props.ns + '.threeDTitle') }}
       </h2>
-      <p class="mb-10 max-w-xl text-[16px] leading-relaxed text-zinc-400">
+      <p class="mb-10 max-w-xl text-[16px] leading-relaxed text-muted-foreground">
         {{ t(props.ns + '.threeDIntro') }}
       </p>
 
@@ -45,10 +45,10 @@ onMounted(async () => {
         <div
           v-for="(file, i) in props.files"
           :key="file"
-          class="overflow-hidden rounded-xl border border-white/10 bg-[#101018]"
+          class="overflow-hidden rounded-xl border border-foreground/10 bg-card"
         >
-          <div class="border-b border-white/10 px-5 py-4">
-            <h3 class="text-lg font-semibold tracking-tight text-white">
+          <div class="border-b border-foreground/10 px-5 py-4">
+            <h3 class="text-lg font-semibold tracking-tight text-foreground">
               {{ models[i] }}
             </h3>
           </div>

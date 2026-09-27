@@ -12,7 +12,8 @@
     "skills": "Keahlian",
     "experience": "Pengalaman",
     "contact": "Kontak",
-    "language": "Bahasa"
+    "language": "Bahasa",
+    "theme": "Ganti tema"
   },
   "common": {
     "close": "Tutup"
@@ -27,7 +28,7 @@
   "about": {
     "eyebrow": "Tentang",
     "title": "Hai, saya Ulil Albab",
-    "intro": "Pemula dengan antusiasme sungguhan pada elektronik, baik <span class=\"text-zinc-200\">analog</span> maupun <span class=\"text-zinc-200\">digital</span>. Saya juga senang mempelajari <span class=\"text-zinc-200\">komputer</span>, <span class=\"text-zinc-200\">jaringan</span>, dan belakangan ini jadi penggemar <span class=\"text-zinc-200\">tabung vakum</span>.",
+    "intro": "Pemula dengan antusiasme sungguhan pada elektronik, baik <span class=\"text-foreground/90\">analog</span> maupun <span class=\"text-foreground/90\">digital</span>. Saya juga senang mempelajari <span class=\"text-foreground/90\">komputer</span>, <span class=\"text-foreground/90\">jaringan</span>, dan belakangan ini jadi penggemar <span class=\"text-foreground/90\">tabung vakum</span>.",
     "interestsTitle": "Minat",
     "interests": [
       "Mendengarkan musik",
@@ -167,7 +168,7 @@
     "headerSubtitle": "Penguat headphone single-ended berperforma tinggi — desain full-SMD di atas PCB 4 lapis dengan topologi hybrid JFET + TPA6120 dan catu daya baterai simetris.",
     "aboutEyebrow": "Tentang",
     "aboutTitle": "Tentang NyaaHibiV2",
-    "aboutP1": "NyaaHibiV2 merupakan pengembangan dari topologi amplifier versi pertama, yaitu <a href=\"https://nyaahibi.nggonku.web.id\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-white underline decoration-[#6c5ce7] underline-offset-4 transition-colors hover:text-[#6c5ce7]\">-NyaaHibi-</a>. Nama <span class=\"text-zinc-200\">NyaaHibi</span> sendiri berasal dari bahasa Jepang: Nyaa (にゃあ), yang berarti suara kucing, dan Hibi (日々), yang berarti setiap hari. Jika digabungkan, NyaaHibi bisa diartikan sebagai \"mengeong setiap hari\" — filosofi sederhana untuk menghadirkan suara yang menyenangkan dan bisa dinikmati setiap hari ^_^.",
+    "aboutP1": "NyaaHibiV2 merupakan pengembangan dari topologi amplifier versi pertama, yaitu <a href=\"https://nyaahibi.nggonku.web.id\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-foreground underline decoration-primary underline-offset-4 transition-colors hover:text-primary\">-NyaaHibi-</a>. Nama <span class=\"text-foreground/90\">NyaaHibi</span> sendiri berasal dari bahasa Jepang: Nyaa (にゃあ), yang berarti suara kucing, dan Hibi (日々), yang berarti setiap hari. Jika digabungkan, NyaaHibi bisa diartikan sebagai \"mengeong setiap hari\" — filosofi sederhana untuk menghadirkan suara yang menyenangkan dan bisa dinikmati setiap hari ^_^.",
     "aboutP2": "Di versi V2 ini, desain dibuat full-SMD dengan beberapa peningkatan — salah satunya pada final stage yang kini menggunakan IC TPA6120A2. PCB juga di-upgrade ke 4 lapis agar tata letak lebih rapi dan noise lebih rendah. Selain itu, topologi rangkaian disempurnakan untuk meningkatkan kualitas suara sekaligus menjaga stabilitas amplifier.",
     "mascotAlt": "Maskot NyaaHibiV2 — foto oleh Flassy",
     "mascotOverlay": "Foto oleh Flassy",
@@ -350,7 +351,6 @@
     "infoP4": "Dengan pendekatan ini, MicroHibi tetap mempertahankan karakter dasar dari topologi amplifier klasik, namun dengan beberapa penyesuaian agar lebih cocok untuk perangkat portabel. Tujuannya adalah menghadirkan rangkaian yang tetap sederhana, efisien dalam penggunaan ruang, dan tetap mampu memberikan performa audio yang baik dalam ukuran yang sangat compact.",
     "topologyEyebrow": "Topologi",
     "topologyTitle": "Block Diagram Amplifier",
-    "topologyAlt": "Block diagram penguat",
     "ampBlocks": [
       {
         "title": "SE Buffer PNP",
@@ -379,7 +379,6 @@
     ],
     "psuEyebrow": "Catu Daya",
     "psuTitle": "Block Diagram Power Supply",
-    "psuAlt": "Block diagram catu daya",
     "psuBlocks": [
       {
         "title": "Modul Charger",
@@ -404,67 +403,6 @@
       {
         "title": "Filter Stage 2",
         "desc": "Filter lokal yang ditempatkan dekat masing-masing IC untuk mengurangi noise akibat jalur suplai yang panjang."
-      }
-    ],
-    "threeDEyebrow": "Pratinjau 3D",
-    "threeDTitle": "Tampilan 3D",
-    "threeDIntro": "Pratinjau 3D interaktif — seret untuk memutar, gulir untuk memperbesar. Model dimuat sesuai kebutuhan.",
-    "models": ["Amplifier + box", "NyaaHibiV2", "Nilai Komponen"],
-    "osciEyebrow": "Pengukuran",
-    "osciTitle": "Test Power Output Menggunakan Oscilloscope",
-    "disclaimer": "⚠️ Disclaimer: Load 10Ω ini tidak di rekomendasikan untuk penggunaan normal karena dapat membebani amplifier secara berlebihan, namun ini hanya untuk tujuan pengujian maksimal output saja!.",
-    "osciRows": [
-      {
-        "image": "/projects/amp/maxmode.jpg",
-        "caption": "5V/Div HI Mode",
-        "tests": [
-          {
-            "title": "Stress Test 32ohm:",
-            "entries": [
-              { "label": "V/Div:", "value": "5V/Div" },
-              { "label": "Vpp:", "equation": "Div vert x V/Div" },
-              { "label": "Vpp:", "equation": "3Div x 5V/Div = 15Vpp" },
-              { "label": "Vpeak:", "equation": "Vpp / 2 = 7.5V" },
-              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 32 ≈ 1.76W" },
-              { "label": "Vrms:", "equation": "Vpp / (2√2) = 15 / 2.828 ≈ 5.30V" },
-              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 32 ≈ 0.878W" }
-            ]
-          },
-          {
-            "title": "Stress Test 10ohm!:",
-            "entries": [
-              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 10 ≈ 5.63W!" },
-              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 10 ≈ 2.81W!" }
-            ],
-            "showDisclaimer": true
-          }
-        ]
-      },
-      {
-        "image": "/projects/amp/lowmode.jpg",
-        "caption": "2V/Div LO Mode",
-        "tests": [
-          {
-            "title": "Stress Test 32Ω:",
-            "entries": [
-              { "label": "V/Div:", "value": "2V/Div" },
-              { "label": "Vpp:", "equation": "Div vert x V/Div" },
-              { "label": "Vpp:", "equation": "4.2Div x 2V/Div = 8.4Vpp" },
-              { "label": "Vpeak:", "equation": "Vpp / 2 = 4.2V" },
-              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 32 ≈ 0.551W" },
-              { "label": "Vrms:", "equation": "Vpp / (2√2) = 8.4 / 2.828 ≈ 2.97V" },
-              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 32 ≈ 0.276W" }
-            ]
-          },
-          {
-            "title": "Stress Test 10Ω!:",
-            "entries": [
-              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 10 ≈ 1.76W" },
-              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 10 ≈ 0.882W" }
-            ],
-            "showDisclaimer": true
-          }
-        ]
       }
     ],
     "notesEyebrow": "Catatan",

@@ -20,12 +20,12 @@ const downloads = computed(() => tm('furuhibi.downloads') as unknown as Download
 </script>
 
 <template>
-  <section id="downloads" class="border-b border-white/10">
+  <section id="downloads" class="border-b border-foreground/10">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-20">
-      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
         {{ t('furuhibi.downloadsEyebrow') }}
       </p>
-      <h2 class="mb-10 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+      <h2 class="mb-10 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
         {{ t('furuhibi.downloadsTitle') }}
       </h2>
 
@@ -33,14 +33,14 @@ const downloads = computed(() => tm('furuhibi.downloads') as unknown as Download
         <div
           v-for="card in downloads"
           :key="card.platform"
-          class="rounded-xl border border-white/10 bg-[#101018] p-6"
+          class="rounded-xl border border-foreground/10 bg-card p-6"
         >
           <div class="flex items-center justify-between gap-3">
-            <h3 class="text-xl font-semibold tracking-tight text-white">
+            <h3 class="text-xl font-semibold tracking-tight text-foreground">
               {{ card.platform }}
             </h3>
             <span
-              class="rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-zinc-400"
+              class="rounded-full border border-foreground/10 px-3 py-1 font-mono text-xs text-muted-foreground"
             >
               {{ card.tag }}
             </span>
@@ -48,22 +48,22 @@ const downloads = computed(() => tm('furuhibi.downloads') as unknown as Download
 
           <div class="mt-5 flex items-end justify-between gap-4">
             <div>
-              <p class="font-mono text-[13px] text-zinc-500">{{ card.latestLabel }}</p>
-              <p class="font-mono text-2xl font-semibold text-white">{{ card.version }}</p>
+              <p class="font-mono text-[13px] text-subtle-foreground">{{ card.latestLabel }}</p>
+              <p class="font-mono text-2xl font-semibold text-foreground">{{ card.version }}</p>
             </div>
             <a
               :href="card.href"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center rounded-lg bg-[#6c5ce7] px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-[#7d6ef0]"
+              class="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-[13px] font-medium text-primary-foreground transition-colors hover:bg-[#7d6ef0]"
             >
               {{ card.downloadLabel }}
             </a>
           </div>
 
-          <details class="mt-5 border-t border-white/10 pt-4">
+          <details class="mt-5 border-t border-foreground/10 pt-4">
             <summary
-              class="cursor-pointer list-none font-mono text-[13px] text-zinc-400 transition-colors hover:text-white"
+              class="cursor-pointer list-none font-mono text-[13px] text-muted-foreground transition-colors hover:text-foreground"
             >
               {{ card.historyLabel }}
             </summary>
@@ -72,12 +72,12 @@ const downloads = computed(() => tm('furuhibi.downloads') as unknown as Download
               :key="entry.version"
               class="mt-3 flex items-center justify-between gap-3"
             >
-              <span class="font-mono text-[13px] text-zinc-500">{{ entry.version }}</span>
+              <span class="font-mono text-[13px] text-subtle-foreground">{{ entry.version }}</span>
               <a
                 :href="entry.href"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[13px] text-zinc-300 underline decoration-[#6c5ce7] underline-offset-4 transition-colors hover:text-white"
+                class="text-[13px] text-foreground/80 underline decoration-primary underline-offset-4 transition-colors hover:text-foreground"
               >
                 {{ entry.label }}
               </a>

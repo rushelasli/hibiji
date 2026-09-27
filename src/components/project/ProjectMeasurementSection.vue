@@ -34,12 +34,12 @@ const osciRows = computed(() => tm(props.ns + '.osciRows') as unknown as OsciRow
 </script>
 
 <template>
-  <section class="border-b border-white/10">
+  <section class="border-b border-foreground/10">
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-20">
-      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-[#6c5ce7]">
+      <p class="mb-3 font-mono text-[13px] uppercase tracking-[0.2em] text-primary">
         {{ t(props.ns + '.osciEyebrow') }}
       </p>
-      <h2 class="mb-8 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+      <h2 class="mb-8 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
         {{ t(props.ns + '.osciTitle') }}
       </h2>
 
@@ -50,7 +50,7 @@ const osciRows = computed(() => tm(props.ns + '.osciRows') as unknown as OsciRow
           class="flex flex-col items-center gap-6 lg:flex-row lg:items-start"
         >
           <div class="shrink-0 text-center">
-            <div class="overflow-hidden rounded-xl border border-white/10">
+            <div class="overflow-hidden rounded-xl border border-foreground/10">
               <img
                 :src="row.image"
                 :alt="row.caption"
@@ -58,7 +58,7 @@ const osciRows = computed(() => tm(props.ns + '.osciRows') as unknown as OsciRow
                 loading="lazy"
               />
             </div>
-            <p class="mt-2 font-mono text-[13px] text-zinc-500">
+            <p class="mt-2 font-mono text-[13px] text-subtle-foreground">
               {{ row.caption }}
             </p>
           </div>

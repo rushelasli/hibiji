@@ -12,7 +12,8 @@
     "skills": "Skills",
     "experience": "Experience",
     "contact": "Contact",
-    "language": "Language"
+    "language": "Language",
+    "theme": "Toggle theme"
   },
   "common": {
     "close": "Close"
@@ -27,7 +28,7 @@
   "about": {
     "eyebrow": "About",
     "title": "Hi, I'm Ulil Albab",
-    "intro": "A beginner with real enthusiasm for electronics — both <span class=\"text-zinc-200\">analog</span> and <span class=\"text-zinc-200\">digital</span>. I also enjoy learning about <span class=\"text-zinc-200\">computers</span>, <span class=\"text-zinc-200\">networking</span>, and lately I've become a fan of <span class=\"text-zinc-200\">vacuum tubes</span>.",
+    "intro": "A beginner with real enthusiasm for electronics — both <span class=\"text-foreground/90\">analog</span> and <span class=\"text-foreground/90\">digital</span>. I also enjoy learning about <span class=\"text-foreground/90\">computers</span>, <span class=\"text-foreground/90\">networking</span>, and lately I've become a fan of <span class=\"text-foreground/90\">vacuum tubes</span>.",
     "interestsTitle": "Interests",
     "interests": [
       "Listening to music",
@@ -167,7 +168,7 @@
     "headerSubtitle": "A single-ended, high-performance headphone amplifier — fully SMD on a 4-layer PCB, with a hybrid JFET + TPA6120 topology and a symmetrical battery power supply.",
     "aboutEyebrow": "About",
     "aboutTitle": "About NyaaHibiV2",
-    "aboutP1": "NyaaHibiV2 builds on the topology of the first-generation amplifier, <a href=\"https://nyaahibi.nggonku.web.id\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-white underline decoration-[#6c5ce7] underline-offset-4 transition-colors hover:text-[#6c5ce7]\">-NyaaHibi-</a>. The name NyaaHibi itself comes from Japanese: Nyaa (にゃあ), meaning a cat's meow, and Hibi (日々), meaning every day. Combined, NyaaHibi can be read as \"meowing every day\" — a simple philosophy of bringing enjoyable sound that can be savored every day ^_^.",
+    "aboutP1": "NyaaHibiV2 builds on the topology of the first-generation amplifier, <a href=\"https://nyaahibi.nggonku.web.id\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-foreground underline decoration-primary underline-offset-4 transition-colors hover:text-primary\">-NyaaHibi-</a>. The name NyaaHibi itself comes from Japanese: Nyaa (にゃあ), meaning a cat's meow, and Hibi (日々), meaning every day. Combined, NyaaHibi can be read as \"meowing every day\" — a simple philosophy of bringing enjoyable sound that can be savored every day ^_^.",
     "aboutP2": "In version V2, the design is fully SMD with several improvements — most notably, the final stage now uses the TPA6120A2 IC. The PCB is also upgraded to 4 layers for cleaner routing and lower noise. The circuit topology has been refined as well, improving sound quality while keeping the amplifier stable.",
     "mascotAlt": "NyaaHibiV2 mascot — photo by Flassy",
     "mascotOverlay": "Photos by Flassy",
@@ -350,7 +351,6 @@
     "infoP4": "With this approach, MicroHibi keeps the core character of the classic amplifier topology, with a few adjustments to make it more suitable for portable devices. The goal is a circuit that stays simple, efficient with space, and still delivers good audio performance in a very compact size.",
     "topologyEyebrow": "Topology",
     "topologyTitle": "Block Diagram Amplifier",
-    "topologyAlt": "Block diagram of the amplifier",
     "ampBlocks": [
       {
         "title": "SE Buffer PNP",
@@ -379,7 +379,6 @@
     ],
     "psuEyebrow": "Power Supply",
     "psuTitle": "Block Diagram Power Supply",
-    "psuAlt": "Block diagram of the power supply",
     "psuBlocks": [
       { "title": "Charger Module", "desc": "Uses a TP4056 module mounted onboard to save PCB space." },
       {
@@ -401,67 +400,6 @@
       {
         "title": "Filter Stage 2",
         "desc": "Local filters placed near each IC to reduce noise caused by long supply paths."
-      }
-    ],
-    "threeDEyebrow": "3D Preview",
-    "threeDTitle": "3D View",
-    "threeDIntro": "Interactive 3D previews — drag to rotate, scroll to zoom. Models are loaded on demand.",
-    "models": ["Amplifier + box", "NyaaHibiV2", "Component Values"],
-    "osciEyebrow": "Measurement",
-    "osciTitle": "Power Output Test Using an Oscilloscope",
-    "disclaimer": "⚠️ Disclaimer: This 10Ω load is not recommended for normal use, as it may overburden the amplifier — it is only used to test maximum power output!.",
-    "osciRows": [
-      {
-        "image": "/projects/amp/maxmode.jpg",
-        "caption": "5V/Div HI Mode",
-        "tests": [
-          {
-            "title": "Stress Test 32ohm:",
-            "entries": [
-              { "label": "V/Div:", "value": "5V/Div" },
-              { "label": "Vpp:", "equation": "Div vert x V/Div" },
-              { "label": "Vpp:", "equation": "3Div x 5V/Div = 15Vpp" },
-              { "label": "Vpeak:", "equation": "Vpp / 2 = 7.5V" },
-              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 32 ≈ 1.76W" },
-              { "label": "Vrms:", "equation": "Vpp / (2√2) = 15 / 2.828 ≈ 5.30V" },
-              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 32 ≈ 0.878W" }
-            ]
-          },
-          {
-            "title": "Stress Test 10ohm!:",
-            "entries": [
-              { "label": "Pmax:", "equation": "Vpeak² / R = 7.5² / 10 ≈ 5.63W!" },
-              { "label": "Prms:", "equation": "Vrms² / R = 28.09 / 10 ≈ 2.81W!" }
-            ],
-            "showDisclaimer": true
-          }
-        ]
-      },
-      {
-        "image": "/projects/amp/lowmode.jpg",
-        "caption": "2V/Div LO Mode",
-        "tests": [
-          {
-            "title": "Stress Test 32Ω:",
-            "entries": [
-              { "label": "V/Div:", "value": "2V/Div" },
-              { "label": "Vpp:", "equation": "Div vert x V/Div" },
-              { "label": "Vpp:", "equation": "4.2Div x 2V/Div = 8.4Vpp" },
-              { "label": "Vpeak:", "equation": "Vpp / 2 = 4.2V" },
-              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 32 ≈ 0.551W" },
-              { "label": "Vrms:", "equation": "Vpp / (2√2) = 8.4 / 2.828 ≈ 2.97V" },
-              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 32 ≈ 0.276W" }
-            ]
-          },
-          {
-            "title": "Stress Test 10Ω!:",
-            "entries": [
-              { "label": "Pmax:", "equation": "Vpeak² / R = 4.2² / 10 ≈ 1.76W" },
-              { "label": "Prms:", "equation": "Vrms² / R = 2.97² / 10 ≈ 0.882W" }
-            ],
-            "showDisclaimer": true
-          }
-        ]
       }
     ],
     "notesEyebrow": "Notes",

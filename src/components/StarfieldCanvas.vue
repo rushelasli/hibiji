@@ -44,14 +44,17 @@ class Star {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
+    // Theme-aware: white streaks on dark, graphite streaks on light
+    const light = !document.documentElement.classList.contains('dark')
+    const [r, g, b] = light ? [82, 82, 91] : [255, 255, 255]
     for (let i = 0; i < this.history.length; i++) {
       const alpha = ((i + 1) / this.history.length) * 0.5
-      ctx.fillStyle = `rgba(255,255,255,${alpha})`
+      ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`
       ctx.beginPath()
       ctx.arc(this.history[i].x, this.history[i].y, this.size * 0.6, 0, Math.PI * 2)
       ctx.fill()
     }
-    ctx.fillStyle = 'white'
+    ctx.fillStyle = light ? '#3f3f46' : 'white'
     ctx.beginPath()
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
     ctx.fill()
