@@ -7,10 +7,7 @@ const { createSSRApp } = await import('vue')
 const { renderToString } = await import('@vue/server-renderer')
 const { default: i18n } = await import('@/i18n')
 const { default: HubApp } = await import('@/hub/HubApp.vue')
-const { hubSites, PORTFOLIO_BASE, PROJECTS_BASE } = await import('@/data/projects')
-
-// Host-only form of the hub origin, as rendered in card address labels
-const siteHost = PROJECTS_BASE.replace(/^https:\/\//, '')
+const { hubSites, PROJECTS_BASE, PORTFOLIO_BASE } = await import('@/data/projects')
 
 // Unresolved vue-i18n keys leak into the HTML as e.g. ">hub.title"
 const KEY_LEAK = />(nav|hub|footer|common)\.[a-zA-Z]/
@@ -19,6 +16,11 @@ const ATTR_KEY_LEAK = /"(nav|hub|footer|common)\.[a-zA-Z]/
 
 const outputs: Record<string, string> = {}
 const failures: string[] = []
+
+const liveSites = hubSites.filter((s) => s.status === 'live')
+const soonSites = hubSites.filter((s) => s.status === 'soon')
+// Card links are labeled with the real hub URL: project.nyaahibi.web.id/<slug>
+const hubHost = PROJECTS_BASE.replace(/^https?:\/\//, '')
 
 function count(haystack: string, needle: string): number {
   return haystack.split(needle).length - 1
@@ -55,7 +57,8 @@ for (const locale of ['id', 'en'] as const) {
     const attrLeak = html.match(ATTR_KEY_LEAK)
     if (attrLeak) failures.push(`${locale}: unresolved key in attribute -> ${attrLeak[0]}`)
 
-    // Brand chrome: logo, mascots staying fixed at the sides, both toggles
+    // Brand chrome: logo, mascots staying fixed at the sides (left one flipped
+    // to face inward), both toggles
     if (!html.includes('/logo.png')) failures.push(`${locale}: navbar logo missing`)
     if (!html.includes('/maskotkiri.png') || !html.includes('/maskotkanan.png')) {
       failures.push(`${locale}: mascot images missing`)
@@ -63,6 +66,7 @@ for (const locale of ['id', 'en'] as const) {
     if (!html.includes('fixed bottom-0 left-0') || !html.includes('fixed bottom-0 right-0')) {
       failures.push(`${locale}: mascots not fixed to the sides`)
     }
+    if (!html.includes('-scale-x-100')) failures.push(`${locale}: left mascot not flipped inward`)
     if (!rendered(html, i18n.global.t('nav.theme'))) failures.push(`${locale}: theme toggle missing`)
     if (!rendered(html, i18n.global.t('nav.languageToggle'))) {
       failures.push(`${locale}: language toggle missing`)
@@ -70,60 +74,77 @@ for (const locale of ['id', 'en'] as const) {
     const flag = locale === 'id' ? '/flags/id.svg' : '/flags/gb.svg'
     if (!html.includes(flag)) failures.push(`${locale}: flag ${flag} missing`)
 
-    // Hero + projects section
+    // Hero section: tagline, title, stats line (interpolated from the
+    // registry), and both CTAs
+    for (const id of ['hero', 'live', 'soon']) {
+      if (!html.includes(`id="${id}"`)) failures.push(`${locale}: section #${id} missing`)
+    }
     if (!rendered(html, i18n.global.t('hub.eyebrow'))) failures.push(`${locale}: hub tagline missing`)
     if (!rendered(html, i18n.global.t('hub.title'))) failures.push(`${locale}: hub title missing`)
-    if (!rendered(html, i18n.global.t('hub.cta'))) failures.push(`${locale}: hero CTA missing`)
-    if (!rendered(html, i18n.global.t('hub.projectsTitle'))) {
-      failures.push(`${locale}: projects section title missing`)
+    const stats = i18n.global.t('hub.stats', { live: liveSites.length, soon: soonSites.length })
+    if (!rendered(html, stats)) failures.push(`${locale}: stats line missing: ${stats}`)
+    if (html.includes('{live}') || html.includes('{soon}')) {
+      failures.push(`${locale}: stats interpolation leaked`)
     }
+    if (!rendered(html, i18n.global.t('hub.ctaBrowse'))) failures.push(`${locale}: browse CTA missing`)
+    if (!rendered(html, i18n.global.t('hub.ctaPortfolio'))) {
+      failures.push(`${locale}: portfolio CTA missing`)
+    }
+    if (!html.includes(`href="${PORTFOLIO_BASE}"`)) failures.push(`${locale}: portfolio CTA href missing`)
 
-    // Every registry site renders as a card
-    let liveCards = 0
-    let soonCards = 0
-    for (const site of hubSites) {
-      const title = i18n.global.t(`hub.sites.${site.slug}.title`)
-      if (!rendered(html, title)) failures.push(`${locale}: card title missing for ${site.slug}`)
+    // Live section header + 2-column grid of cards with URL-labeled links
+    if (!rendered(html, i18n.global.t('hub.liveEyebrow'))) failures.push(`${locale}: live eyebrow missing`)
+    if (!rendered(html, i18n.global.t('hub.liveTitle'))) failures.push(`${locale}: live title missing`)
+    if (!html.includes('md:grid-cols-2')) failures.push(`${locale}: 2-column live grid missing`)
+
+    for (const site of liveSites) {
+      if (!rendered(html, i18n.global.t(`hub.sites.${site.slug}.title`))) {
+        failures.push(`${locale}: card title missing for ${site.slug}`)
+      }
       if (!rendered(html, i18n.global.t(`hub.sites.${site.slug}.desc`))) {
         failures.push(`${locale}: card description missing for ${site.slug}`)
       }
-      if (!rendered(html, site.tags[0])) failures.push(`${locale}: tags missing for ${site.slug}`)
-
-      if (site.status === 'live') {
-        liveCards++
-        if (!html.includes(`href="/${site.slug}"`)) {
-          failures.push(`${locale}: visit link missing for ${site.slug}`)
-        }
-        // Address-style label, portfolio convention
-        if (!html.includes(`${siteHost}/${site.slug}`)) {
-          failures.push(`${locale}: address label missing for ${site.slug}`)
-        }
-      } else {
-        soonCards++
-        // A coming-soon site must never link anywhere
-        if (html.includes(`href="/${site.slug}"`)) {
-          failures.push(`${locale}: coming-soon site ${site.slug} must not have a visit link`)
-        }
+      if (!html.includes(`href="/${site.slug}"`)) {
+        failures.push(`${locale}: visit link missing for ${site.slug}`)
       }
-
-      if (site.detail) {
-        if (!html.includes(`${PORTFOLIO_BASE}${site.detail}`)) {
-          failures.push(`${locale}: portfolio detail link missing for ${site.slug}`)
-        }
-        if (!rendered(html, i18n.global.t('hub.details'))) {
-          failures.push(`${locale}: details label missing`)
-        }
+      // The link label is the real URL, portfolio-card style
+      if (!html.includes(`${hubHost}/${site.slug}`)) {
+        failures.push(`${locale}: URL label missing for ${site.slug}`)
       }
-      if (site.extra && !html.includes(site.extra.href)) {
-        failures.push(`${locale}: extra link missing for ${site.slug}`)
+      const tags = i18n.global.tm(`hub.sites.${site.slug}.tags`) as unknown as string[]
+      for (const tag of tags ?? []) {
+        if (!rendered(html, tag)) failures.push(`${locale}: tag chip missing for ${site.slug}: ${tag}`)
+      }
+      if (site.extra && !html.includes(`${hubHost}${site.extra.href}`)) {
+        failures.push(`${locale}: extra URL label missing for ${site.slug}`)
       }
     }
 
-    const badgeCount = count(html, esc(i18n.global.t('hub.comingSoon')))
-    if (badgeCount !== soonCards) {
-      failures.push(`${locale}: expected ${soonCards} coming-soon badges, found ${badgeCount}`)
+    // Coming-soon section: compact panel — titles/descs, badges, no links
+    if (!rendered(html, i18n.global.t('hub.soonEyebrow'))) failures.push(`${locale}: soon eyebrow missing`)
+    if (!rendered(html, i18n.global.t('hub.soonTitle'))) failures.push(`${locale}: soon title missing`)
+    for (const site of soonSites) {
+      if (!rendered(html, i18n.global.t(`hub.sites.${site.slug}.title`))) {
+        failures.push(`${locale}: soon title missing for ${site.slug}`)
+      }
+      if (!rendered(html, i18n.global.t(`hub.sites.${site.slug}.desc`))) {
+        failures.push(`${locale}: soon description missing for ${site.slug}`)
+      }
+      if (html.includes(`href="/${site.slug}"`)) {
+        failures.push(`${locale}: coming-soon site ${site.slug} must not have a visit link`)
+      }
     }
-    if (liveCards + soonCards !== hubSites.length) failures.push(`${locale}: registry size mismatch`)
+    // Badges are the only elements using the primary-outlined chip class
+    const badgeCount = count(html, 'border-primary/40')
+    if (badgeCount !== soonSites.length) {
+      failures.push(`${locale}: expected ${soonSites.length} coming-soon badges, found ${badgeCount}`)
+    }
+
+    // The old "details → portfolio" duality is gone: no portfolio project
+    // pages may be linked from the hub cards
+    if (html.includes(`${PORTFOLIO_BASE}/projects/`)) {
+      failures.push(`${locale}: stale portfolio detail link (/projects/) rendered on the hub`)
+    }
 
     // The hub lives on the singular subdomain — the plural must never appear
     if (html.includes('projects.nyaahibi.web.id')) {

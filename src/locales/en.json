@@ -167,44 +167,55 @@
     "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",
     "title": "One home for every NyaaHibi audio project.",
     "intro": "Amplifiers, DACs, and more — pick a card to open its site.",
-    "cta": "View projects",
-    "projectsEyebrow": "Projects",
-    "projectsTitle": "All projects",
-    "details": "Project details",
+    "stats": "{live} live · {soon} coming soon",
+    "ctaBrowse": "Browse projects",
+    "ctaPortfolio": "Main portfolio",
+    "liveEyebrow": "Live sites",
+    "liveTitle": "Online right now — open any of them.",
+    "soonEyebrow": "Coming soon",
+    "soonTitle": "Still in the works.",
     "comingSoon": "Coming soon",
     "backToMain": "Back to the main portfolio",
     "sites": {
       "nyaahibiamp": {
         "title": "NyaaHibi AMP",
-        "desc": "The first-generation NyaaHibi headphone amplifier."
+        "desc": "The first-generation NyaaHibi headphone amplifier.",
+        "tags": ["Analog", "Headphone Amp", "Gen 1"]
       },
       "nyaahibiv2": {
         "title": "NyaaHibiV2 AMP",
-        "desc": "Second-generation NyaaHibi — an upgrade over the first-gen amplifier."
+        "desc": "Second-generation NyaaHibi — an upgrade over the first-gen amplifier.",
+        "tags": ["Hybrid", "SMD", "TPA6120"]
       },
       "amahibi": {
         "title": "AmaHibi",
-        "desc": "Balanced amplifier built around the TPA6120."
+        "desc": "Balanced amplifier built around the TPA6120.",
+        "tags": ["Balanced", "Headphone Amp", "TPA6120"]
       },
       "microhibiamp": {
         "title": "MicroHibi",
-        "desc": "Micro discrete amp — single-ended buffer."
+        "desc": "Micro discrete amp — single-ended buffer.",
+        "tags": ["Discrete", "Single-Ended", "Portable"]
       },
       "nyaaop": {
         "title": "Nyaa-OP",
-        "desc": "Micro discrete op-amp based on Rod Elliot's symmetrical buffer."
+        "desc": "Micro discrete op-amp based on Rod Elliot's symmetrical buffer.",
+        "tags": ["Discrete", "Op-Amp", "Rod Elliot"]
       },
       "tubeseamp": {
         "title": "NyaaTube SE",
-        "desc": "Tube headphone amplifier, single-ended with a symmetrical HV supply."
+        "desc": "Tube headphone amplifier, single-ended with a symmetrical HV supply.",
+        "tags": ["Tube", "Single-Ended", "HV Supply"]
       },
       "nyaatubefda": {
         "title": "NyaaTube FDA",
-        "desc": "End-game tube headphone amp — fully differential + single-ended."
+        "desc": "End-game tube headphone amp — fully differential + single-ended.",
+        "tags": ["Tube", "Fully Differential"]
       },
       "furuhibi": {
         "title": "FuruHibi",
-        "desc": "R2R DAC built around the PCM56 IC."
+        "desc": "R2R DAC built around the PCM56 IC.",
+        "tags": ["R2R DAC", "PCM56", "DSP"]
       }
     }
   },
