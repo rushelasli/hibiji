@@ -82,15 +82,15 @@ function isActive(id: string) {
         </a>
 
         <div class="ml-2 flex items-center gap-0.5 border-l border-foreground/10 pl-3">
+          <ThemeToggle />
           <button
-            class="rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
+            class="cursor-pointer rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
             :aria-label="t('nav.languageToggle')"
             :title="t('nav.languageToggle')"
             @click="toggleLocale"
           >
             <img :src="flagSrc" alt="" class="h-5 w-5" aria-hidden="true" />
           </button>
-          <ThemeToggle />
         </div>
       </div>
 
@@ -137,18 +137,18 @@ function isActive(id: string) {
         </nav>
 
         <div class="flex items-center gap-1 border-t border-foreground/10 pt-6">
-          <span class="mr-2 font-mono text-xs uppercase tracking-widest text-subtle-foreground">
+          <ThemeToggle />
+          <span class="ml-auto mr-2 font-mono text-xs uppercase tracking-widest text-subtle-foreground">
             {{ t('nav.language') }}
           </span>
           <button
-            class="rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
+            class="cursor-pointer rounded px-2 py-1.5 transition-colors hover:bg-foreground/5"
             :aria-label="t('nav.languageToggle')"
             :title="t('nav.languageToggle')"
             @click="toggleLocale"
           >
             <img :src="flagSrc" alt="" class="h-5 w-5" aria-hidden="true" />
           </button>
-          <ThemeToggle class="ml-auto" />
         </div>
       </div>
     </template>

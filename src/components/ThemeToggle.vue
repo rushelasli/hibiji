@@ -18,7 +18,7 @@ function toggle() {
 
 <template>
   <button
-    class="rounded px-2 py-1.5 text-subtle-foreground transition-colors hover:text-foreground/80"
+    class="cursor-pointer rounded px-2 py-1.5 text-subtle-foreground transition-colors hover:text-foreground/80"
     :aria-label="t('nav.theme')"
     :title="t('nav.theme')"
     @click="toggle"
