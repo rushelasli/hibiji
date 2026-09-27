@@ -127,7 +127,7 @@ watch(locale, syncDocumentMeta)
                 {{ siteDesc(site) }}
               </p>
 
-              <div class="mt-5 flex flex-wrap gap-2">
+              <div class="mt-5 mb-5 flex flex-wrap gap-2">
                 <span
                   v-for="tag in siteTags(site)"
                   :key="tag"
@@ -137,24 +137,29 @@ watch(locale, syncDocumentMeta)
                 </span>
               </div>
 
-              <!-- Buttons sit on the same bottom line across every card -->
+              <!-- Links sit on the same bottom line across every card; the
+                   chips' mb-5 keeps the divider clear when desc wraps to 2 lines -->
               <div class="mt-auto flex flex-wrap gap-2 border-t border-foreground/10 pt-5">
                 <a
                   :href="`/${site.slug}`"
-                  class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-[#5a4bd1]"
+                  class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-foreground/80 transition-colors hover:text-foreground"
                 >
+                  <ArrowUpRight
+                    class="h-3.5 w-3.5 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
                   {{ t('hub.seeDetail') }}
-                  <ArrowUpRight class="h-4 w-4" />
                 </a>
                 <a
                   v-if="site.extra"
                   :href="site.extra.href"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex h-11 items-center gap-2 rounded-lg border border-foreground/15 px-5 text-sm font-medium text-foreground/90 transition-colors hover:border-foreground/30 hover:text-foreground"
+                  class="group inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-foreground/80 transition-colors hover:text-foreground"
                 >
+                  <ExternalLink
+                    class="h-3.5 w-3.5 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
                   {{ site.extra.label }}
-                  <ExternalLink class="h-4 w-4" />
                 </a>
               </div>
             </article>

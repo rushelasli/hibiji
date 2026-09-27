@@ -95,14 +95,18 @@ for (const locale of ['id', 'en'] as const) {
     if (!rendered(html, i18n.global.t('hub.liveTitle'))) failures.push(`${locale}: live title missing`)
     if (!html.includes('md:grid-cols-2')) failures.push(`${locale}: 2-column live grid missing`)
 
-    // Every live card ends in a "See detail" button, pinned to the card
-    // bottom by the flex-end footer (mt-auto)
+    // Every live card ends in a "See detail" text link, pinned to the card
+    // bottom by the flex-end footer (mt-auto); the chips' fixed mb-5 keeps
+    // the divider clear even when a description wraps to 2 lines
     const seeDetail = i18n.global.t('hub.seeDetail')
     const detailCount = count(html, seeDetail)
     if (detailCount !== liveSites.length) {
-      failures.push(`${locale}: expected ${liveSites.length} "See detail" buttons, found ${detailCount}`)
+      failures.push(`${locale}: expected ${liveSites.length} "See detail" links, found ${detailCount}`)
     }
-    if (!html.includes('mt-auto')) failures.push(`${locale}: card button footer not flex-end`)
+    if (!html.includes('mt-auto')) failures.push(`${locale}: card link footer not flex-end`)
+    if (!html.includes('mt-5 mb-5')) {
+      failures.push(`${locale}: chip gap fix missing — divider would touch the tags`)
+    }
 
     for (const site of liveSites) {
       if (!rendered(html, i18n.global.t(`hub.sites.${site.slug}.title`))) {
@@ -118,7 +122,7 @@ for (const locale of ['id', 'en'] as const) {
       for (const tag of tags ?? []) {
         if (!rendered(html, tag)) failures.push(`${locale}: tag chip missing for ${site.slug}: ${tag}`)
       }
-      // Extra link is a button labeled from the registry, not a raw URL
+      // Extra link is labeled from the registry, not a raw URL
       if (site.extra && !rendered(html, site.extra.label)) {
         failures.push(`${locale}: extra button label missing for ${site.slug}`)
       }
