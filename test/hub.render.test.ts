@@ -163,6 +163,11 @@ for (const locale of ['id', 'en'] as const) {
       failures.push(`${locale}: stale plural subdomain projects.nyaahibi.web.id present`)
     }
 
+    // The retired furuhibi subdomain must not appear anywhere on the hub
+    if (html.includes('furuhibi.nyaahibi.web.id')) {
+      failures.push(`${locale}: retired furuhibi subdomain still linked`)
+    }
+
     // Footer points back to the portfolio
     if (!html.includes(PORTFOLIO_BASE)) failures.push(`${locale}: portfolio link missing in footer`)
     if (!rendered(html, i18n.global.t('hub.backToMain'))) {
@@ -191,10 +196,19 @@ const detailMarkers: Record<string, string> = {
   nyaahibiv2: '/projects/amp/TopologiAmp.png',
   microhibiamp: '/projects/microamp/maskot.jpg',
   tubeseamp: '/projects/tubeseamp/tubese.glb',
-  furuhibi: 'furuhibi.nyaahibi.web.id/dsp.html',
+  furuhibi: '/furuhibi/dsp.html',
 }
 
 const detailOutputs: Record<string, string> = {}
+
+// Every live site must have a detail-page test entry (and therefore a
+// composer in HubApp's detailPages — without one the landing fallback
+// would quietly hide the miss at /<slug>/)
+for (const site of liveSites) {
+  if (!(site.slug in detailPages)) {
+    failures.push(`live slug ${site.slug} has no detail-page test entry`)
+  }
+}
 
 for (const [slug, ns] of Object.entries(detailPages)) {
   for (const locale of ['id', 'en'] as const) {
@@ -239,6 +253,11 @@ for (const [slug, ns] of Object.entries(detailPages)) {
       // The landing itself must NOT render on a detail page
       if (html.includes('id="hero"') || html.includes('id="live"')) {
         failures.push(`${tag}: landing sections rendered on detail page`)
+      }
+
+      // The retired furuhibi subdomain — the hub links its apps locally
+      if (html.includes('furuhibi.nyaahibi.web.id')) {
+        failures.push(`${tag}: retired furuhibi subdomain still linked`)
       }
     } catch (e) {
       failures.push(`${tag}: THREW ${(e as Error).stack ?? e}`)

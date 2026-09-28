@@ -10,15 +10,20 @@ import FuruUpdates from '@/components/furuhibi/FuruUpdates.vue'
 import FuruAbout from '@/components/furuhibi/FuruAbout.vue'
 
 /** Set by the projects hub (no router); when omitted, falls back to a router link. */
-defineProps<{ backHref?: string }>()
+defineProps<{
+  backHref?: string
+  /** FuruHibi app URLs — hub passes relative paths, portfolio uses defaults. */
+  dspHref?: string
+  presetsHref?: string
+}>()
 </script>
 
 <template>
   <main>
-    <FuruHero :back-href="backHref" />
+    <FuruHero :back-href="backHref" :dsp-href="dspHref" />
     <FuruProducts />
     <FuruEcosystem />
-    <FuruDspBand />
+    <FuruDspBand :dsp-href="dspHref" :presets-href="presetsHref" />
     <FuruDownloads />
     <FuruPhilosophy />
     <FuruArchitecture />

@@ -2,19 +2,25 @@
 import { useI18n } from 'vue-i18n'
 import { ArrowLeft } from '@lucide/vue'
 
-const props = defineProps<{
-  /**
-   * Plain back href — set by the projects hub, which has no router.
-   * When omitted, falls back to a router link back to the portfolio
-   * project list (the default for the standalone portfolio app).
-   */
-  backHref?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    /**
+     * Plain back href — set by the projects hub, which has no router.
+     * When omitted, falls back to a router link back to the portfolio
+     * project list (the default for the standalone portfolio app).
+     */
+    backHref?: string
+    /**
+     * DSP app URL. Defaults to the hub-hosted absolute URL (the retired
+     * furuhibi subdomain is gone); the hub passes a relative path so
+     * local previews don't jump to production.
+     */
+    dspHref?: string
+  }>(),
+  { dspHref: 'https://project.nyaahibi.web.id/furuhibi/dsp.html' },
+)
 
 const { t } = useI18n()
-
-// The DSP web app stays on the live origin (691 KB app, not ported)
-const dspHref = 'https://furuhibi.nyaahibi.web.id/dsp.html'
 </script>
 
 <template>

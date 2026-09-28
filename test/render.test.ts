@@ -104,11 +104,13 @@ if (microEn.includes('BlockSupply.png')) failures.push('microamp: psu diagram im
 if (microEn.includes('model-viewer')) failures.push('microamp: 3D model-viewer should be absent (live site has no 3D section)')
 if (microEn.includes('maxmode.jpg')) failures.push('microamp: oscilloscope photo should be absent (commented out on live site)')
 
-// furuhibi: light pipeline diagram on a white panel, apps stay on live origin
+// furuhibi: light pipeline diagram on a white panel; the DSP/preset apps
+// are served from the hub (the retired subdomain must be gone from hrefs)
 const fhEn = outputs['en:/projects/furuhibi'] ?? ''
 if (!fhEn.includes('audiopipeline.png')) failures.push('furuhibi: pipeline diagram img missing')
-if (!fhEn.includes('furuhibi.nyaahibi.web.id/dsp.html')) failures.push('furuhibi: external DSP link missing')
-if (!fhEn.includes('furuhibi.nyaahibi.web.id/preset.html')) failures.push('furuhibi: external presets link missing')
+if (!fhEn.includes('project.nyaahibi.web.id/furuhibi/dsp.html')) failures.push('furuhibi: hub DSP link missing')
+if (!fhEn.includes('project.nyaahibi.web.id/furuhibi/preset.html')) failures.push('furuhibi: hub presets link missing')
+if (fhEn.includes('furuhibi.nyaahibi.web.id')) failures.push('furuhibi: retired subdomain still linked')
 
 // No project page may carry the personal profile block
 for (const key of ['id:/projects/amp', 'en:/projects/amp', 'id:/projects/microamp', 'en:/projects/microamp', 'id:/projects/furuhibi', 'en:/projects/furuhibi']) {
@@ -126,8 +128,9 @@ for (const [slug, links] of Object.entries(projectLinks)) {
   }
 }
 
-// Retired hosts must never reappear (nyaaop card link, microamp external)
-for (const dead of ['nyaaop.nyaahibi.web.id', 'https://microamp.nyaahibi.web.id']) {
+// Retired hosts must never reappear (nyaaop card link, microamp externals,
+// furuhibi's retired subdomain — all links now target the hub)
+for (const dead of ['nyaaop.nyaahibi.web.id', 'https://microamp.nyaahibi.web.id', 'https://furuhibi.nyaahibi.web.id']) {
   if (homeEn.includes(dead)) failures.push(`home: retired host present: ${dead}`)
 }
 

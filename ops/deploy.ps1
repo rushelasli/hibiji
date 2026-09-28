@@ -71,9 +71,17 @@ if (Test-Path "$repos\projects") {
 # index.html. Point every live slug at the hub app instead — HubApp reads
 # window.location and renders the matching detail page; everything else in
 # the folder (dsp.html, images, legacy pages) stays untouched.
-# Keep in sync with hubSites (status: 'live') in src/data/projects.ts.
+# Slugs are derived from hubSites (status: 'live') — one source of truth.
 Write-Host '[6/6] Overlaying hub detail pages onto live site folders...'
-$liveSlugs = 'nyaahibiamp', 'nyaahibiv2', 'microhibiamp', 'tubeseamp', 'furuhibi'
+Push-Location "$repos\hibi"
+try {
+    $liveOut = & bun -e "const { hubSites } = await import('./src/data/projects'); console.log(hubSites.filter((s) => s.status === 'live').map((s) => s.slug).join(' '))"
+    if ($LASTEXITCODE -ne 0) { throw 'could not derive live slugs from hubSites' }
+} finally {
+    Pop-Location
+}
+$liveSlugs = ($liveOut -join ' ').Trim() -split '\s+'
+if (-not $liveSlugs -or -not $liveSlugs[0]) { throw 'derived live slug list is empty' }
 foreach ($slug in $liveSlugs) {
     $src = "$repos\hibi\dist-hub\$slug\index.html"
     $dst = "$sites\projects\$slug"

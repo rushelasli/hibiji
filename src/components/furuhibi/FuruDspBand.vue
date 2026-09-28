@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
+withDefaults(
+  defineProps<{
+    /**
+     * DSP / Cloud Presets app URLs. Default to the hub-hosted absolute
+     * URLs (the retired furuhibi subdomain is gone); the hub passes
+     * relative paths so local previews don't jump to production.
+     */
+    dspHref?: string
+    presetsHref?: string
+  }>(),
+  {
+    dspHref: 'https://project.nyaahibi.web.id/furuhibi/dsp.html',
+    presetsHref: 'https://project.nyaahibi.web.id/furuhibi/preset.html',
+  },
+)
 
-// DSP and Cloud Presets apps stay on the live origin (not ported)
-const dspHref = 'https://furuhibi.nyaahibi.web.id/dsp.html'
-const presetsHref = 'https://furuhibi.nyaahibi.web.id/preset.html'
+const { t } = useI18n()
 </script>
 
 <template>

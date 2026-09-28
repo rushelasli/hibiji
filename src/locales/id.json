@@ -719,12 +719,12 @@
         "version": "v1.1",
         "downloadLabel": "Download",
         "historyLabel": "Release History",
-        "href": "https://furuhibi.nyaahibi.web.id/windows_app/FuruHibiR2R%20DAC%20%20v1.1.rar",
+        "href": "https://project.nyaahibi.web.id/furuhibi/windows_app/FuruHibiR2R%20DAC%20%20v1.1.rar",
         "history": [
           {
             "version": "v1.0",
             "label": "Download .rar",
-            "href": "https://furuhibi.nyaahibi.web.id/windows_app/FuruHibiR2R%20DAC%20%20v1.0.rar"
+            "href": "https://project.nyaahibi.web.id/furuhibi/windows_app/FuruHibiR2R%20DAC%20%20v1.0.rar"
           }
         ]
       },
@@ -735,12 +735,12 @@
         "version": "v1.1",
         "downloadLabel": "Download APK",
         "historyLabel": "Release History",
-        "href": "https://furuhibi.nyaahibi.web.id/android_app/furuhibi%20r2r%201.1.apk",
+        "href": "https://project.nyaahibi.web.id/furuhibi/android_app/furuhibi%20r2r%201.1.apk",
         "history": [
           {
             "version": "v1.0",
             "label": "Download .apk",
-            "href": "https://furuhibi.nyaahibi.web.id/android_app/furuhibi%20r2r%201.0.apk"
+            "href": "https://project.nyaahibi.web.id/furuhibi/android_app/furuhibi%20r2r%201.0.apk"
           }
         ]
       }

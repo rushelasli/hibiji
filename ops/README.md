@@ -25,6 +25,7 @@ C:\srv\sites\hibi            served portfolio (dist mirror)
 C:\srv\sites\project         served hub:
                              index.html + assets/ + flags/ + logo/mascots
                              (the dist-hub landing, mirrored with /MIR)
+                             projects/                 ... images + GLB models
                              <slug>/                    ... one folder per site
                              dash/                      ... existing dashboard
 ```
@@ -57,7 +58,10 @@ C:\srv\sites\project         served hub:
      `dist-hub\projects\` ships with it, detail pages need those images) →
      portfolio → per-site folders → **hub detail-page overlay** (copies
      `dist-hub\<slug>\index.html` onto each live site folder, after the
-     mirrors restored the old sites).
+     mirrors restored the old sites; slugs are derived from `hubSites`).
+   - Local-only gate: `python3 ops/check_classes.py` (after
+     `bun run build`) verifies every class token used in the SFCs and
+     locales exists in the built CSS.
 
 ## Cloudflare edge rules
 
@@ -95,4 +99,11 @@ C:\srv\sites\project         served hub:
 2. In this repo: point the entry's `href` at `` `${PROJECTS_BASE}/<slug>` ``
    (`src/data/projects.ts`) — the SSR test derives its assertions from the
    registry, so nothing else changes.
-3. Deploy the portfolio; add the Cloudflare 301 from the old subdomain.
+3. Give the slug a **detail page**: add `hub.sites.<slug>` locale keys
+   (title, desc, tags), a composer in `HubApp`'s `detailPages` (reuse a
+   portfolio page or add `src/pages/<Name>Project.vue` + its own locale
+   namespace), and a `detailPages` entry in `test/hub.render.test.ts`.
+   `deploy.ps1` derives its overlay list from `hubSites`, so a live slug
+   without a composer would serve the landing app at `/<slug>/` — the
+   hub test fails until both maps cover every live slug.
+4. Deploy the portfolio; add the Cloudflare 301 from the old subdomain.

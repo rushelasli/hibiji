@@ -23,13 +23,22 @@ const year = new Date().getFullYear()
 
 const liveSites = computed(() => hubSites.filter((s) => s.status === 'live'))
 
+interface DetailPage {
+  comp: Component
+  /** Extra props — the hub links the FuruHibi apps by relative path. */
+  props?: Record<string, string>
+}
+
 /** Detail page per live slug — content pages reuse the portfolio sections. */
-const detailPages: Record<string, Component> = {
-  nyaahibiamp: AmpGen1Project,
-  nyaahibiv2: AmpProject,
-  microhibiamp: MicroampProject,
-  tubeseamp: TubeSeProject,
-  furuhibi: FuruhibiProject,
+const detailPages: Record<string, DetailPage> = {
+  nyaahibiamp: { comp: AmpGen1Project },
+  nyaahibiv2: { comp: AmpProject },
+  microhibiamp: { comp: MicroampProject },
+  tubeseamp: { comp: TubeSeProject },
+  furuhibi: {
+    comp: FuruhibiProject,
+    props: { dspHref: '/furuhibi/dsp.html', presetsHref: '/furuhibi/preset.html' },
+  },
 }
 
 const detailPath = computed(() => {
@@ -42,7 +51,7 @@ const detailSite = computed<HubSite | undefined>(() =>
   liveSites.value.find((s) => detailPath.value === `/${s.slug}`),
 )
 
-const detailComponent = computed<Component | null>(() => {
+const detailEntry = computed<DetailPage | null>(() => {
   const site = detailSite.value
   if (!site) return null
   return detailPages[site.slug] ?? null
@@ -93,7 +102,13 @@ watch(locale, syncDocumentMeta)
 
       <!-- Detail page — one of the five live project sites (back goes to
            the hub landing); anything else renders the landing itself -->
-      <component v-if="detailComponent" :is="detailComponent" :key="detailPath" back-href="/" />
+      <component
+        v-if="detailEntry"
+        :is="detailEntry.comp"
+        :key="detailPath"
+        v-bind="detailEntry.props"
+        back-href="/"
+      />
       <HubLanding v-else />
 
       <footer>
