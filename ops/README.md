@@ -53,8 +53,11 @@ C:\srv\sites\project         served hub:
      hand, then schedule it (Task Scheduler, daily or on demand).
    - One run builds **both** sites (`bun run build` → `dist/`,
      `bun run build:hub` → `dist-hub/`), runs both SSR gates, then mirrors
-     in the only safe order: hub landing (`/MIR`, resets the root) →
-     portfolio → per-site folders.
+     in the only safe order: hub landing (`/MIR`, resets the root —
+     `dist-hub\projects\` ships with it, detail pages need those images) →
+     portfolio → per-site folders → **hub detail-page overlay** (copies
+     `dist-hub\<slug>\index.html` onto each live site folder, after the
+     mirrors restored the old sites).
 
 ## Cloudflare edge rules
 
@@ -64,17 +67,26 @@ C:\srv\sites\project         served hub:
   - `furuhibi.nyaahibi.web.id/*` → `project.nyaahibi.web.id/furuhibi/$1`
   - same pattern for `amp.`/`microamp.` subdomains when they retire.
 
-## Hub landing page (this repo)
+## Hub landing + detail pages (this repo)
 
 - Source: `hub.html` + `src/hub/` — shares the portfolio's theme tokens,
   locale files (`hub.*` keys), `ThemeToggle`, `LocaleToggle`, and logo.
 - Cards are driven by `hubSites` in `src/data/projects.ts`
   (`slug`, `status: live|soon`, optional `extra` link) plus three
-  `hub.sites.<slug>` locale keys per language (title, desc, tags); the
-  card's visit link is labeled with its full
-  `project.nyaahibi.web.id/<slug>` URL.
+  `hub.sites.<slug>` locale keys per language (title, desc, tags). Each
+  live card links "See detail" to `/<slug>`; `extra` adds a second link
+  (e.g. FuruHibi's WebUSB DSP panel).
+- **Detail pages have no router.** `main.ts` passes
+  `window.location.pathname` into `HubApp`, which renders the matching
+  page composer from `detailPages` (reusing the portfolio's project
+  sections; the back link is a plain `href="/"`). Unknown or soon slugs
+  fall back to the landing. `vite.hub.config.ts` writes
+  `dist-hub/<slug>/index.html` for every live slug so local previews
+  behave like the deployed folders, and `deploy.ps1` overlays the same
+  file onto each live site folder after the per-site mirrors.
 - Mascots (`maskotkiri.png` / `maskotkanan.png`) and `logo.png` live in
-  `public/` and ship with both builds.
+  `public/` and ship with both builds; project images and GLB models come
+  from `public/projects/` (served as `/projects/...` on both apps).
 
 ## Migrating a live site's card to the hub
 

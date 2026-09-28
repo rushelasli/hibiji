@@ -12,6 +12,9 @@ interface BlockItem {
   desc: string
 }
 
+/** Set by the projects hub (no router); when omitted, falls back to a router link. */
+defineProps<{ backHref?: string }>()
+
 const { tm } = useI18n()
 
 const microAmpBlocks = computed(() => tm('microamp.ampBlocks') as unknown as BlockItem[])
@@ -27,7 +30,7 @@ const infoParagraphs = [
 
 <template>
   <main>
-    <ProjectHero ns="microamp" />
+    <ProjectHero ns="microamp" :back-href="backHref" />
     <ProjectAbout ns="microamp" image="/projects/microamp/maskot.jpg" />
 
     <ProjectTextSection

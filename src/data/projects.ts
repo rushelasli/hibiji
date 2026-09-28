@@ -41,8 +41,7 @@ export const projectLinks: Record<string, ProjectLink[]> = {
   ],
   furuhibi: [
     { label: 'furuhibi.nyaahibi.web.id', href: '/projects/furuhibi', internal: true },
-    // TODO(hub): switch to `${PROJECTS_BASE}/furuhibi` once the homeserver hub is up
-    { label: 'Live site — furuhibi.nyaahibi.web.id', href: 'https://furuhibi.nyaahibi.web.id' },
+    { label: 'project.nyaahibi.web.id/furuhibi', href: `${PROJECTS_BASE}/furuhibi` },
   ],
 }
 

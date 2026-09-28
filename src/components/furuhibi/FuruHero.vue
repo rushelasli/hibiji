@@ -2,6 +2,15 @@
 import { useI18n } from 'vue-i18n'
 import { ArrowLeft } from '@lucide/vue'
 
+const props = defineProps<{
+  /**
+   * Plain back href — set by the projects hub, which has no router.
+   * When omitted, falls back to a router link back to the portfolio
+   * project list (the default for the standalone portfolio app).
+   */
+  backHref?: string
+}>()
+
 const { t } = useI18n()
 
 // The DSP web app stays on the live origin (691 KB app, not ported)
@@ -11,13 +20,14 @@ const dspHref = 'https://furuhibi.nyaahibi.web.id/dsp.html'
 <template>
   <section class="border-b border-foreground/10">
     <div class="mx-auto max-w-5xl px-5 py-14 md:px-8 md:py-20">
-      <router-link
-        to="/#projects"
+      <component
+        :is="props.backHref ? 'a' : 'router-link'"
+        v-bind="props.backHref ? { href: props.backHref } : { to: '/#projects' }"
         class="mb-8 inline-flex items-center gap-1.5 font-mono text-[13px] text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft class="h-3.5 w-3.5 text-primary" />
         {{ t('furuhibi.back') }}
-      </router-link>
+      </component>
 
       <div class="flex flex-col-reverse items-center gap-10 md:flex-row md:items-start md:gap-12">
         <div class="w-full flex-1">

@@ -10,9 +10,9 @@ const { default: HubApp } = await import('@/hub/HubApp.vue')
 const { hubSites, PORTFOLIO_BASE } = await import('@/data/projects')
 
 // Unresolved vue-i18n keys leak into the HTML as e.g. ">hub.title"
-const KEY_LEAK = />(nav|hub|footer|common)\.[a-zA-Z]/
+const KEY_LEAK = />(nav|hub|footer|common|meta|amp|microamp|furuhibi|ampgen1|tubese)\.[a-zA-Z]/
 // ... or into attribute values as e.g. alt="hub.sites.x"
-const ATTR_KEY_LEAK = /"(nav|hub|footer|common)\.[a-zA-Z]/
+const ATTR_KEY_LEAK = /"(nav|hub|footer|common|meta|amp|microamp|furuhibi|ampgen1|tubese)\.[a-zA-Z]/
 
 const outputs: Record<string, string> = {}
 const failures: string[] = []
@@ -173,12 +173,107 @@ for (const locale of ['id', 'en'] as const) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Detail pages — /<slug>/ serves the same app; HubApp picks the composer
+// from window.location (passed in as initialPath). Each live slug renders
+// its content page inside the shared chrome with a plain back link to "/".
+const detailPages: Record<string, string> = {
+  nyaahibiamp: 'ampgen1',
+  nyaahibiv2: 'amp',
+  microhibiamp: 'microamp',
+  tubeseamp: 'tubese',
+  furuhibi: 'furuhibi',
+}
+
+// One content marker per page — an asset path only that page renders.
+const detailMarkers: Record<string, string> = {
+  nyaahibiamp: '/projects/nyaahibiamp/block_amp.png',
+  nyaahibiv2: '/projects/amp/TopologiAmp.png',
+  microhibiamp: '/projects/microamp/maskot.jpg',
+  tubeseamp: '/projects/tubeseamp/tubese.glb',
+  furuhibi: 'furuhibi.nyaahibi.web.id/dsp.html',
+}
+
+const detailOutputs: Record<string, string> = {}
+
+for (const [slug, ns] of Object.entries(detailPages)) {
+  for (const locale of ['id', 'en'] as const) {
+    const tag = `${slug}:${locale}`
+    try {
+      i18n.global.locale.value = locale
+      const app = createSSRApp(HubApp, { initialPath: `/${slug}/` })
+      app.use(i18n)
+
+      const html = await renderToString(app)
+      detailOutputs[tag] = html
+
+      if (html.length < 500) failures.push(`${tag}: suspiciously short render (${html.length} chars)`)
+
+      const leak = html.match(KEY_LEAK)
+      if (leak) failures.push(`${tag}: unresolved i18n key leaked -> ${leak[0]}`)
+      const attrLeak = html.match(ATTR_KEY_LEAK)
+      if (attrLeak) failures.push(`${tag}: unresolved key in attribute -> ${attrLeak[0]}`)
+
+      // Shared chrome survives the page swap
+      if (!html.includes('/logo.png')) failures.push(`${tag}: navbar logo missing`)
+      if (!html.includes('/maskotkiri.png') || !html.includes('/maskotkanan.png')) {
+        failures.push(`${tag}: mascot images missing`)
+      }
+      if (!rendered(html, i18n.global.t('nav.theme'))) failures.push(`${tag}: theme toggle missing`)
+      if (!rendered(html, i18n.global.t('nav.languageToggle'))) {
+        failures.push(`${tag}: language toggle missing`)
+      }
+
+      // Back link is a plain anchor to the hub landing (no router here)
+      if (!html.includes('href="/"')) failures.push(`${tag}: back-to-hub link missing`)
+      if (!rendered(html, i18n.global.t(`${ns}.back`))) failures.push(`${tag}: back label missing`)
+
+      // Content: this page's about copy + its signature asset
+      if (!rendered(html, i18n.global.t(`${ns}.aboutTitle`))) {
+        failures.push(`${tag}: about title missing`)
+      }
+      if (!html.includes(detailMarkers[slug])) {
+        failures.push(`${tag}: signature asset missing: ${detailMarkers[slug]}`)
+      }
+
+      // The landing itself must NOT render on a detail page
+      if (html.includes('id="hero"') || html.includes('id="live"')) {
+        failures.push(`${tag}: landing sections rendered on detail page`)
+      }
+    } catch (e) {
+      failures.push(`${tag}: THREW ${(e as Error).stack ?? e}`)
+    }
+  }
+}
+
+// Fallback: a soon slug (or any unknown path) serves the landing itself
+try {
+  i18n.global.locale.value = 'id'
+  const app = createSSRApp(HubApp, { initialPath: '/amahibi/' })
+  app.use(i18n)
+  const html = await renderToString(app)
+  if (!html.includes('id="hero"')) failures.push('soon slug /amahibi: landing hero missing (fallback broken)')
+  if (html.includes('href="/amahibi"')) failures.push('soon slug /amahibi: must not be linked from the cards')
+} catch (e) {
+  failures.push(`soon slug fallback: THREW ${(e as Error).stack ?? e}`)
+}
+
+// Per slug, the two locales must produce genuinely different HTML
+for (const slug of Object.keys(detailPages)) {
+  const idHtml = detailOutputs[`${slug}:id`]
+  const enHtml = detailOutputs[`${slug}:en`]
+  if (idHtml && enHtml && idHtml === enHtml) {
+    failures.push(`${slug}: id and en rendered IDENTICAL html`)
+  }
+}
+
 // The two locales must produce genuinely different HTML
 if (outputs.id && outputs.en && outputs.id === outputs.en) {
   failures.push('id and en rendered IDENTICAL html')
 }
 
 console.log('hub locales rendered:', Object.keys(outputs).length)
+console.log('detail renders:', Object.keys(detailOutputs).length)
 for (const k of Object.keys(outputs)) console.log(`  ${k}: ${outputs[k].length} chars`)
 console.log(failures.length ? '\nFAILURES:\n' + failures.join('\n') : '\nALL HUB RENDER CHECKS PASSED')
 process.exit(failures.length ? 1 : 0)

@@ -162,6 +162,174 @@
   "footer": {
     "tagline": "Dibuat dengan Vue"
   },
+  "ampgen1": {
+    "back": "Kembali ke proyek",
+    "headerEyebrow": "Proyek / 01 — Nyaa.hibi Amp",
+    "headerTitle": "Nyaa.hibi Amp",
+    "headerSubtitle": "Amplifier headphone DIY hybrid — generasi pertama NyaaHibi, dibikin asal-asalan tapi serius ^_^",
+    "aboutEyebrow": "Tentang",
+    "aboutTitle": "Tentang Nyaa.hibi Amp",
+    "aboutP1": "Nyaa.hibi Amp adalah amplifier headphone DIY berarsitektur hybrid yang dirancang dengan asal-asalan oleh seorang lulusan SMK saja.",
+    "aboutP2": "Desain ini tiba-tiba kepikiran saat gabut, dan entah kenapa malah dibikin serius — astaga, duitnya langsung ludes buat bikin project ini. Sebelum masuk ke block diagram yang saya pakai, baca dulu apa itu <a href=\"https://www.diyaudio.com/community/threads/what-is-nested-feedback-how-it-realy-works-and-some-examples.96634/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-foreground underline decoration-primary underline-offset-4 transition-colors hover:text-primary\">nested feedback di sini</a> ^_^.",
+    "mascotAlt": "Maskot Nyaa.hibi Amp",
+    "mascotOverlay": "Generasi pertama",
+    "topologyEyebrow": "Topologi",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram penguat Nyaa.hibi Amp",
+    "psuEyebrow": "Catu Daya",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram catu daya Nyaa.hibi Amp",
+    "ampBlocks": [
+      {
+        "title": "Discrete JFET Input (Unity Gain)",
+        "desc": "Berfungsi sebagai impedance buffer dan pembentuk karakter awal tanpa penguatan tegangan."
+      },
+      {
+        "title": "BJT Current Booster (Unity Gain)",
+        "desc": "Current booster dengan Source Follower, agar arus keluaran dari JFET ini bisa ditingkatkan karena arus output JFET itu sangat kecil."
+      },
+      {
+        "title": "JFET-input Op-Amp Buffer (Unity Gain)",
+        "desc": "Mengisolasi rangkaian diskrit dari preamp utama, dan mengambil fungsi input op-amp JFET yang memiliki karakteristik impedansi tinggi daripada op-amp dengan penguatan awal BJT."
+      },
+      {
+        "title": "Preamp (Nested Feedback)",
+        "desc": "Stage penguatan utama pada sistem ini yang mengatur gain dan distorsi. Sistem nested feedback dipilih karena mampu mengendalikan distorsi dengan baik, meski kurang stabil bagi pemula."
+      },
+      {
+        "title": "Output Buffer (Unity Gain)",
+        "desc": "Menaikkan arus preamp, menurunkan impedansi output, tanpa membebani preamp utama."
+      }
+    ],
+    "psuBlocks": [
+      {
+        "title": "Charging System",
+        "desc": "Saya menggunakan IC TP4056 karena selain simpel, dia juga murah. Cocok buat charging system baterai 1S."
+      },
+      {
+        "title": "PMOS + Schottky Active Bypass",
+        "desc": "Mengalihkan supply amp secara otomatis saat adaptor terpasang. Sistem PMOS mengurangi rugi daya dibanding dioda konvensional."
+      },
+      {
+        "title": "Battery",
+        "desc": "Menggunakan sistem 1S agar desain tetap ringkas dan portabel."
+      },
+      {
+        "title": "Step Up",
+        "desc": "Step up kecil seperti MT3608 sudah cukup karena headamp tidak perlu arus output besar seperti power amp."
+      },
+      {
+        "title": "Filter Cap dan Virtual Ground",
+        "desc": "Virtual ground bisa pasif atau menggunakan transistor sederhana agar lebih stabil. Ditambah filter cap agar suplai lebih bersih."
+      }
+    ],
+    "notesEyebrow": "Catatan",
+    "notesTitle": "Catatan dan Referensi",
+    "refs": [
+      {
+        "title": "JFET",
+        "links": [
+          { "label": "JFET Pre-Amplifiers", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET + BJT Buffer", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET Source Follower", "href": "https://next.gr/circuits/amplifier/simple-jfet-preamp-c21712" },
+          { "label": "Universal JFET Buffer", "href": "https://hifisonix.com/wp-content/uploads/2015/01/UBx.pdf" }
+        ]
+      },
+      {
+        "title": "Nested Composite",
+        "links": [
+          { "label": "Composite Amp", "href": "https://www.analog.com/en/resources/analog-dialogue/articles/composite-amplifiers-high-output-drive-capability-with-precision.html" },
+          { "label": "Nested Feedback", "href": "https://www.allaboutcircuits.com/technical-articles/composite-amplifiers-improving-phase-accuracy/" },
+          { "label": "Nested Distortion Reducer", "href": "https://www.tubecad.com/2017/04/blog0376.htm" }
+        ]
+      }
+    ]
+  },
+  "tubese": {
+    "back": "Kembali ke proyek",
+    "headerEyebrow": "Proyek / 01 — TubeSE HPA",
+    "headerTitle": "TubeSE HPA",
+    "headerSubtitle": "Headphone amplifier tube single-ended standar dengan supply HV simetris — PCB kompak 6 × 8 cm.",
+    "aboutEyebrow": "Tentang",
+    "aboutTitle": "Tentang TubeSE HPA",
+    "aboutP1": "TubeSE by NekoHibi merupakan portable tube headphone amplifier (hPA) berbasis high-voltage (HV) supply architecture yang dirancang dalam form factor kompak (PCB 6 × 8 cm) tanpa mengorbankan performa elektrikal. Desain ini mengimplementasikan simetris HV rail untuk mengoptimalkan efisiensi konversi daya serta menjaga linearitas operasi tabung pada tegangan kerja optimal.",
+    "aboutP2": "Dengan tegangan tinggi yang sesungguhnya, amplifier ini menghindari karakter <em>starved plate</em> yang cenderung menyebabkan kompresi dinamis dan suara \"tercekik\". Tabung dapat bekerja dalam region yang lebih linear dengan headroom yang memadai.",
+    "mascotAlt": "Maskot TubeSE HPA — foto oleh Flassy",
+    "mascotOverlay": "Foto oleh Flassy",
+    "infoEyebrow": "Detail",
+    "infoTitle": "Informasi Tambahan",
+    "infoP1": "<strong>Power Rail &amp; Operating Condition</strong><br>B+ : <strong>+70V</strong> — B− : <strong>−20V</strong> — rail to rail : <strong>90VDC</strong>. Dengan tegangan kerja yang sesungguhnya, desain ini mampu menjaga headroom yang cukup untuk dinamika suara yang lebih baik.",
+    "infoP2": "<strong>HV Generation Topology</strong><br>Satu step-up converter utama diikuti rangkaian HV multiplier untuk menghasilkan kedua rail: HV+ multiplier menghasilkan B+ (+70V), HV− multiplier menghasilkan B− (−20V). Pendekatan ini memungkinkan satu sumber switching melayani kedua polaritas — lebih efisien daripada dual converter terpisah atau menaikkan langsung ke 90V. Step-up tambahan menghasilkan catu heater (filament tabung) dan catu rangkaian buffer.",
+    "infoP3": "<strong>Output Stage &amp; Buffer</strong><br>Rangkaian output menggunakan buffer dengan supply simetris, bukan supply tunggal: headroom lebih besar, tidak memerlukan kapasitor kopling di output, dan impedansi output lebih stabil.",
+    "topologyEyebrow": "Topologi",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram penguat TubeSE",
+    "psuEyebrow": "Catu Daya",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram catu daya TubeSE",
+    "ampBlocks": [
+      {
+        "title": "6N16 Dual Triode",
+        "desc": "Menggunakan sistem supply simetris (+70V dan −20V) untuk memastikan tabung bekerja dalam kondisi optimal, menghindari starved plate, dan memberikan headroom yang memadai untuk dinamika suara yang lebih baik."
+      },
+      {
+        "title": "Buffer Stage",
+        "desc": "Dirancang dengan supply simetris untuk memberikan headroom yang cukup, menghilangkan kebutuhan kapasitor kopling di output, dan menjaga impedansi output tetap stabil."
+      }
+    ],
+    "psuBlocks": [
+      {
+        "title": "Modul Charger",
+        "desc": "Menggunakan modul TP4056 yang dipasang onboard untuk menghemat ruang PCB."
+      },
+      {
+        "title": "Bypass Charging",
+        "desc": "Agar bisa menggunakan amplifier saat kondisi baterai sedang diisi, sehingga tidak perlu menunggu sampai baterai penuh untuk menikmati musik."
+      },
+      {
+        "title": "Step-Up Converter",
+        "desc": "Menggunakan 3 stepup terpisah. Stage 1 sebagai penaik tegangan kecil ke 5V stabil sebagai catu daya stepup HV dan stepup buffer + heater, agar memaksimalkan penggunaan baterai dikarenakan XL6009 memiliki tegangan kerja minimal yang lumayan tinggi."
+      },
+      {
+        "title": "Charge Pump",
+        "desc": "Menghasilkan rail tegangan negatif sehingga catu daya menjadi simetris (+ dan −)."
+      },
+      {
+        "title": "Filter Stage 1",
+        "desc": "Terdiri dari kapasitor, ferrite bead, resistor, dan kapasitor untuk meredam ripple dan noise awal."
+      },
+      {
+        "title": "Capacitance Multiplier",
+        "desc": "Digunakan agar kapasitansi kecil pada SMD terasa seperti kapasitansi besar, sehingga suplai lebih bersih."
+      },
+      {
+        "title": "Multiplier",
+        "desc": "Rangkaian multiplier simetris agar efisiensi lebih tinggi daripada langsung menaikkan ke 90V dengan satu rail."
+      }
+    ],
+    "threeDEyebrow": "Pratinjau 3D",
+    "threeDTitle": "Tampilan 3D",
+    "threeDIntro": "Pratinjau 3D interaktif — seret untuk memutar, gulir untuk memperbesar. Model dimuat sesuai kebutuhan.",
+    "models": ["PCB TubeSE"],
+    "notesEyebrow": "Catatan",
+    "notesTitle": "Catatan dan Referensi",
+    "refs": [
+      {
+        "title": "Tube",
+        "links": [
+          { "label": "Tube Preamp (6J1)", "href": "https://www.circuitlab.com/circuit/qe3v569hm8t9/6j1-vacuum-tube-preamp-ver1_0/" }
+        ]
+      },
+      {
+        "title": "Step-Up Simetris",
+        "links": [
+          { "label": "LT3471 Symmetric Boost Converter", "href": "https://www.alldatasheet.com/html-pdf/101718/LINER/LT3471/1079/7/LT3471.html" },
+          { "label": "Symetric Multiplier", "href": "https://www.researchgate.net/figure/a-Cockcroft-Walton-voltage-multiplier-b-Nx-multiplier-boost-converter_fig2_252413497" },
+          { "label": "Charge Pump", "href": "https://electronics.stackexchange.com/questions/143507/inverting-charge-pump-with-boost-converter-loading-characteristics" }
+        ]
+      }
+    ]
+  },
   "hub": {
     "metaTitle": "NyaaHibi Projects — Everyday Listening",
     "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",

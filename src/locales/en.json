@@ -162,6 +162,174 @@
   "footer": {
     "tagline": "Built with Vue"
   },
+  "ampgen1": {
+    "back": "Back to projects",
+    "headerEyebrow": "Projects / 01 — Nyaa.hibi Amp",
+    "headerTitle": "Nyaa.hibi Amp",
+    "headerSubtitle": "A hybrid DIY headphone amplifier — the first-generation NyaaHibi, thrown together carelessly but built seriously ^_^",
+    "aboutEyebrow": "About",
+    "aboutTitle": "About Nyaa.hibi Amp",
+    "aboutP1": "Nyaa.hibi Amp is a hybrid-architecture DIY headphone amplifier, designed carelessly by nothing more than a vocational school graduate.",
+    "aboutP2": "The idea popped up out of nowhere while I was bored, and somehow it got built for real — boom, the money evaporated instantly funding this project. Before diving into the block diagram I use, read up first on what <a href=\"https://www.diyaudio.com/community/threads/what-is-nested-feedback-how-it-realy-works-and-some-examples.96634/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-foreground underline decoration-primary underline-offset-4 transition-colors hover:text-primary\">nested feedback is, right here</a> ^_^.",
+    "mascotAlt": "Nyaa.hibi Amp mascot",
+    "mascotOverlay": "First generation",
+    "topologyEyebrow": "Topology",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram of the Nyaa.hibi Amp amplifier",
+    "psuEyebrow": "Power Supply",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram of the Nyaa.hibi Amp power supply",
+    "ampBlocks": [
+      {
+        "title": "Discrete JFET Input (Unity Gain)",
+        "desc": "Acts as an impedance buffer and shapes the initial character without any voltage gain."
+      },
+      {
+        "title": "BJT Current Booster (Unity Gain)",
+        "desc": "A current booster with a source follower, so the current coming out of the JFET can be increased — a JFET's output current is tiny."
+      },
+      {
+        "title": "JFET-input Op-Amp Buffer (Unity Gain)",
+        "desc": "Isolates the discrete stage from the main preamp, taking advantage of a JFET-input op-amp's high input impedance over a BJT-gain op-amp."
+      },
+      {
+        "title": "Preamp (Nested Feedback)",
+        "desc": "The main gain stage of this system, controlling gain and distortion. Nested feedback was chosen because it handles distortion well — even if it's unforgiving for beginners."
+      },
+      {
+        "title": "Output Buffer (Unity Gain)",
+        "desc": "Raises the preamp's current and lowers the output impedance without loading down the main preamp."
+      }
+    ],
+    "psuBlocks": [
+      {
+        "title": "Charging System",
+        "desc": "I use a TP4056 IC because it's simple and cheap — a good fit for a 1S battery charging system."
+      },
+      {
+        "title": "PMOS + Schottky Active Bypass",
+        "desc": "Switches the amp's supply automatically when the adapter is connected. The PMOS system wastes less power than conventional diodes."
+      },
+      {
+        "title": "Battery",
+        "desc": "A 1S system keeps the design compact and portable."
+      },
+      {
+        "title": "Step Up",
+        "desc": "A small step up like the MT3608 is plenty — a headamp doesn't need the high output current of a power amp."
+      },
+      {
+        "title": "Filter Cap and Virtual Ground",
+        "desc": "The virtual ground can be passive or use simple transistors for more stability. A filter cap keeps the supply that much cleaner."
+      }
+    ],
+    "notesEyebrow": "Notes",
+    "notesTitle": "Notes and References",
+    "refs": [
+      {
+        "title": "JFET",
+        "links": [
+          { "label": "JFET Pre-Amplifiers", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET + BJT Buffer", "href": "https://sound-au.com/articles/followers.html" },
+          { "label": "JFET Source Follower", "href": "https://next.gr/circuits/amplifier/simple-jfet-preamp-c21712" },
+          { "label": "Universal JFET Buffer", "href": "https://hifisonix.com/wp-content/uploads/2015/01/UBx.pdf" }
+        ]
+      },
+      {
+        "title": "Nested Composite",
+        "links": [
+          { "label": "Composite Amp", "href": "https://www.analog.com/en/resources/analog-dialogue/articles/composite-amplifiers-high-output-drive-capability-with-precision.html" },
+          { "label": "Nested Feedback", "href": "https://www.allaboutcircuits.com/technical-articles/composite-amplifiers-improving-phase-accuracy/" },
+          { "label": "Nested Distortion Reducer", "href": "https://www.tubecad.com/2017/04/blog0376.htm" }
+        ]
+      }
+    ]
+  },
+  "tubese": {
+    "back": "Back to projects",
+    "headerEyebrow": "Projects / 01 — TubeSE HPA",
+    "headerTitle": "TubeSE HPA",
+    "headerSubtitle": "A standard single-ended tube headphone amplifier with a symmetrical HV supply — compact 6 × 8 cm PCB.",
+    "aboutEyebrow": "About",
+    "aboutTitle": "About TubeSE HPA",
+    "aboutP1": "TubeSE by NekoHibi is a portable tube headphone amplifier (hPA) based on a high-voltage (HV) supply architecture, designed in a compact form factor (6 × 8 cm PCB) without sacrificing electrical performance. The design implements symmetrical HV rails to optimize power conversion efficiency and keep the tube operating linearly at its optimal voltage.",
+    "aboutP2": "With real high voltage, this amplifier avoids the <em>starved plate</em> character that tends to cause dynamic compression and a \"choked\" sound. The tube can operate in a more linear region with adequate headroom.",
+    "mascotAlt": "TubeSE HPA mascot — photo by Flassy",
+    "mascotOverlay": "Photos by Flassy",
+    "infoEyebrow": "Details",
+    "infoTitle": "Additional Information",
+    "infoP1": "<strong>Power Rail &amp; Operating Condition</strong><br>B+ : <strong>+70V</strong> — B− : <strong>−20V</strong> — rail to rail : <strong>90VDC</strong>. With real operating voltages, the design keeps enough headroom for better sound dynamics.",
+    "infoP2": "<strong>HV Generation Topology</strong><br>A single main step-up converter feeds an HV multiplier chain that produces both rails: the HV+ multiplier makes B+ (+70V), the HV− multiplier makes B− (−20V). This lets one switching source serve both polarities — more efficient than separate dual converters or boosting straight up to 90V. Two more step ups generate the tube heater supply and the buffer supply.",
+    "infoP3": "<strong>Output Stage &amp; Buffer</strong><br>The output stage uses a buffer on a symmetrical supply instead of a single supply: more headroom, no coupling capacitor at the output, and a more stable output impedance.",
+    "topologyEyebrow": "Topology",
+    "topologyTitle": "Block Diagram Amplifier",
+    "topologyAlt": "Block diagram of the TubeSE amplifier",
+    "psuEyebrow": "Power Supply",
+    "psuTitle": "Block Diagram Power Supply",
+    "psuAlt": "Block diagram of the TubeSE power supply",
+    "ampBlocks": [
+      {
+        "title": "6N16 Dual Triode",
+        "desc": "Runs on a symmetrical supply (+70V and −20V) to keep the tube in its optimal operating condition, avoiding starved plate and giving adequate headroom for better sound dynamics."
+      },
+      {
+        "title": "Buffer Stage",
+        "desc": "Designed with a symmetrical supply to provide plenty of headroom, remove the need for a coupling capacitor at the output, and keep the output impedance stable."
+      }
+    ],
+    "psuBlocks": [
+      {
+        "title": "Charge Module",
+        "desc": "Uses a TP4056 module mounted onboard to save PCB space."
+      },
+      {
+        "title": "Bypass Charging",
+        "desc": "Lets you run the amplifier while the battery is charging, so you never have to wait for a full charge before enjoying your music."
+      },
+      {
+        "title": "Step-Up Converter",
+        "desc": "Three separate step ups. Stage 1 boosts the small battery voltage to a stable 5V rail feeding the HV step up and the buffer + heater step ups, squeezing the most out of the battery since the XL6009 has a fairly high minimum operating voltage."
+      },
+      {
+        "title": "Charge Pump",
+        "desc": "Produces the negative voltage rail so the supply becomes symmetrical (+ and −)."
+      },
+      {
+        "title": "Filter Stage 1",
+        "desc": "Capacitors, ferrite beads, resistors, and more capacitors to tame the initial ripple and noise."
+      },
+      {
+        "title": "Capacitance Multiplier",
+        "desc": "Makes a small SMD capacitance behave like a big one, for a much cleaner supply."
+      },
+      {
+        "title": "Multiplier",
+        "desc": "A symmetrical multiplier arrangement for better efficiency than boosting straight to 90V off a single rail."
+      }
+    ],
+    "threeDEyebrow": "3D Preview",
+    "threeDTitle": "3D View",
+    "threeDIntro": "Interactive 3D preview — drag to rotate, scroll to zoom. Models load on demand.",
+    "models": ["TubeSE PCB"],
+    "notesEyebrow": "Notes",
+    "notesTitle": "Notes and References",
+    "refs": [
+      {
+        "title": "Tube",
+        "links": [
+          { "label": "Tube Preamp (6J1)", "href": "https://www.circuitlab.com/circuit/qe3v569hm8t9/6j1-vacuum-tube-preamp-ver1_0/" }
+        ]
+      },
+      {
+        "title": "Symmetrical Step-Up",
+        "links": [
+          { "label": "LT3471 Symmetric Boost Converter", "href": "https://www.alldatasheet.com/html-pdf/101718/LINER/LT3471/1079/7/LT3471.html" },
+          { "label": "Symetric Multiplier", "href": "https://www.researchgate.net/figure/a-Cockcroft-Walton-voltage-multiplier-b-Nx-multiplier-boost-converter_fig2_252413497" },
+          { "label": "Charge Pump", "href": "https://electronics.stackexchange.com/questions/143507/inverting-charge-pump-with-boost-converter-loading-characteristics" }
+        ]
+      }
+    ]
+  },
   "hub": {
     "metaTitle": "NyaaHibi Projects — Everyday Listening",
     "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",
