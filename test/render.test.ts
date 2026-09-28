@@ -117,6 +117,7 @@ for (const key of ['id:/projects/amp', 'en:/projects/amp', 'id:/projects/microam
   const html = outputs[key] ?? ''
   if (html.includes('saia.png')) failures.push(`${key}: profile photo (saia.png) still present — should be removed`)
   if (html.includes('Tentang Saya')) failures.push(`${key}: "Tentang Saya" still present — should be removed`)
+  if (html.includes('nyaahibi.nggonku.web.id')) failures.push(`${key}: dead nggonku link still present`)
 }
 
 const homeEn = outputs['en:/'] ?? ''

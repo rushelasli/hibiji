@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, type Plugin } from 'vite'
 import path from 'path'
 import fs from 'node:fs'
-import { hubSites } from './src/data/projects'
+import { hubSites, PROJECTS_BASE } from './src/data/projects'
 import en from './src/locales/en.json'
 
 // Second entry: the projects-hub landing page served at
@@ -29,6 +29,10 @@ function withSlugHead(html: string, slug: string): string {
     .replace(
       /<meta property="og:description" content="[^"]*" \/>/,
       `<meta property="og:description" content="${desc}" />`,
+    )
+    .replace(
+      /<meta property="og:url" content="[^"]*" \/>/,
+      `<meta property="og:url" content="${PROJECTS_BASE}/${slug}" />`,
     )
 }
 

@@ -20,7 +20,9 @@ outbound-only connections to Cloudflare.
 
 ```
 C:\srv\repos\hibi            git clone of https://github.com/rushelasli/hibiji
-C:\srv\repos\project\<slug>  git clones of live project sites (optional)
+C:\srv\repos\projects\<slug> git clones of live project sites (optional;
+                             older boxes may name the folder `project` —
+                             deploy.ps1 accepts both)
 C:\srv\sites\hibi            served portfolio (dist mirror)
 C:\srv\sites\project         served hub:
                              index.html + assets/ + flags/ + logo/mascots
@@ -55,10 +57,12 @@ C:\srv\sites\project         served hub:
    - One run builds **both** sites (`bun run build` → `dist/`,
      `bun run build:hub` → `dist-hub/`), runs both SSR gates, then mirrors
      in the only safe order: hub landing (`/MIR`, resets the root —
-     `dist-hub\projects\` ships with it, detail pages need those images) →
-     portfolio → per-site folders → **hub detail-page overlay** (copies
-     `dist-hub\<slug>\index.html` onto each live site folder, after the
-     mirrors restored the old sites; slugs are derived from `hubSites`).
+     `dist-hub\projects\` ships with it, detail pages need those images;
+     `dash` and the live slug folders are `/XD`-excluded so legacy content
+     like `dsp.html` survives) → portfolio → per-site folders → **hub
+     detail-page overlay** (copies `dist-hub\<slug>\index.html` onto each
+     live site folder, after the mirrors restored the old sites; slugs are
+     derived from `hubSites`).
    - Local-only gate: `python3 ops/check_classes.py` (after
      `bun run build`) verifies every class token used in the SFCs and
      locales exists in the built CSS.

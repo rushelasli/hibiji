@@ -259,6 +259,11 @@ for (const [slug, ns] of Object.entries(detailPages)) {
       if (html.includes('furuhibi.nyaahibi.web.id')) {
         failures.push(`${tag}: retired furuhibi subdomain still linked`)
       }
+
+      // Dead first-gen domain — the V2 page's about link points at the hub
+      if (html.includes('nyaahibi.nggonku.web.id')) {
+        failures.push(`${tag}: dead nggonku link still present`)
+      }
     } catch (e) {
       failures.push(`${tag}: THREW ${(e as Error).stack ?? e}`)
     }
