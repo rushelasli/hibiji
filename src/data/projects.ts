@@ -6,13 +6,14 @@
  * means: one entry here (+ a locale block for its card text if it has one).
  *
  * Link policy (enforced by test/render.test.ts):
- *  - an internal detail page when the portfolio has one (`internal: true`)
- *  - an absolute live-site URL only while a live demo exists
+ *  - live projects link to their hub detail page (`${PROJECTS_BASE}/<slug>`)
+ *    — the hub is the single front door; the portfolio's `/projects/*`
+ *    pages remain as legacy mirrors, reachable by direct URL only
  *  - retired hosts never reappear (see RETIRED_HOSTS in the test)
  */
 
 export interface ProjectLink {
-  /** Display text — pseudo-subdomain labels for internal pages. */
+  /** Display text — the hub URL for project links. */
   label: string
   /** Internal router path (`/projects/...`) or an absolute external URL. */
   href: string
@@ -36,11 +37,10 @@ export const PORTFOLIO_BASE = 'https://nyaahibi.web.id'
 
 export const projectLinks: Record<string, ProjectLink[]> = {
   amps: [
-    { label: 'amp.nyaahibi.web.id', href: '/projects/amp', internal: true },
-    { label: 'microamp.nyaahibi.web.id', href: '/projects/microamp', internal: true },
+    { label: 'project.nyaahibi.web.id/nyaahibiamp', href: `${PROJECTS_BASE}/nyaahibiamp` },
+    { label: 'project.nyaahibi.web.id/microhibiamp', href: `${PROJECTS_BASE}/microhibiamp` },
   ],
   furuhibi: [
-    { label: 'furuhibi.nyaahibi.web.id', href: '/projects/furuhibi', internal: true },
     { label: 'project.nyaahibi.web.id/furuhibi', href: `${PROJECTS_BASE}/furuhibi` },
   ],
 }

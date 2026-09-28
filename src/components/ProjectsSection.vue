@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ArrowRight, ArrowUpRight } from '@lucide/vue'
-import { linksFor } from '@/data/projects'
+import { linksFor, PROJECTS_BASE } from '@/data/projects'
 
 interface ProjectMsg {
   id: string
@@ -100,6 +100,18 @@ const projects = computed(() => tm('projects.items') as unknown as ProjectMsg[])
           </div>
         </article>
       </div>
+
+      <a
+        :href="PROJECTS_BASE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group mt-6 inline-flex w-fit items-center gap-1.5 font-mono text-[13px] text-primary transition-colors hover:text-foreground"
+      >
+        {{ t('projects.seeMore') }}
+        <ArrowUpRight
+          class="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        />
+      </a>
     </div>
   </section>
 </template>

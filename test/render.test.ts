@@ -129,6 +129,17 @@ for (const [slug, links] of Object.entries(projectLinks)) {
   }
 }
 
+// Cards route to the hub — the legacy /projects/* pages stay unlinked
+// (the "See more projects" CTA at the end of the section targets the hub)
+const homeId = outputs['id:/'] ?? ''
+for (const [key, html] of [['en:/', homeEn], ['id:/', homeId]] as const) {
+  if (html.includes('href="/projects/')) failures.push(`${key}: home still links legacy /projects/ pages`)
+  if (!html.includes('project.nyaahibi.web.id/nyaahibiamp')) failures.push(`${key}: hub gen1 link missing`)
+  if (!html.includes('project.nyaahibi.web.id/microhibiamp')) failures.push(`${key}: hub microhibi link missing`)
+}
+if (!homeEn.includes('See more projects')) failures.push('home (en): seeMore CTA missing')
+if (!homeId.includes('Lihat proyek lainnya')) failures.push('home (id): seeMore CTA missing')
+
 // Retired hosts must never reappear (nyaaop card link, microamp externals,
 // furuhibi's retired subdomain — all links now target the hub)
 for (const dead of ['nyaaop.nyaahibi.web.id', 'https://microamp.nyaahibi.web.id', 'https://furuhibi.nyaahibi.web.id']) {
@@ -136,7 +147,6 @@ for (const dead of ['nyaaop.nyaahibi.web.id', 'https://microamp.nyaahibi.web.id'
 }
 
 // language switcher is a single flag toggle showing the current locale's flag
-const homeId = outputs['id:/'] ?? ''
 if (!homeId.includes('/flags/id.svg')) failures.push('home (id): language flag toggle missing')
 if (!homeEn.includes('/flags/gb.svg')) failures.push('home (en): language flag toggle missing')
 if (homeEn.includes('Switch language to')) failures.push('home: old ID/EN two-button switcher still present')
