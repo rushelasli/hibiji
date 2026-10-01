@@ -24,7 +24,7 @@ C:\srv\repos\projects\<slug> git clones of live project sites (optional;
                              older boxes may name the folder `project` —
                              deploy.ps1 accepts both)
 C:\srv\sites\hibi            served portfolio (dist mirror)
-C:\srv\sites\project         served hub:
+C:\srv\sites\projects        served hub:
                              index.html + assets/ + flags/ + logo/mascots
                              (the dist-hub landing, mirrored with /MIR)
                              projects/                 ... images + GLB models
@@ -44,7 +44,7 @@ C:\srv\sites\project         served hub:
    - `winget install Cloudflare.cloudflared` (runs as a Windows service).
    - Create a tunnel in Zero Trust → Networks → Tunnels, add two public
      hostnames, both pointing at `http://localhost:8080`:
-     - `nyaahibi.web.id` → portfolio
+     - `ulilhibi.my.id` → portfolio (zone `my.id` in Cloudflare)
      - `project.nyaahibi.web.id` → hub (landing + site folders)
 3. **Caddy**
    - Put this `ops/Caddyfile` at `C:\srv\caddy\Caddyfile`, adjust the
@@ -98,8 +98,8 @@ C:\srv\sites\project         served hub:
 
 ## Migrating a live site's card to the hub
 
-1. Ensure `C:\srv\repos\project\<slug>` is a clone and `deploy.ps1` mirrored
-   it to `C:\srv\sites\project\<slug>`.
+1. Ensure `C:\srv\repos\projects\<slug>` is a clone and `deploy.ps1` mirrored
+   it to `C:\srv\sites\projects\<slug>`.
 2. In this repo: point the entry's `href` at `` `${PROJECTS_BASE}/<slug>` ``
    (`src/data/projects.ts`) — the SSR test derives its assertions from the
    registry, so nothing else changes.

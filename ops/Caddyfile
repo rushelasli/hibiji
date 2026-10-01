@@ -4,8 +4,9 @@
 #
 # cloudflared forwards the original Host header, so Caddy routes on it.
 
-# Portfolio (this repo). Adjust hostname if your apex differs.
-nyaahibi.web.id:8080 {
+# Portfolio (this repo — the Ulil Albab profile site). Adjust hostname
+# if the domain differs.
+ulilhibi.my.id:8080 {
 	bind 127.0.0.1
 	root * C:/srv/sites/hibi
 	encode gzip

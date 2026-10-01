@@ -33,7 +33,7 @@ export interface ProjectLink {
 export const PROJECTS_BASE = 'https://project.nyaahibi.web.id'
 
 /** The portfolio itself — pointed at by the hub's hero CTA and footer link. */
-export const PORTFOLIO_BASE = 'https://nyaahibi.web.id'
+export const PORTFOLIO_BASE = 'https://ulilhibi.my.id'
 
 export const projectLinks: Record<string, ProjectLink[]> = {
   amps: [
