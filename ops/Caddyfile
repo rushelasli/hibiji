@@ -22,8 +22,9 @@ ulilhibi.my.id:8080 {
 
 # Projects hub: one subdomain + path routing (/furuhibi, /nyaahibiv2, ...).
 # Landing page (dist-hub) sits at the root; each site is a folder under
-# C:/srv/sites/projects.
-project.nyaahibi.web.id:8080 {
+# C:/srv/sites/projects. The apex (nyaahibi.web.id) is an alias of the
+# same content; project.nyaahibi.web.id stays the canonical URL in code.
+project.nyaahibi.web.id:8080, nyaahibi.web.id:8080 {
 	bind 127.0.0.1
 	root * C:/srv/sites/projects
 	encode gzip

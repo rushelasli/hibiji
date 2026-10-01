@@ -52,6 +52,7 @@ C:\srv\sites\projects        served hub:
      hostnames, both pointing at `http://localhost:8080`:
      - `ulilhibi.my.id` → portfolio (zone `my.id` in Cloudflare)
      - `project.nyaahibi.web.id` → hub (landing + site folders)
+     - `nyaahibi.web.id` → hub as well (apex alias of the same content)
 3. **Caddy**
    - Put this `ops/Caddyfile` at `C:\srv\caddy\Caddyfile`, adjust the
      portfolio hostname if your apex differs.
@@ -83,6 +84,10 @@ C:\srv\sites\projects        served hub:
 
 ## Hub landing + detail pages (this repo)
 
+- Hostnames: `project.nyaahibi.web.id` and the apex `nyaahibi.web.id`
+  serve this same content (one Caddy block, two host headers);
+  `project.` stays canonical in `PROJECTS_BASE`, the og:url heads, and
+  the portfolio's registry links.
 - Source: `hub.html` + `src/hub/` — shares the portfolio's theme tokens,
   locale files (`hub.*` keys), `ThemeToggle`, `LocaleToggle`, and logo.
 - Cards are driven by `hubSites` in `src/data/projects.ts`
