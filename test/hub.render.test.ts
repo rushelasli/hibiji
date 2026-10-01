@@ -10,9 +10,9 @@ const { default: HubApp } = await import('@/hub/HubApp.vue')
 const { hubSites, PORTFOLIO_BASE } = await import('@/data/projects')
 
 // Unresolved vue-i18n keys leak into the HTML as e.g. ">hub.title"
-const KEY_LEAK = />(nav|hub|footer|common|meta|amp|microamp|furuhibi|ampgen1|tubese)\.[a-zA-Z]/
+const KEY_LEAK = />(nav|hub|footer|common|meta|amp|microamp|furuhibi|ampgen1|tubese|dash)\.[a-zA-Z]/
 // ... or into attribute values as e.g. alt="hub.sites.x"
-const ATTR_KEY_LEAK = /"(nav|hub|footer|common|meta|amp|microamp|furuhibi|ampgen1|tubese)\.[a-zA-Z]/
+const ATTR_KEY_LEAK = /"(nav|hub|footer|common|meta|amp|microamp|furuhibi|ampgen1|tubese|dash)\.[a-zA-Z]/
 
 const outputs: Record<string, string> = {}
 const failures: string[] = []
@@ -282,8 +282,76 @@ try {
   failures.push(`soon slug fallback: THREW ${(e as Error).stack ?? e}`)
 }
 
-// Per slug, the two locales must produce genuinely different HTML
-for (const slug of Object.keys(detailPages)) {
+// ---------------------------------------------------------------------------
+// Dashboard — /dash/ renders the rebuilt dashboard (cards, profile, clock)
+// on the shared hub chrome
+for (const locale of ['id', 'en'] as const) {
+  const tag = `dash:${locale}`
+  try {
+    i18n.global.locale.value = locale
+    const app = createSSRApp(HubApp, { initialPath: '/dash/' })
+    app.use(i18n)
+
+    const html = await renderToString(app)
+    detailOutputs[tag] = html
+
+    if (html.length < 500) failures.push(`${tag}: suspiciously short render (${html.length} chars)`)
+
+    const leak = html.match(KEY_LEAK)
+    if (leak) failures.push(`${tag}: unresolved i18n key leaked -> ${leak[0]}`)
+    const attrLeak = html.match(ATTR_KEY_LEAK)
+    if (attrLeak) failures.push(`${tag}: unresolved key in attribute -> ${attrLeak[0]}`)
+
+    // Shared chrome survives the page swap
+    if (!html.includes('/logo.png')) failures.push(`${tag}: navbar logo missing`)
+    if (!rendered(html, i18n.global.t('nav.theme'))) failures.push(`${tag}: theme toggle missing`)
+    if (!rendered(html, i18n.global.t('nav.languageToggle'))) failures.push(`${tag}: language toggle missing`)
+
+    // Header, every project card, and the profile card
+    if (!rendered(html, i18n.global.t('dash.title'))) failures.push(`${tag}: dash header missing`)
+    if (!rendered(html, i18n.global.t('dash.subtitle'))) failures.push(`${tag}: dash tagline missing`)
+    if (!html.includes('href="/"')) failures.push(`${tag}: back-to-landing link missing`)
+    const visit = i18n.global.t('dash.visit')
+    const visitCount = count(html, visit)
+    if (visitCount !== hubSites.length) {
+      failures.push(`${tag}: expected ${hubSites.length} visit buttons, found ${visitCount}`)
+    }
+    if (!rendered(html, i18n.global.t('dash.profileTitle'))) failures.push(`${tag}: profile card missing`)
+    if (!rendered(html, i18n.global.t('dash.aboutBtn'))) failures.push(`${tag}: about button missing`)
+    if (!rendered(html, i18n.global.t('dash.chatBtn'))) failures.push(`${tag}: chat button missing`)
+
+    // Signature assets: profile photo, a card GLB, FuruHibi's WebUSB panel
+    if (!html.includes('/dash/gwe.png')) failures.push(`${tag}: profile photo missing`)
+    if (!html.includes('/dash/NyaaHibiV2.glb')) failures.push(`${tag}: card GLB preview missing`)
+    if (!html.includes('href="/furuhibi/dsp.html"')) failures.push(`${tag}: WebUSB link missing`)
+
+    // About goes to the portfolio; the FB chat link stays as-is
+    if (!html.includes(`href="${PORTFOLIO_BASE}/#about"`)) {
+      failures.push(`${tag}: about link must point at the portfolio`)
+    }
+    if (!html.includes('facebook.com/share/1DikM81ymJ')) {
+      failures.push(`${tag}: FB chat link missing`)
+    }
+
+    // Soon cards open the shared coming-soon page, not their own slug
+    const soonCount = count(html, 'href="/dash/comingsoon.html"')
+    if (soonCount !== soonSites.length) {
+      failures.push(`${tag}: expected ${soonSites.length} coming-soon links, found ${soonCount}`)
+    }
+
+    // The landing must not render on /dash/
+    if (html.includes('id="hero"')) failures.push(`${tag}: landing hero rendered on dash`)
+
+    // Dead links from the old page must not come back
+    if (html.includes('nggonku')) failures.push(`${tag}: dead nggonku link still present`)
+    if (html.includes('furuhibi.nyaahibi.web.id')) failures.push(`${tag}: retired furuhibi subdomain still linked`)
+  } catch (e) {
+    failures.push(`${tag}: THREW ${(e as Error).stack ?? e}`)
+  }
+}
+
+// Per page, the two locales must produce genuinely different HTML
+for (const slug of [...Object.keys(detailPages), 'dash']) {
   const idHtml = detailOutputs[`${slug}:id`]
   const enHtml = detailOutputs[`${slug}:en`]
   if (idHtml && enHtml && idHtml === enHtml) {

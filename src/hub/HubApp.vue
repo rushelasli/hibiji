@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import LocaleToggle from '@/components/LocaleToggle.vue'
 import HubLanding from '@/hub/HubLanding.vue'
+import DashboardPage from '@/hub/DashboardPage.vue'
 import { hubSites, PORTFOLIO_BASE, type HubSite } from '@/data/projects'
 import AmpProject from '@/pages/AmpProject.vue'
 import AmpGen1Project from '@/pages/AmpGen1Project.vue'
@@ -57,10 +58,17 @@ const detailEntry = computed<DetailPage | null>(() => {
   return detailPages[site.slug] ?? null
 })
 
+/** The rebuilt dashboard — vite.hub.config writes dist-hub/dash/index.html. */
+const isDash = computed(() => detailPath.value === '/dash')
+
 function syncDocumentMeta() {
   document.documentElement.lang = locale.value
   const site = detailSite.value
-  document.title = site ? `${t(`hub.sites.${site.slug}.title`)} — ${t('hub.title')}` : t('hub.metaTitle')
+  document.title = isDash.value
+    ? `${t('dash.metaTitle')} — ${t('hub.title')}`
+    : site
+      ? `${t(`hub.sites.${site.slug}.title`)} — ${t('hub.title')}`
+      : t('hub.metaTitle')
 }
 
 onMounted(syncDocumentMeta)
@@ -100,10 +108,11 @@ watch(locale, syncDocumentMeta)
         </nav>
       </header>
 
-      <!-- Detail page — one of the five live project sites (back goes to
-           the hub landing); anything else renders the landing itself -->
+      <!-- Dashboard at /dash/, detail page for the five live sites (back
+           goes to the hub landing); anything else renders the landing -->
+      <DashboardPage v-if="isDash" />
       <component
-        v-if="detailEntry"
+        v-else-if="detailEntry"
         :is="detailEntry.comp"
         :key="detailPath"
         v-bind="detailEntry.props"

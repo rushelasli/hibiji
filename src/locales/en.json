@@ -331,6 +331,24 @@
       }
     ]
   },
+  "dash": {
+    "metaTitle": "Dashboard",
+    "metaDesc": "Every NyaaHibi project on one page — amplifiers, DACs, and what's coming next.",
+    "title": "Dashboard NyaaHibi Project",
+    "subtitle": "Everyday Listening • Crafted With Passion • にゃあ日々",
+    "visit": "Open Website",
+    "visitDsp": "Open WebUSB",
+    "profileTitle": "Creator Profile",
+    "profileBio1": "Hi! I'm just an electronics beginner who wants to keep growing ^_^",
+    "profileBio2": "Every component, every circuit, and every project is a form of <strong>passion meets function</strong>. Not just building amplifiers or audio gear, but creating an experience that <strong>satisfies the ears and the heart</strong>.",
+    "aboutBtn": "About Me",
+    "chatBtn": "Chat Me (FB)",
+    "footer": {
+      "serverTime": "Server time UTC+7",
+      "total": "Total visits",
+      "today": "Today"
+    }
+  },
   "hub": {
     "metaTitle": "NyaaHibi Projects — Everyday Listening",
     "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",

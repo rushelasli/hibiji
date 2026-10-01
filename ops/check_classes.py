@@ -47,6 +47,8 @@ ALLOW = {
     'skillIcons[skill.id]', 'step-up', 'string[]', 'string[])', 'tiba-tiba',
     'update:open', 'vue-i18n',
     'vue-router',
+    # Intl locale identifiers (DashboardPage server clock)
+    'en-GB', 'en-US', 'id-ID',
 }
 
 def in_css(tok: str) -> bool:

@@ -104,4 +104,17 @@ foreach ($slug in $liveSlugs) {
     }
 }
 
+# The dashboard page gets the same treatment: dist-hub/dash/index.html on
+# top of the box's dash/ folder. Only index.html is replaced — the GLB
+# models, profile photo, and comingsoon.html stay box-side (protected by
+# the root mirror's /XD dash).
+$dashSrc = "$repos\hibi\dist-hub\dash\index.html"
+$dashDst = "$sites\projects\dash"
+if ((Test-Path $dashSrc) -and (Test-Path $dashDst)) {
+    Copy-Item $dashSrc "$dashDst\index.html" -Force
+    Write-Host '      dash <- hub dashboard page'
+} else {
+    Write-Warning '      dash skipped — source index.html or dash folder missing'
+}
+
 Write-Host 'Deploy complete.'

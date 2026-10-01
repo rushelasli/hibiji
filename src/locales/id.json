@@ -331,6 +331,24 @@
       }
     ]
   },
+  "dash": {
+    "metaTitle": "Dashboard",
+    "metaDesc": "Semua proyek NyaaHibi dalam satu halaman — amplifier, DAC, dan yang akan datang.",
+    "title": "Dashboard NyaaHibi Project",
+    "subtitle": "Everyday Listening • Crafted With Passion • にゃあ日々",
+    "visit": "Buka Website",
+    "visitDsp": "Buka WebUSB",
+    "profileTitle": "Profil Pembuat",
+    "profileBio1": "Hai! Saya seorang pemula elektronik yang hanya ingin berkembang ^_^",
+    "profileBio2": "Setiap komponen, setiap rangkaian, dan setiap proyek yang dibuat adalah wujud dari prinsip <strong>passion bertemu fungsi</strong>. Tidak hanya sekadar membuat amplifier atau perangkat audio, tapi menciptakan pengalaman yang <strong>memuaskan telinga dan hati</strong>.",
+    "aboutBtn": "Tentang Saya",
+    "chatBtn": "Chat Saya (FB)",
+    "footer": {
+      "serverTime": "Waktu Server UTC+7",
+      "total": "Total Akses",
+      "today": "Hari Ini"
+    }
+  },
   "hub": {
     "metaTitle": "NyaaHibi Projects — Everyday Listening",
     "eyebrow": "Everyday Listening • Crafted With Passion • にゃあ日々",

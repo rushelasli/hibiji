@@ -9,16 +9,19 @@ import en from './src/locales/en.json'
 // Second entry: the projects-hub landing page served at
 // https://project.nyaahibi.web.id (built separately into dist-hub/).
 
-/**
- * Per-slug <head>: crawlers see the project's own title/description
- * before the SPA mounts (site titles are locale-neutral brand names,
- * so English copy drives the metadata).
- */
-function withSlugHead(html: string, slug: string): string {
-  const site = en.hub.sites[slug as keyof typeof en.hub.sites]
+/** Per-page <head> values: crawlers see the right title/description
+ *  before the SPA mounts (site titles are locale-neutral brand names,
+ *  so English copy drives the metadata). */
+interface PageHead {
+  title: string
+  desc: string
+  url: string
+}
+
+function withHead(html: string, head: PageHead): string {
   const esc = (s: string) => s.replace(/"/g, '&quot;')
-  const title = esc(`${site.title} — ${en.hub.title}`)
-  const desc = esc(site.desc)
+  const title = esc(head.title)
+  const desc = esc(head.desc)
   return html
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
     .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${title}" />`)
@@ -32,8 +35,17 @@ function withSlugHead(html: string, slug: string): string {
     )
     .replace(
       /<meta property="og:url" content="[^"]*" \/>/,
-      `<meta property="og:url" content="${PROJECTS_BASE}/${slug}" />`,
+      `<meta property="og:url" content="${head.url}" />`,
     )
+}
+
+function slugHead(slug: string): PageHead {
+  const site = en.hub.sites[slug as keyof typeof en.hub.sites]
+  return {
+    title: `${site.title} — ${en.hub.title}`,
+    desc: site.desc,
+    url: `${PROJECTS_BASE}/${slug}`,
+  }
 }
 
 /**
@@ -41,7 +53,8 @@ function withSlugHead(html: string, slug: string): string {
  * (dist-hub/<slug>/index.html) serving the same app; HubApp picks the
  * page from window.location.pathname. Mirroring hub.html into each live
  * slug folder keeps local previews (`vite preview`) identical to the
- * deployed layout.
+ * deployed layout. dist-hub/dash/index.html is the rebuilt dashboard
+ * (deploy.ps1 overlays it onto the box's dash/ folder).
  */
 function hubSlugPages(): Plugin {
   return {
@@ -52,8 +65,18 @@ function hubSlugPages(): Plugin {
       for (const site of hubSites.filter((s) => s.status === 'live')) {
         const dir = path.join(outDir, site.slug)
         fs.mkdirSync(dir, { recursive: true })
-        fs.writeFileSync(path.join(dir, 'index.html'), withSlugHead(html, site.slug))
+        fs.writeFileSync(path.join(dir, 'index.html'), withHead(html, slugHead(site.slug)))
       }
+      const dashDir = path.join(outDir, 'dash')
+      fs.mkdirSync(dashDir, { recursive: true })
+      fs.writeFileSync(
+        path.join(dashDir, 'index.html'),
+        withHead(html, {
+          title: `${en.dash.metaTitle} — ${en.hub.title}`,
+          desc: en.dash.metaDesc,
+          url: `${PROJECTS_BASE}/dash`,
+        }),
+      )
     },
   }
 }

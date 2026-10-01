@@ -80,7 +80,8 @@ C:\srv\sites\projects        served hub:
 - Source: `hub.html` + `src/hub/` — shares the portfolio's theme tokens,
   locale files (`hub.*` keys), `ThemeToggle`, `LocaleToggle`, and logo.
 - Cards are driven by `hubSites` in `src/data/projects.ts`
-  (`slug`, `status: live|soon`, optional `extra` link) plus three
+  (`slug`, `status: live|soon`, optional `extra` link, optional `model`
+  GLB path used by the dashboard) plus three
   `hub.sites.<slug>` locale keys per language (title, desc, tags). Each
   live card links "See detail" to `/<slug>`; `extra` adds a second link
   (e.g. FuruHibi's WebUSB DSP panel).
@@ -92,6 +93,14 @@ C:\srv\sites\projects        served hub:
   `dist-hub/<slug>/index.html` for every live slug so local previews
   behave like the deployed folders, and `deploy.ps1` overlays the same
   file onto each live site folder after the per-site mirrors.
+- **Dashboard (`/dash/`)** — the old standalone `dash/` HTML rebuilt in
+  this repo (`src/hub/DashboardPage.vue`, `dash.*` locale keys): same
+  header, 8 project cards (GLB viewers from `hubSites.model`, "Open
+  Website" buttons to `/<slug>` or `comingsoon.html`), profile card, and
+  the WIB clock + `/stats` footer. `vite.hub.config.ts` writes
+  `dist-hub/dash/index.html`; `deploy.ps1` overlays only that file onto
+  the box's `dash/` folder — its GLBs, `gwe.png`, and `comingsoon.html`
+  stay box-side (`/XD dash` protects them from the root mirror).
 - Mascots (`maskotkiri.png` / `maskotkanan.png`) and `logo.png` live in
   `public/` and ship with both builds; project images and GLB models come
   from `public/projects/` (served as `/projects/...` on both apps).

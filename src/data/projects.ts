@@ -57,16 +57,18 @@ export interface HubSite {
   status: 'live' | 'soon'
   /** Extra link shown on the card (e.g. FuruHibi's WebUSB DSP panel). */
   extra?: { label: string; href: string }
+  /** GLB previewed in the dashboard's 3D card viewer (box-hosted under /dash/). */
+  model?: string
 }
 
 /** All sites shown on `project.nyaahibi.web.id` — order = curated order. */
 export const hubSites: HubSite[] = [
   { slug: 'nyaahibiamp', status: 'live' },
-  { slug: 'nyaahibiv2', status: 'live' },
+  { slug: 'nyaahibiv2', status: 'live', model: '/dash/NyaaHibiV2.glb' },
   { slug: 'amahibi', status: 'soon' },
-  { slug: 'microhibiamp', status: 'live' },
-  { slug: 'nyaaop', status: 'soon' },
-  { slug: 'tubeseamp', status: 'live' },
+  { slug: 'microhibiamp', status: 'live', model: '/dash/MicroHibiAmp.glb' },
+  { slug: 'nyaaop', status: 'soon', model: '/dash/MicroDiscreteOP.glb' },
+  { slug: 'tubeseamp', status: 'live', model: '/dash/tubese.glb' },
   { slug: 'nyaatubefda', status: 'soon' },
   {
     slug: 'furuhibi',
