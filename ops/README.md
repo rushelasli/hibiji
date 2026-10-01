@@ -1,5 +1,11 @@
 # Homeserver runbook — Windows 10 + Caddy + Cloudflare Tunnel
 
+> **Docs index:** [`../README.md`](../README.md) · architecture & why the
+> repo isn't split: [`../docs/architecture.md`](../docs/architecture.md) ·
+> local dev/tests: [`../docs/development.md`](../docs/development.md) ·
+> adding a site: [`../docs/adding-a-site.md`](../docs/adding-a-site.md) ·
+> the `/dash/` page: [`../docs/dashboard.md`](../docs/dashboard.md)
+
 One box serves everything: the portfolio (this repo) and the projects hub
 (`project.nyaahibi.web.id` — landing page + all live sites under one
 subdomain with path routing). No open inbound ports — cloudflared makes

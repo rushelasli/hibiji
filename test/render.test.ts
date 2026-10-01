@@ -1,5 +1,8 @@
 // SSR render test — exercises the real App, router, and i18n instance.
-// Run: bunx vite build --ssr test/render.test.ts --outDir /tmp/opencode/ssr && node /tmp/opencode/ssr/render.test.mjs
+// Run from the repo root (outDir must stay INSIDE the repo so node can
+// resolve `vue` etc. — /tmp would fail with ERR_MODULE_NOT_FOUND):
+//   bunx vite build --ssr test/render.test.ts --outDir node_modules/.tmp/ssr
+//   node node_modules/.tmp/ssr/render.test.js
 await import('./stubs')
 
 const { createSSRApp } = await import('vue')

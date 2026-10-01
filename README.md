@@ -1,30 +1,65 @@
-# Hibiji — Portfolio Ulil Albab
+# Hibiji — Portfolio & NyaaHibi Projects Hub
 
-Portfolio site for Ulil Albab (Nyaahibi) — rebuilt from static HTML to Vue 3 + shadcn-vue with improved responsiveness. Dark purple/pink retro-tech theme, starfield canvas, and Chart.js personality chart.
+One Vue codebase that builds **two websites** (a third view — the dashboard — is a page inside the hub):
+
+| Site | URL | Entry file | Build output |
+| --- | --- | --- | --- |
+| **Portfolio** — Ulil Albab's profile site | <https://ulilhibi.my.id> | `index.html` → `src/main.ts` (vue-router) | `dist/` |
+| **Projects hub** — landing page for every NyaaHibi project | <https://project.nyaahibi.web.id> | `hub.html` → `src/hub/main.ts` (no router) | `dist-hub/` |
+| **Dashboard** — project cards + profile (a hub page, not a separate app) | <https://project.nyaahibi.web.id/dash/> | same hub app, picked by URL path | `dist-hub/dash/index.html` |
+
+Both apps share one `src/` tree: theme, locale files, project pages, and the
+site registry (`src/data/projects.ts`). See
+[`docs/architecture.md`](docs/architecture.md) for how they fit together and
+why the repo is deliberately **not** split.
 
 ## Stack
 
 - Vue 3 + Composition API + TypeScript
-- Vite + Bun
-- Tailwind CSS v3 + shadcn-vue (`Card`, `Badge`, `Button`, `Sheet`, `Table`) + `lucide-vue-next`
-- `reka-ui`, `class-variance-authority`, `chart.js`
+- Vite 8 + Bun
+- Tailwind CSS v4 + shadcn-vue / reka-ui (`Button`, `Card`, `Sheet`)
+- `@lucide/vue` icons, `@vueuse/core`, `@google/model-viewer` (3D cards on the dashboard)
+- `vue-i18n` (Indonesian + English), `vue-router` (portfolio only — the hub picks pages from the URL)
 
-## Sections
-
-Hero · About · Projects · Skills · Experience · It's Me · Contact · Footer
-
-## Setup
+## Quick start
 
 ```bash
 bun install
-bun run dev      # http://localhost:5173
-bun run build    # type-check + vite build → dist/
-bun run preview  # preview build
+
+bun run dev          # portfolio → http://localhost:5173/
+                     # hub landing → http://localhost:5173/hub.html
+bun run build        # type-check + build portfolio → dist/
+bun run build:hub    # build hub (incl. dashboard) → dist-hub/
+bun run preview      # preview the portfolio build
+bun run preview:hub  # preview the hub build
+```
+
+> **Dev gotcha:** `/dash/` and `/furuhibi/` only work in `preview:hub`
+> (after `build:hub`) — during `dev` they fall back to the portfolio.
+> Details in [`docs/development.md`](docs/development.md).
+
+## Documentation
+
+| Doc | What's in it |
+| --- | --- |
+| [`docs/architecture.md`](docs/architecture.md) | The two entries, what they share, why one repo |
+| [`docs/development.md`](docs/development.md) | Dev servers, builds, tests, i18n, theme |
+| [`docs/adding-a-site.md`](docs/adding-a-site.md) | Checklist: add a new project site to the hub |
+| [`docs/dashboard.md`](docs/dashboard.md) | The `/dash/` page: what it renders, box-side assets, history |
+| [`ops/README.md`](ops/README.md) | Homeserver runbook: Caddy, Cloudflare tunnel, `deploy.ps1` |
+
+## Deploying
+
+One script builds and ships both sites to the homeserver:
+
+```powershell
+ops\deploy.ps1   # runs on the box — see ops/README.md
 ```
 
 ## Assets
 
-Replace `src/assets/profil.png` and `src/assets/bini.gif` with your own images.
+Replace `src/assets/profil.jpg` with your own photo; project images and GLB
+models live under `public/projects/`.
 
 ## License
 
