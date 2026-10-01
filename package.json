@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:hub": "vite --config vite.hub.config.ts --port 5174",
     "build": "vue-tsc -b && vite build",
     "build:hub": "vite build --config vite.hub.config.ts",
     "preview": "vite preview",

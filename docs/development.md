@@ -16,39 +16,45 @@ bun install
 ## Dev servers
 
 ```bash
-bun run dev
+bun run dev        # portfolio → http://localhost:5173/
+bun run dev:hub    # hub (landing, /dash, /<slug>) → http://localhost:5174/
 ```
 
-One Vite dev server serves **both entries**, but at different paths:
+Both can run at once — one port each:
 
 | URL | What you get |
 | --- | --- |
 | `http://localhost:5173/` | Portfolio |
-| `http://localhost:5173/hub.html` | Hub landing page |
-| `http://localhost:5173/dash` | ⚠️ **falls back to the portfolio** (see below) |
-| `http://localhost:5173/furuhibi` | ⚠️ **falls back to the portfolio** too |
+| `http://localhost:5173/hub.html` | Hub shell only — `/dash` & slugs fall back to the portfolio, use `dev:hub` |
+| `http://localhost:5174/` | Hub landing |
+| `http://localhost:5174/dash` | Dashboard |
+| `http://localhost:5174/nyaahibiv2` | That slug's detail page (all five work) |
 
-**Why `/dash` doesn't work in dev:** the dashboard and the per-slug detail
-pages only exist as generated `index.html` files inside the *build output*
-(`dist-hub/dash/`, `dist-hub/<slug>/`). The dev server has no router for
-them, so Vite's SPA fallback serves the root `index.html` — the portfolio —
-instead. This is expected, not a bug.
+`dev:hub` mirrors production's layout with a dev-only middleware in
+`vite.hub.config.ts`: extensionless GET/HEAD paths are served `hub.html`
+(Vite's SPA fallback would otherwise serve the *portfolio's*
+`index.html`), and `HubApp` picks the page from the real
+`window.location.pathname` — the same routing the deployed site uses,
+but with HMR.
 
-To see the dashboard and detail pages locally, build and preview the hub:
+Box-only files don't exist in the repo, and dev mirrors production's
+`try_files` fallback for them: `/furuhibi/dsp.html`,
+`/dash/comingsoon.html`, and the GLB models under `/dash/` all serve the
+HTML shell locally (model cards show gray panels). They work once
+deployed, where those files live on the server box.
+
+For a production-shaped check — the generated per-slug and `/dash/`
+folders with their injected `<title>`s — build and preview instead:
 
 ```bash
 bun run build:hub
 bun run preview:hub
-# then open http://localhost:4173/dash/   or   /furuhibi/   or   /nyaahibiv2/
+# → http://localhost:4173/  ·  /dash/  ·  /furuhibi/  ·  /nyaahibiv2/
 ```
 
-(`vite preview` serves `dist-hub/` exactly as the server will, including
-the generated per-slug and `/dash/` folders. Two things match production
-but surprise people locally: **trailing slashes matter**
-(`/dash` → 404, `/dash/` → 200), and `/` itself is 404 because
-`index.html` at the root is created by `deploy.ps1` from `hub.html` —
-use `/hub.html` for the landing page. On the deployed server, Caddy's
-`try_files` + the deploy copy make both work.)
+(`deploy.ps1` and the gate commands copy `hub.html` → `index.html` in
+`dist-hub/` so the preview root works; on the deployed server Caddy's
+`try_files` + the deploy overlay make every path work.)
 
 ## Builds
 

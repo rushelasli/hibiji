@@ -81,6 +81,34 @@ function hubSlugPages(): Plugin {
   }
 }
 
+/**
+ * Dev-only: in production every folder serves the same app's index.html
+ * (dist-hub/<path>/), routed by window.location.pathname. The dev server
+ * has no such folders, and its SPA fallback points at the PORTFOLIO
+ * index.html — so any extensionless GET/HEAD path (/, /dash/, /<slug>/)
+ * is rewritten to /hub.html here, before the fallback; HubApp then reads
+ * the real pathname from location. Paths with a dot (modules, assets)
+ * and Vite internals (/@…) pass through untouched.
+ */
+function hubDevRouter(): Plugin {
+  return {
+    name: 'hub-dev-router',
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const url = req.url
+        if (!url || (req.method !== 'GET' && req.method !== 'HEAD')) return next()
+        const pathname = url.split('?', 1)[0]
+        if (pathname === '/hub.html' || pathname.startsWith('/@') || pathname.includes('.')) {
+          return next()
+        }
+        const q = url.indexOf('?')
+        req.url = q === -1 ? '/hub.html' : `/hub.html${url.slice(q)}`
+        next()
+      })
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
     vue({
@@ -92,6 +120,7 @@ export default defineConfig({
     }),
     tailwindcss(),
     hubSlugPages(),
+    hubDevRouter(),
   ],
   resolve: {
     alias: {
